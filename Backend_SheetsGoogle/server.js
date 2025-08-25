@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const { addRow } = require("./googleSheet.js"); // นำเข้าฟังก์ชัน addRow
+const { addRow } = require("./googleSheet.js"); 
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,7 +13,6 @@ app.post("/submit", async (req, res) => {
   try {
     const { fname, lname, grade, email, phone } = req.body;
     
-    // สร้างอาร์เรย์ของข้อมูลตามลำดับคอลัมน์ใน Google Sheets
     const rowData = [
       fname, 
       lname, 
@@ -21,11 +20,10 @@ app.post("/submit", async (req, res) => {
       email, 
       phone, 
       new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }), 
-      "คนที่" 
     ];
     
     // เรียกใช้ฟังก์ชัน addRow จากไฟล์ googleSheet.js
-    await addRow("Info", rowData);
+    await addRow("INFO1", rowData);
     res.send("✅ บันทึกข้อมูลเรียบร้อย");
   } catch (err) {
     console.error(err);

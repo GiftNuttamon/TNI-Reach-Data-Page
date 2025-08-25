@@ -14,17 +14,30 @@ async function getAuthClient() {
   return await auth.getClient();
 }
 
+// ฟังก์ชันเพิ่มข้อมูลลง Google Sheets
 async function addRow(sheetName, values) {
   const authClient = await getAuthClient();
   const sheets = google.sheets({ version: "v4", auth: authClient });
 
+  // 1. ดึงข้อมูลที่มีอยู่ทั้งหมดจากชีตเพื่อหาจำนวนแถว
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${sheetName}!A:A`, // อ่านจากคอลัมน์ A เท่านั้นเพื่อความเร็ว
+  });
+  const existingRows = response.data.values ? response.data.values.length : 0;
+  const newRowNumber = existingRows + 1; // ลำดับใหม่ = จำนวนแถวเดิม + 1
+
+  // 2. เพิ่มลำดับคนที่ลงในอาร์เรย์ values
+  const updatedValues = [...values, newRowNumber];
+
+  // 3. เพิ่มข้อมูลลงในชีต
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${sheetName}!A:Z`,
+    range: `${sheetName}!A:Z`, 
     valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
     requestBody: {
-      values: [values],
+      values: [updatedValues],
     },
   });
   console.log("✅ Data added to Google Sheets");
