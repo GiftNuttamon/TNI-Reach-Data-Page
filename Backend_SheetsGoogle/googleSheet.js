@@ -25,7 +25,7 @@ async function addRow(sheetName, values) {
     range: `${sheetName}!A:A`, // อ่านจากคอลัมน์ A เท่านั้นเพื่อความเร็ว
   });
   const existingRows = response.data.values ? response.data.values.length : 0;
-  const newRowNumber = existingRows + 1; // ลำดับใหม่ = จำนวนแถวเดิม + 1
+  const newRowNumber = existingRows; // ลำดับใหม่ = จำนวนแถวเดิม + 1
 
   // 2. เพิ่มลำดับคนที่ลงในอาร์เรย์ values
   const updatedValues = [...values, newRowNumber];
