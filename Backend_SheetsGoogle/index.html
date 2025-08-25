@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>บันทึกข้อมูลไป Google Sheets</title>
+</head>
+<body>
+  <h2>แบบฟอร์มบันทึกข้อมูล</h2>
+  <form id="dataForm">
+  <label for="fname">ชื่อ:</label><br>
+  <input type="text" id="fname" name="fname" required><br><br>
+
+  <label for="lname">นามสกุล:</label><br>
+  <input type="text" id="lname" name="lname" required><br><br>
+
+  <label for="grade">ระดับชั้น:</label><br>
+  <select id="grade" name="grade" required>
+    <option value="">เลือกระดับชั้น</option>
+    <option value="ประถมศึกษา">ประถมศึกษา</option>
+    <option value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</option>
+    <option value="มัธยมศึกษาตอนปลาย">มัธยมศึกษาตอนปลาย</option>
+    <option value="ปริญญาตรี">ปริญญาตรี</option>
+    <option value="ปริญญาโท">ปริญญาโท</option>
+    <option value="ปริญญาเอก">ปริญญาเอก</option>
+  </select><br><br>
+
+  <label for="email">อีเมล:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="phone">เบอร์:</label><br>
+  <input type="tel" id="phone" name="phone" required><br><br>
+
+  <button type="submit">ส่งข้อมูล</button>
+</form>
+
+  <script>
+    document.getElementById("dataForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        message: formData.get("message"),
+      };
+
+      const res = await fetch("http://localhost:3000/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.text();
+      alert(result);
+    });
+  </script>
+</body>
+</html>
