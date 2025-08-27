@@ -275,7 +275,14 @@
             <option value="ปริญญาโท">ปริญญาโท</option>
           </select>
 
-          <br><br>
+          <div id="course-type-container" style="display: none;"><br><br>
+            <label for="course-type">ภาค/หลักสูตร <span style="color: red;">*</span></label><br>
+            <select name="course-type" id="course-type" required>
+              <option value="">เลือกภาค/หลักสูตร</option>
+              <option value="ภาคปกติ">ภาคปกติ</option>
+              <option value="นานาชาติ">นานาชาติ</option>
+            </select>
+          </div><br><br>
 
           <label for="fac">คณะที่สนใจศึกษา <span style="color: red;">*</span></label><br>
           <select name="fac" id="fac" required>
@@ -284,13 +291,18 @@
 
           <script>
             const facOptions = {
-              "ปริญญาตรี": [
+              "ปริญญาตรี - ภาคปกติ": [
                 "วิศวกรรมศาสตร์",
                 "บริหารธุรกิจ",
                 "เทคโนโลยีสารสนเทศ",
                 "สื่อสารสากล",
                 "เทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม",
-                "หลักสูตรนานาชาติ"
+              ],
+              "ปริญญาตรี - นานาชาติ": [
+                "วิศวกรรมศาสตร์ (นานาชาติ)",
+                "บริหารธุรกิจ (นานาชาติ)",
+                "เทคโนโลยีสารสนเทศ (นานาชาติ)",
+                "สื่อสารสากล (นานาชาติ)",
               ],
               "ป.ตรี หลักสูตรเทียบโอน": [
                 "วิศวกรรมศาสตร์ (เทียบโอน)",
@@ -305,22 +317,52 @@
               ]
             };
 
-            document.getElementById("level").addEventListener("change", function () {
-              const facSelect = document.getElementById("fac");
-              const selectedLevel = this.value;
+            const levelSelect = document.getElementById("level");
+            const courseTypeContainer = document.getElementById("course-type-container");
+            const courseTypeSelect = document.getElementById("course-type");
+            const facSelect = document.getElementById("fac");
+
+            function updateFaculties() {
+              const selectedLevel = levelSelect.value;
+              const selectedCourseType = courseTypeSelect.value;
+              let combinedKey = selectedLevel;
+
+              // ตรวจสอบว่าเลือกปริญญาตรีและภาค/หลักสูตรแล้วหรือไม่
+              if (selectedLevel === "ปริญญาตรี" && selectedCourseType) {
+                combinedKey = `ปริญญาตรี - ${selectedCourseType}`;
+              }
 
               // ล้าง option เดิมออกก่อน
               facSelect.innerHTML = '<option value="">เลือกคณะ</option>';
 
-              if (facOptions[selectedLevel]) {
-                facOptions[selectedLevel].forEach(fac => {
+              if (facOptions[combinedKey]) {
+                facOptions[combinedKey].forEach(fac => {
                   const opt = document.createElement("option");
                   opt.value = fac;
                   opt.textContent = fac;
                   facSelect.appendChild(opt);
                 });
               }
+            }
+
+            // Event listener สำหรับการเปลี่ยนแปลงระดับการศึกษา
+            levelSelect.addEventListener("change", function () {
+              const selectedLevel = this.value;
+
+              // ซ่อน/แสดง ตัวเลือกภาค/หลักสูตรตามระดับที่เลือก
+              if (selectedLevel === "ปริญญาตรี") {
+                courseTypeContainer.style.display = 'block';
+                // Reset ค่าของ courseTypeSelect เมื่อระดับเปลี่ยน
+                courseTypeSelect.value = "";
+              } else {
+                courseTypeContainer.style.display = 'none';
+                courseTypeSelect.value = "";
+              }
+              updateFaculties();
             });
+
+            // Event listener สำหรับการเปลี่ยนแปลงภาค/หลักสูตร
+            courseTypeSelect.addEventListener("change", updateFaculties);
           </script>
 
         </div>
@@ -362,6 +404,25 @@
         </form>
       </div>
     </section>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const select = document.getElementById('country');
+        if (!select) return;
+
+        // ดึง options ทั้งหมด ยกเว้นตัวแรก (เช่น "เลือกประเทศ")
+        const firstOption = select.options[0];
+        const optionsArray = Array.from(select.options).slice(1);
+
+        // เรียง options ตามตัวอักษรไทย
+        optionsArray.sort((a, b) => a.text.localeCompare(b.text, 'th'));
+
+        // ล้าง options เดิม แล้วใส่ใหม่เรียงตามลำดับ
+        select.innerHTML = '';
+        select.appendChild(firstOption);
+        optionsArray.forEach(option => select.appendChild(option));
+      });
+    </script>
 
     <script>
       document.getElementById("dataForm").addEventListener("submit", async (e) => {
