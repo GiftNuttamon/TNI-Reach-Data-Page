@@ -3,9 +3,9 @@
 const { google } = require("googleapis");
 const path = require("path");
 
-const KEYFILEPATH = path.join(__dirname, "solar-idea-470104-r0-83b7f2684f00.json"); 
+const KEYFILEPATH = path.join(__dirname, "solar-idea-470104-r0-83b7f2684f00.json");  //API Keys Sheets (ใช้ ADD Credentials)
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
-const SPREADSHEET_ID = "1G-htktut-n4Iy9hoZEWWKPsvlw44kDNlZw_Wb8YCDX0"; 
+const SPREADSHEET_ID = "1G-htktut-n4Iy9hoZEWWKPsvlw44kDNlZw_Wb8YCDX0"; //Sheets ID
 
 async function getAuthClient() {
   const auth = new google.auth.GoogleAuth({
@@ -26,7 +26,7 @@ async function addRow(sheetName, values) {
     range: `${sheetName}!A:A`, // อ่านจากคอลัมน์ A เท่านั้นเพื่อความเร็ว
   });
   const existingRows = response.data.values ? response.data.values.length : 0;
-  const newRowNumber = existingRows; // ลำดับใหม่ = จำนวนแถวเดิม + 1
+  const newRowNumber = existingRows; // ลำดับใหม่คนที่ ...
 
   // 2. เพิ่มลำดับคนที่ลงในอาร์เรย์ values
   const updatedValues = [...values, newRowNumber];
@@ -41,7 +41,7 @@ async function addRow(sheetName, values) {
       values: [updatedValues],
     },
   });
-  console.log("✅ Data added to Google Sheets");
+  console.log("✅ Data added to Google Sheets"); //แจ้งเตือนใน LOG ว่าต่อดาต้าเบสสมบูณร์
 }
 
 module.exports = { addRow };
