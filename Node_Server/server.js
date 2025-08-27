@@ -13,7 +13,7 @@ app.use(cors());
 // Route สำหรับรับข้อมูลจากฟอร์ม
 app.post("/submit", async (req, res) => {
   try {
-    const { fname, lname, grade, email, phone, lineid, country, fac, major } = req.body;
+    const { fname, lname, grade, email, phone, lineid, country, level, fac, major } = req.body;
     
     const rowData = [
       fname, 
@@ -23,6 +23,7 @@ app.post("/submit", async (req, res) => {
       phone, 
       lineid,
       country,
+      level,
       fac,
       major,
       new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }), 
