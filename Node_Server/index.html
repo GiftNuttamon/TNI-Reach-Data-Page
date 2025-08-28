@@ -13,7 +13,7 @@
 
 <body>
 
-<!-- ***********************************************************Style*********************************************************** -->
+  <!-- ***********************************************************Style*********************************************************** -->
   <style>
     h1 {
       color: #210f90;
@@ -22,7 +22,152 @@
 
     body {
       font-family: 'Kanit', sans-serif;
-      padding-top: 15px;
+      /* ใช้ Font Sarabun ที่ดูเป็นทางการและอ่านง่าย */
+      display: flex;
+      /* ใช้ Flexbox สำหรับจัดกึ่งกลางเนื้อหา */
+      flex-direction: column;
+      justify-content: center;
+      /* จัดเนื้อหาให้อยู่กึ่งกลางแนวนอน */
+      align-items: center;
+      /* จัดเนื้อหาให้อยู่กึ่งกลางแนวตั้ง */
+      min-height: 100vh;
+      /* กำหนดความสูงขั้นต่ำให้เต็มหน้าจอ */
+      margin: 0;
+      /* ลบ margin เริ่มต้นของ body */
+      padding: 20px;
+      /* เพิ่ม padding รอบๆ เพื่อไม่ให้เนื้อหาชิดขอบ */
+      box-sizing: border-box;
+      /* ให้ padding และ border รวมอยู่ในความกว้าง/สูง */
+    }
+
+    .container {
+      background-color: #ffffff;
+      /* สีพื้นหลังของ container เป็นสีขาว */
+      padding: 40px;
+      /* เพิ่ม padding ด้านใน container ให้มากขึ้น */
+      border-radius: 12px;
+      /* ทำให้มุมของ container โค้งมนสวยงาม */
+      width: 100%;
+      /* ให้ container ขยายเต็มความกว้างที่มี */
+      box-sizing: border-box;
+      /* ให้ padding และ border รวมอยู่ในความกว้าง/สูง */
+    }
+
+    h2 {
+      color: #007bff;
+      /* ใช้สีน้ำเงินที่เป็นธีมหลัก */
+      text-align: center;
+      /* จัดข้อความหัวข้อให้อยู่กึ่งกลาง */
+      margin-bottom: 30px;
+      /* เพิ่มระยะห่างด้านล่างหัวข้อ */
+      font-weight: 700;
+      /* ทำให้ตัวอักษรหัวข้อหนาขึ้น */
+    }
+
+    .form-group label {
+      font-weight: 600;
+      /* ทำให้ label ของฟอร์มหนาขึ้นเล็กน้อย */
+      color: #343a40;
+      /* สีข้อความ label ให้เข้มขึ้น */
+      margin-bottom: 8px;
+      /* เพิ่มระยะห่างด้านล่าง label */
+      display: block;
+      /* ทำให้ label อยู่ในบรรทัดของตัวเอง */
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 8px;
+      /* ทำให้ขอบของ input และ select โค้งมน */
+      border: 1px solid #ced4da;
+      /* สีขอบ input */
+      padding: 12px 15px;
+      /* เพิ่ม padding ด้านใน input */
+      margin-bottom: 15px;
+      /* เพิ่มระยะห่างด้านล่าง input */
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+      /* เพิ่มเงาด้านในเล็กน้อย */
+      transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      /* เพิ่ม transition */
+      width: 70%;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #80bdff;
+      /* สีขอบเมื่อ focus */
+      box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+      /* เพิ่มเงารอบๆ เมื่อ focus */
+      outline: none;
+      /* ลบ outline เริ่มต้น */
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      /* สีพื้นหลังปุ่มหลัก */
+      border-color: #007bff;
+      /* สีขอบปุ่มหลัก */
+      padding: 12px 25px;
+      /* เพิ่ม padding ด้านในปุ่ม */
+      border-radius: 8px;
+      /* ทำให้มุมปุ่มโค้งมน */
+      font-size: 1.1rem;
+      /* เพิ่มขนาดตัวอักษรปุ่ม */
+      font-weight: 600;
+      /* ทำให้ตัวอักษรปุ่มหนาขึ้น */
+      transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+      /* เพิ่ม transition */
+      display: block;
+      /* ทำให้ปุ่มอยู่เต็มความกว้าง */
+      width: 100%;
+      /* ให้ปุ่มขยายเต็มความกว้าง */
+      margin-top: 20px;
+      /* เพิ่มระยะห่างด้านบนปุ่ม */
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      /* สีพื้นหลังปุ่มเมื่อ hover */
+      border-color: #0056b3;
+      /* สีขอบปุ่มเมื่อ hover */
+      transform: translateY(-2px);
+      /* ทำให้ปุ่มขยับขึ้นเล็กน้อยเมื่อ hover */
+      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+      /* เพิ่มเงาเมื่อ hover */
+    }
+
+    /* เพิ่ม CSS สำหรับการจัดเรียง form-row ให้สวยงาม */
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+
+    .form-row>.col-md-6 {
+      padding-right: 15px;
+      padding-left: 15px;
+      flex: 0 0 50%;
+      /* ทำให้แต่ละคอลัมน์ใช้พื้นที่ 50% */
+      max-width: 50%;
+    }
+
+    /* ปรับสำหรับหน้าจอขนาดเล็ก */
+    @media (max-width: 768px) {
+      .container {
+        padding: 25px;
+        margin: 10px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .form-row>.col-md-6 {
+        flex: 0 0 100%;
+        /* ให้แต่ละคอลัมน์ใช้พื้นที่ 100% บนมือถือ */
+        max-width: 100%;
+      }
     }
 
     label {
@@ -44,7 +189,7 @@
     input[type="email"],
     input[type="tel"],
     select {
-      width: 100%;
+      width: 70%;
       padding: 10px;
       font-size: 1rem;
       border: 1px solid #ccc;
@@ -78,7 +223,7 @@
     }
 
     .dropdown-toggle {
-      /* width: 100%; */
+      width: 70%;
       text-align: left;
       padding: 10px;
       border: 1px solid #ccc;
@@ -86,16 +231,17 @@
       background-color: #fff;
     }
   </style>
-<!-- ***********************************************************Style*********************************************************** -->
-<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-  <div class="container">
+  <!-- ***********************************************************Style*********************************************************** -->
+  <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <div class="container-fluid">
 
     <!-- ***********************************************************Head*********************************************************** -->
     <div class="row">
 
       <!-- โลโก้มอซ้ายบน -->
-      <div class="col-6" style="padding-left: -800px;">
-        <img src="img/TNIHeader.png" alt="homelogoTNI" style="width: 70%; padding-left: 30px;">
+      <div class="col-6">
+        <img src="img/TNIHeader.png" alt="homelogoTNI"
+          style="width: 70%; max-width: 400px; height: auto; display: block; margin-left: 50px; padding-left: 15px;">
       </div>
 
       <!-- Text แนะนำเว็บขวาบน -->
@@ -103,322 +249,427 @@
         <h1>Thai Nichi Institute Of Technology</h1>
         <h1>สนใจเรียนต่อ ณ</h1>
         <h1>สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
-        <button class="btn" style="background-color: #b20025; border-radius: 0%;"><a href=""
-            style="color: white;">สนใจศึกษา</a></button>
+        <button
+          style="background-color: #b20025; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; text-decoration: none; display: inline-block; cursor: pointer; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <a href="#" style="color: inherit; text-decoration: none;">สนใจศึกษา</a>
+        </button>
       </div>
 
     </div>
-    </div>
-    <!-- ***********************************************************END Head*********************************************************** -->
-    <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  </div>
+  <!-- ***********************************************************END Head*********************************************************** -->
+  <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-    <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
-    <section class="container" style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 20px;">
-      <form id="myForm" method="POST" action="http://localhost:3000/submit">
-        <div class="row">
-          <div class="col-6">
-            <h1 style="color: white;">
-              กำลังวางแผนเรียนต่อ<br>
-              สถาบันเทคโนโลยีไทย-ญี่ปุ่น<br>
-              อยู่รึป่าว ?
-            </h1>
-            <p style="color: #cce8ff">
-              กรอกข้อมูลของคุณแล้วเราจะติดต่อหา !
-            </p>
-          </div>
-          <div class="col-6">
-            
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <label for="fname">ชื่อ *</label>
-            <input type="text" id="fname" name="fname" class="form-control mb-2" required>
-
-            <label for="lname">นามสกุล *</label>
-            <input type="text" id="lname" name="lname" class="form-control mb-2" required>
-
-            <label for="grade">ระดับชั้น *</label><br>
-            <select id="grade" name="grade" required>
-              <option value="">เลือกระดับชั้น</option>
-              <option value="ม.4 (Grade 10 /Year 11)">ม.4 (Grade 10 /Year 11)</option>
-              <option value="ม.5 (Grade 11 /Year 12)">ม.5 (Grade 11 /Year 12)</option>
-              <option value="ม.6 (Grade 12 /Year 13)">ม.6 (Grade 12 /Year 13)</option>
-              <option value="ปวช.1">ปวช.1</option>
-              <option value="ปวช.2">ปวช.2</option>
-              <option value="ปวช.3">ปวช.3</option>
-              <option value="ปวส.1">ปวส.1</option>
-              <option value="ปวส.2">ปวส.2</option>
-              <option value="ปริญญาตรี">ปริญญาตรี</option>
-              <option value="ปริญญาโท">ปริญญาโท</option>
-              <option value="IGCSE">IGCSE</option>
-              <option value="GED">GED</option>
-              <option value="กศน.">กศน.</option>
-              <option value="เทียบโอน">เทียบโอน</option>
-            </select><br><br>
-
-            <label for="email">อีเมล *</label>
-            <input type="email" id="email" name="email" class="form-control mb-2" required>
-
-            <label for="phone">เบอร์โทร *</label>
-            <input type="tel" id="phone" name="phone" class="form-control mb-2" required>
-
-            <label for="lineid">LINE ID</label>
-            <input type="text" id="lineid" name="lineid" class="form-control mb-2">
-
-            <label for="country">ประเทศ *</label>
-            <select id="country" name="country" class="form-control mb-3" required>
-              <option value="">เลือกประเทศ</option>
-              <option value="1">กัมพูชา</option>
-              <option value="2">กาตาร์</option>
-              <option value="3">เกาหลีใต้</option>
-              <option value="4">เกาหลีเหนือ</option>
-              <option value="5">คาซัคสถาน</option>
-              <option value="6">คีร์กีซสถาน</option>
-              <option value="7">คูเวต</option>
-              <option value="8">จอร์เจีย</option>
-              <option value="9">จอร์แดน</option>
-              <option value="10">จีน</option>
-              <option value="11">ซาอุดิอาระเบีย</option>
-              <option value="12">ซีเรีย</option>
-              <option value="13">ญี่ปุ่น</option>
-              <option value="14">ติมอร์-เลสเต / ติมอร์ตะวันออก</option>
-              <option value="15">ตุรกี</option>
-              <option value="16">เติร์กเมนิสถาน</option>
-              <option value="17">ไต้หวัน</option>
-              <option value="18">ทาจิกิสถาน</option>
-              <option value="19">ไทย</option>
-              <option value="20">เนปาล</option>
-              <option value="21">บรูไนดารุสซาลาม</option>
-              <option value="22">บังกลาเทศ</option>
-              <option value="23">บาห์เรน</option>
-              <option value="24">ปากีสถาน</option>
-              <option value="25">ปาเลสไตน์</option>
-              <option value="26">พม่า / เมียนมา</option>
-              <option value="27">ฟิลิปปินส์</option>
-              <option value="28">ภูฏาน</option>
-              <option value="29">มองโกเลีย</option>
-              <option value="30">มัลดีฟส์</option>
-              <option value="31">มาเลเซีย</option>
-              <option value="32">เยเมน</option>
-              <option value="33">รัสเซีย</option>
-              <option value="34">ลาว</option>
-              <option value="35">เลบานอน</option>
-              <option value="36">เวียดนาม</option>
-              <option value="37">ศรีลังกา</option>
-              <option value="38">สหรัฐอาหรับเอมิเรตส์</option>
-              <option value="39">สิงคโปร์</option>
-              <option value="40">อัฟกานิสถาน</option>
-              <option value="41">อาเซอร์ไบจาน</option>
-              <option value="42">อาร์มีเนีย</option>
-              <option value="43">อินเดีย</option>
-              <option value="44">อินโดนีเซีย</option>
-              <option value="45">อิรัก</option>
-              <option value="46">อิสราเอล</option>
-              <option value="47">อิหร่าน</option>
-              <option value="48">อุซเบกิสถาน</option>
-              <option value="49">โอมาน</option>
-              <option value="50">คิริบาส</option>
-              <option value="51">ซามัว</option>
-              <option value="52">ตองกา</option>
-              <option value="53">ตูวาลู</option>
-              <option value="54">นาอูรู</option>
-              <option value="55">นิวซีแลนด์</option>
-              <option value="56">ปาปัวนิวกินี</option>
-              <option value="57">ปาเลา</option>
-              <option value="58">ฟิจิ</option>
-              <option value="59">ไมโครนีเซีย</option>
-              <option value="60">วานูอาตู</option>
-              <option value="61">หมู่เกาะโซโลมอน</option>
-              <option value="62">หมู่เกาะมาร์แชลล์</option>
-              <option value="63">ออสเตรเลีย</option>
-              <option value="64">กรีซ</option>
-              <option value="65">โครเอเชีย</option>
-              <option value="66">ซานมารีโน</option>
-              <option value="67">เซอร์เบีย</option>
-              <option value="68">ไซปรัส</option>
-              <option value="69">เดนมาร์ก</option>
-              <option value="70">นครรัฐวาติกัน</option>
-              <option value="71">นอร์เวย์</option>
-              <option value="72">เนเธอร์แลนด์</option>
-              <option value="73">บอสเนียและเฮอร์เซโกวีนา</option>
-              <option value="74">บัลแกเรีย</option>
-              <option value="75">เบลเยียม</option>
-              <option value="76">เบลารุส</option>
-              <option value="77">โปรตุเกส</option>
-              <option value="78">โปแลนด์</option>
-              <option value="79">ฝรั่งเศส</option>
-              <option value="80">ฟินแลนด์</option>
-              <option value="81">มอนเตเนโกร</option>
-              <option value="82">มอลโดวา</option>
-              <option value="83">มอลตา</option>
-              <option value="84">โมนาโก</option>
-              <option value="85">ยูเครน</option>
-              <option value="86">เยอรมนี</option>
-              <option value="87">โรมาเนีย</option>
-              <option value="88">ลักเซมเบิร์ก</option>
-              <option value="89">ลัตเวีย</option>
-              <option value="90">ลิกเตนสไตน์</option>
-              <option value="91">ลิทัวเนีย</option>
-              <option value="92">เวลส์</option>
-              <option value="93">สกอตแลนด์</option>
-              <option value="94">สเปน</option>
-              <option value="95">สโลวาเกีย</option>
-              <option value="96">สโลวีเนีย</option>
-              <option value="97">สวิตเซอร์แลนด์</option>
-              <option value="98">สวีเดน</option>
-              <option value="99">สหราชอาณาจักร</option>
-              <option value="100">สาธารณรัฐเช็ก</option>
-              <option value="101">มาซิโดเนีย</option>
-              <option value="102">ออสเตรีย</option>
-              <option value="103">อังกฤษ</option>
-              <option value="104">อันดอร์รา</option>
-              <option value="105">อิตาลี</option>
-              <option value="106">เอสโตเนีย</option>
-              <option value="107">แอลเบเนีย</option>
-              <option value="108">ไอซ์แลนด์</option>
-              <option value="109">ไอร์แลนด์</option>
-              <option value="110">ฮังการี</option>
-              <option value="111">กานา</option>
-              <option value="112">กาบอง</option>
-              <option value="113">กินี</option>
-              <option value="114">กินี-บิสเซา</option>
-              <option value="115">แกมเบีย</option>
-              <option value="116">โกตดิวัวร์ / ไอวอรีโคสต์</option>
-              <option value="117">คอโมโรส</option>
-              <option value="118">เคนยา</option>
-              <option value="119">เคปเวิร์ด</option>
-              <option value="120">แคเมอรูน</option>
-              <option value="121">จิบูตี</option>
-              <option value="122">ชาด</option>
-              <option value="123">ซิมบับเว</option>
-              <option value="124">ซูดาน</option>
-              <option value="125">เซเชลส์</option>
-              <option value="126">เซเนกัล</option>
-              <option value="127">เซาตูเมและปรินซิปี</option>
-              <option value="128">เซียร์ราลีโอน</option>
-              <option value="129">แซมเบีย</option>
-              <option value="130">โซมาเลีย</option>
-              <option value="131">ตูนิเซีย</option>
-              <option value="132">โตโก</option>
-              <option value="133">แทนซาเนีย</option>
-              <option value="134">นามิเบีย</option>
-              <option value="135">ไนจีเรีย</option>
-              <option value="136">ไนเจอร์</option>
-              <option value="137">บอตสวานา</option>
-              <option value="138">บุรุนดี</option>
-              <option value="139">บูร์กินาฟาโซ</option>
-              <option value="140">เบนิน</option>
-              <option value="141">มอริเซียส</option>
-              <option value="142">มอริเตเนีย</option>
-              <option value="143">มาดากัสการ์</option>
-              <option value="144">มาลาวี</option>
-              <option value="145">มาลี</option>
-              <option value="146">โมซัมบิก</option>
-              <option value="147">โมร็อกโก</option>
-              <option value="148">ยูกันดา</option>
-              <option value="149">รวันดา</option>
-              <option value="150">ลิเบีย</option>
-              <option value="151">เลโซโท</option>
-              <option value="152">ไลบีเรีย</option>
-              <option value="153">สวาซิแลนด์</option>
-              <option value="154">สาธารณรัฐคองโก</option>
-              <option value="155">สาธารณรัฐแอฟริกากลาง</option>
-              <option value="156">อิเควทอเรียลกินี</option>
-              <option value="157">อียิปต์</option>
-              <option value="158">เอธิโอเปีย</option>
-              <option value="159">เอริเทรีย</option>
-              <option value="160">เอสวาตีนี</option>
-              <option value="161">แองโกลา</option>
-              <option value="162">แอฟริกาใต้</option>
-              <option value="163">แอลจีเรีย</option>
-              <option value="164">กัวเตมาลา</option>
-              <option value="165">เกรเนดา</option>
-              <option value="166">คอสตาริกา</option>
-              <option value="167">คิวบา</option>
-              <option value="168">แคนาดา</option>
-              <option value="169">จาเมกา</option>
-              <option value="170">เซนต์คิตส์และเนวิส</option>
-              <option value="171">เซนต์ลูเซีย</option>
-              <option value="172">เซนต์วินเซนต์และเกรนาดีนส์</option>
-              <option value="173">โดมินิกา</option>
-              <option value="174">ตรินิแดดและโตเมโก</option>
-              <option value="175">นิการากัว</option>
-              <option value="176">บาร์เบโดส</option>
-              <option value="177">บาฮามาส</option>
-              <option value="178">เบลีซ</option>
-              <option value="179">ปานามา</option>
-              <option value="180">เม็กซิโก</option>
-              <option value="181">สหรัฐอเมริกา</option>
-              <option value="182">สาธารณรัฐโดมินิกัน</option>
-              <option value="183">เอลซัลวาดอร์</option>
-              <option value="184">แอนติกาและบาร์บูดา</option>
-              <option value="185">ฮอนดูรัส</option>
-              <option value="186">เฮติ</option>
-              <option value="187">กายอานา</option>
-              <option value="188">โคลอมเบีย</option>
-              <option value="189">ชิลี</option>
-              <option value="190">ซูรินาเม</option>
-              <option value="191">บราซิล</option>
-              <option value="192">โบลิเวีย</option>
-              <option value="193">ปารากวัย</option>
-              <option value="194">เปรู</option>
-              <option value="195">เวเนซุเอลา</option>
-              <option value="196">อาร์เจนตินา</option>
-              <option value="197">อุรุกวัย</option>
-              <option value="198">เอกวาดอร์</option>
-            </select>
-          </div>
-          <div class="col-6">
-            <!-- Dropdown: ระดับ -->
-            <label>ระดับที่สนใจศึกษา *</label>
-            <div class="dropdown mb-3">
-              <button id="levelDropdown" class="dropdown-toggle" type="button"
-                data-bs-toggle="dropdown">เลือกระดับ</button>
-              <ul class="dropdown-menu">
-                <li class="dropdown-submenu">
-                  <a class="dropdown-item dropdown-toggle" href="#">ปริญญาตรี</a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ">ป.ตรี ภาคปกติ</a></li>
-                    <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ">ป.ตรี
-                        หลักสูตรนานาชาติ</a></li>
-                  </ul>
-                </li>
-                <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน">ป.ตรี
-                    หลักสูตรเทียบโอน</a></li>
-                <li><a class="dropdown-item level-option" href="#" data-level="ป.โท">ปริญญาโท</a></li>
-              </ul>
-            </div>
-
-            <!-- Dropdown: คณะ -->
-            <label>คณะที่สนใจศึกษา *</label>
-            <div class="dropdown mb-3">
-              <button id="facultyDropdown" class="dropdown-toggle" type="button"
-                data-bs-toggle="dropdown">เลือกคณะ</button>
-              <ul class="dropdown-menu" id="facultyOptions"></ul>
-            </div>
-
-            <!-- Dropdown: สาขา -->
-            <label>สาขาที่สนใจศึกษา *</label>
-            <div class="dropdown mb-4">
-              <button id="majorDropdown" class="dropdown-toggle" type="button"
-                data-bs-toggle="dropdown">เลือกสาขา</button>
-              <ul class="dropdown-menu" id="majorOptions"></ul>
-            </div>
-
-            <!-- Input hidden สำหรับส่งข้อมูล -->
-            <input type="hidden" name="level" id="hiddenLevel">
-            <input type="hidden" name="fac" id="hiddenFac">
-            <input type="hidden" name="major" id="hiddenMajor">
-
-            <!-- ปุ่มส่ง -->
-            <button type="submit" class="btn btn-primary">ส่งข้อมูล</button>
-          </div>
-      </form>
-    </section>
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
-<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-  
+  <section class="container" style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 20px;">
+    <form id="myForm" method="POST" action="http://localhost:3000/submit">
+      <div class="row">
+        <div class="col-12">
+          <h1 style="color: white;">
+            กำลังวางแผนเรียนต่อ<br>
+            สถาบันเทคโนโลยีไทย-ญี่ปุ่น<br>
+            อยู่รึป่าว ?
+          </h1>
+          <p style="color: #cce8ff">
+            กรอกข้อมูลของคุณแล้วเราจะติดต่อหา !
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label for="fname">ชื่อ <span style="color: #b20025;">*</span></label>
+          <input type="text" id="fname" name="fname" class="form-control mb-2" required>
+
+          <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></span></label>
+          <input type="text" id="lname" name="lname" class="form-control mb-2" required>
+
+          <label for="grade">ระดับชั้น <span style="color: #b20025;">*</span></label>
+          <select id="grade" name="grade" class="form-control mb-3" required>
+            <option value="">เลือกระดับชั้น</option>
+            <option value="ม.4 (Grade 10 /Year 11)">ม.4 (Grade 10 /Year 11)</option>
+            <option value="ม.5 (Grade 11 /Year 12)">ม.5 (Grade 11 /Year 12)</option>
+            <option value="ม.6 (Grade 12 /Year 13)">ม.6 (Grade 12 /Year 13)</option>
+            <option value="ปวช.1">ปวช.1</option>
+            <option value="ปวช.2">ปวช.2</option>
+            <option value="ปวช.3">ปวช.3</option>
+            <option value="ปวส.1">ปวส.1</option>
+            <option value="ปวส.2">ปวส.2</option>
+            <option value="ปริญญาตรี">ปริญญาตรี</option>
+            <option value="ปริญญาโท">ปริญญาโท</option>
+            <option value="IGCSE">IGCSE</option>
+            <option value="GED">GED</option>
+            <option value="กศน.">กศน.</option>
+            <option value="เทียบโอน">เทียบโอน</option>
+          </select>
+
+          <label for="email">อีเมล <span style="color: #b20025;">*</span></label>
+          <input type="email" id="email" name="email" class="form-control mb-2" required>
+          <script>
+            // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
+            document.addEventListener('DOMContentLoaded', function () {
+              const emailInput = document.getElementById('email');
+
+              // ตรวจสอบว่ามี element ที่มี id เป็น 'email' อยู่จริง
+              if (!emailInput) {
+                console.error("ไม่พบ element ที่มี id เป็น 'email'");
+                return;
+              }
+
+              // สร้าง element สำหรับแสดงข้อความแจ้งเตือน
+              const emailValidationMessage = document.createElement('div');
+              emailValidationMessage.id = 'email-validation-message';
+              emailValidationMessage.style.color = '#ffcccc'; // สีข้อความแจ้งเตือน
+              emailValidationMessage.style.fontSize = '14px';
+              emailValidationMessage.style.marginTop = '5px';
+              emailValidationMessage.style.display = 'none'; // ซ่อนไว้ก่อน
+              emailInput.parentNode.insertBefore(emailValidationMessage, emailInput.nextSibling);
+
+              // เพิ่ม event listener สำหรับเหตุการณ์ 'input'
+              emailInput.addEventListener('input', function () {
+                // ใช้ Regex ในการตรวจสอบรูปแบบอีเมล
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const isValid = emailRegex.test(this.value);
+
+                // ตรวจสอบว่าช่องว่างหรือไม่มีการเปลี่ยนแปลง
+                if (this.value === '') {
+                  emailValidationMessage.style.display = 'none';
+                  this.setCustomValidity('');
+                  return;
+                }
+
+                // แสดงข้อความแจ้งเตือนตามผลการตรวจสอบ
+                if (!isValid) {
+                  emailValidationMessage.textContent = 'รูปแบบอีเมลไม่ถูกต้อง';
+                  emailValidationMessage.style.display = 'block';
+                  this.setCustomValidity('รูปแบบอีเมลไม่ถูกต้อง');
+                } else {
+                  emailValidationMessage.style.display = 'none';
+                  this.setCustomValidity('');
+                }
+              });
+            });
+          </script>
+
+          <label for="phone">เบอร์โทร <span style="color: #b20025;">*</span></label>
+          <input type="tel" id="phone" name="phone" class="form-control mb-2" required>
+          <script>
+            // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
+            document.addEventListener('DOMContentLoaded', function () {
+              const phoneInput = document.getElementById('phone');
+
+              // ตรวจสอบว่ามี input element ที่มี id เป็น 'phone' อยู่จริง
+              if (!phoneInput) {
+                console.error("ไม่พบ element ที่มี id เป็น 'phone'");
+                return;
+              }
+
+              // สร้าง element สำหรับแสดงข้อความแจ้งเตือน
+              const phoneValidationMessage = document.createElement('div');
+              phoneValidationMessage.id = 'phone-validation-message';
+              phoneValidationMessage.style.color = '#ffcccc'; // สีข้อความแจ้งเตือน
+              phoneValidationMessage.style.fontSize = '14px';
+              phoneValidationMessage.style.marginTop = '5px';
+              phoneValidationMessage.style.display = 'none'; // ซ่อนไว้ก่อน
+              phoneInput.parentNode.insertBefore(phoneValidationMessage, phoneInput.nextSibling);
+
+              // เพิ่ม event listener สำหรับเหตุการณ์ 'input'
+              phoneInput.addEventListener('input', function () {
+                const value = this.value;
+
+                // ล้างข้อความแจ้งเตือนเดิม
+                phoneValidationMessage.textContent = '';
+                phoneValidationMessage.style.display = 'none';
+
+                // ตรวจสอบความยาว
+                if (value.length > 0 && value.length !== 10) {
+                  phoneValidationMessage.textContent = 'เบอร์โทรศัพท์ต้องมี 10 หลัก';
+                  phoneValidationMessage.style.display = 'block';
+                  this.setCustomValidity('เบอร์โทรศัพท์ต้องมี 10 หลัก');
+                }
+                // ตรวจสอบว่าขึ้นต้นด้วย 0
+                else if (value.length > 0 && !value.startsWith('0')) {
+                  phoneValidationMessage.textContent = 'เบอร์โทรศัพท์ต้องขึ้นต้นด้วย 0';
+                  phoneValidationMessage.style.display = 'block';
+                  this.setCustomValidity('เบอร์โทรศัพท์ต้องขึ้นต้นด้วย 0');
+                }
+                // ตรวจสอบว่าเป็นตัวเลขเท่านั้น
+                else if (value.length > 0 && !/^\d+$/.test(value)) {
+                  phoneValidationMessage.textContent = 'กรุณากรอกเฉพาะตัวเลข';
+                  phoneValidationMessage.style.display = 'block';
+                  this.setCustomValidity('กรุณากรอกเฉพาะตัวเลข');
+                }
+                // หากผ่านการตรวจสอบทั้งหมด
+                else {
+                  this.setCustomValidity('');
+                }
+              });
+
+              // เพิ่ม event listener สำหรับเหตุการณ์ 'invalid' เพื่อแสดงข้อความที่กำหนดเองเมื่อมีการกด submit
+              phoneInput.addEventListener('invalid', function (event) {
+                event.preventDefault(); // ป้องกันการแสดงข้อความแจ้งเตือนเริ่มต้นของเบราว์เซอร์
+                const message = this.validationMessage;
+                phoneValidationMessage.textContent = message;
+                phoneValidationMessage.style.display = 'block';
+              });
+            });
+          </script>
+
+          <label for="lineid">LINE ID</label>
+          <input type="text" id="lineid" name="lineid" class="form-control mb-2">
+
+          <label for="country">ประเทศ <span style="color: #b20025;">*</span></label>
+          <select id="country" name="country" class="form-control mb-3" required>
+            <option value="">เลือกประเทศ</option>
+            <option value="1">กัมพูชา</option>
+            <option value="2">กาตาร์</option>
+            <option value="3">เกาหลีใต้</option>
+            <option value="4">เกาหลีเหนือ</option>
+            <option value="5">คาซัคสถาน</option>
+            <option value="6">คีร์กีซสถาน</option>
+            <option value="7">คูเวต</option>
+            <option value="8">จอร์เจีย</option>
+            <option value="9">จอร์แดน</option>
+            <option value="10">จีน</option>
+            <option value="11">ซาอุดิอาระเบีย</option>
+            <option value="12">ซีเรีย</option>
+            <option value="13">ญี่ปุ่น</option>
+            <option value="14">ติมอร์-เลสเต / ติมอร์ตะวันออก</option>
+            <option value="15">ตุรกี</option>
+            <option value="16">เติร์กเมนิสถาน</option>
+            <option value="17">ไต้หวัน</option>
+            <option value="18">ทาจิกิสถาน</option>
+            <option value="19">ไทย</option>
+            <option value="20">เนปาล</option>
+            <option value="21">บรูไนดารุสซาลาม</option>
+            <option value="22">บังกลาเทศ</option>
+            <option value="23">บาห์เรน</option>
+            <option value="24">ปากีสถาน</option>
+            <option value="25">ปาเลสไตน์</option>
+            <option value="26">พม่า / เมียนมา</option>
+            <option value="27">ฟิลิปปินส์</option>
+            <option value="28">ภูฏาน</option>
+            <option value="29">มองโกเลีย</option>
+            <option value="30">มัลดีฟส์</option>
+            <option value="31">มาเลเซีย</option>
+            <option value="32">เยเมน</option>
+            <option value="33">รัสเซีย</option>
+            <option value="34">ลาว</option>
+            <option value="35">เลบานอน</option>
+            <option value="36">เวียดนาม</option>
+            <option value="37">ศรีลังกา</option>
+            <option value="38">สหรัฐอาหรับเอมิเรตส์</option>
+            <option value="39">สิงคโปร์</option>
+            <option value="40">อัฟกานิสถาน</option>
+            <option value="41">อาเซอร์ไบจาน</option>
+            <option value="42">อาร์มีเนีย</option>
+            <option value="43">อินเดีย</option>
+            <option value="44">อินโดนีเซีย</option>
+            <option value="45">อิรัก</option>
+            <option value="46">อิสราเอล</option>
+            <option value="47">อิหร่าน</option>
+            <option value="48">อุซเบกิสถาน</option>
+            <option value="49">โอมาน</option>
+            <option value="50">คิริบาส</option>
+            <option value="51">ซามัว</option>
+            <option value="52">ตองกา</option>
+            <option value="53">ตูวาลู</option>
+            <option value="54">นาอูรู</option>
+            <option value="55">นิวซีแลนด์</option>
+            <option value="56">ปาปัวนิวกินี</option>
+            <option value="57">ปาเลา</option>
+            <option value="58">ฟิจิ</option>
+            <option value="59">ไมโครนีเซีย</option>
+            <option value="60">วานูอาตู</option>
+            <option value="61">หมู่เกาะโซโลมอน</option>
+            <option value="62">หมู่เกาะมาร์แชลล์</option>
+            <option value="63">ออสเตรเลีย</option>
+            <option value="64">กรีซ</option>
+            <option value="65">โครเอเชีย</option>
+            <option value="66">ซานมารีโน</option>
+            <option value="67">เซอร์เบีย</option>
+            <option value="68">ไซปรัส</option>
+            <option value="69">เดนมาร์ก</option>
+            <option value="70">นครรัฐวาติกัน</option>
+            <option value="71">นอร์เวย์</option>
+            <option value="72">เนเธอร์แลนด์</option>
+            <option value="73">บอสเนียและเฮอร์เซโกวีนา</option>
+            <option value="74">บัลแกเรีย</option>
+            <option value="75">เบลเยียม</option>
+            <option value="76">เบลารุส</option>
+            <option value="77">โปรตุเกส</option>
+            <option value="78">โปแลนด์</option>
+            <option value="79">ฝรั่งเศส</option>
+            <option value="80">ฟินแลนด์</option>
+            <option value="81">มอนเตเนโกร</option>
+            <option value="82">มอลโดวา</option>
+            <option value="83">มอลตา</option>
+            <option value="84">โมนาโก</option>
+            <option value="85">ยูเครน</option>
+            <option value="86">เยอรมนี</option>
+            <option value="87">โรมาเนีย</option>
+            <option value="88">ลักเซมเบิร์ก</option>
+            <option value="89">ลัตเวีย</option>
+            <option value="90">ลิกเตนสไตน์</option>
+            <option value="91">ลิทัวเนีย</option>
+            <option value="92">เวลส์</option>
+            <option value="93">สกอตแลนด์</option>
+            <option value="94">สเปน</option>
+            <option value="95">สโลวาเกีย</option>
+            <option value="96">สโลวีเนีย</option>
+            <option value="97">สวิตเซอร์แลนด์</option>
+            <option value="98">สวีเดน</option>
+            <option value="99">สหราชอาณาจักร</option>
+            <option value="100">สาธารณรัฐเช็ก</option>
+            <option value="101">มาซิโดเนีย</option>
+            <option value="102">ออสเตรีย</option>
+            <option value="103">อังกฤษ</option>
+            <option value="104">อันดอร์รา</option>
+            <option value="105">อิตาลี</option>
+            <option value="106">เอสโตเนีย</option>
+            <option value="107">แอลเบเนีย</option>
+            <option value="108">ไอซ์แลนด์</option>
+            <option value="109">ไอร์แลนด์</option>
+            <option value="110">ฮังการี</option>
+            <option value="111">กานา</option>
+            <option value="112">กาบอง</option>
+            <option value="113">กินี</option>
+            <option value="114">กินี-บิสเซา</option>
+            <option value="115">แกมเบีย</option>
+            <option value="116">โกตดิวัวร์ / ไอวอรีโคสต์</option>
+            <option value="117">คอโมโรส</option>
+            <option value="118">เคนยา</option>
+            <option value="119">เคปเวิร์ด</option>
+            <option value="120">แคเมอรูน</option>
+            <option value="121">จิบูตี</option>
+            <option value="122">ชาด</option>
+            <option value="123">ซิมบับเว</option>
+            <option value="124">ซูดาน</option>
+            <option value="125">เซเชลส์</option>
+            <option value="126">เซเนกัล</option>
+            <option value="127">เซาตูเมและปรินซิปี</option>
+            <option value="128">เซียร์ราลีโอน</option>
+            <option value="129">แซมเบีย</option>
+            <option value="130">โซมาเลีย</option>
+            <option value="131">ตูนิเซีย</option>
+            <option value="132">โตโก</option>
+            <option value="133">แทนซาเนีย</option>
+            <option value="134">นามิเบีย</option>
+            <option value="135">ไนจีเรีย</option>
+            <option value="136">ไนเจอร์</option>
+            <option value="137">บอตสวานา</option>
+            <option value="138">บุรุนดี</option>
+            <option value="139">บูร์กินาฟาโซ</option>
+            <option value="140">เบนิน</option>
+            <option value="141">มอริเซียส</option>
+            <option value="142">มอริเตเนีย</option>
+            <option value="143">มาดากัสการ์</option>
+            <option value="144">มาลาวี</option>
+            <option value="145">มาลี</option>
+            <option value="146">โมซัมบิก</option>
+            <option value="147">โมร็อกโก</option>
+            <option value="148">ยูกันดา</option>
+            <option value="149">รวันดา</option>
+            <option value="150">ลิเบีย</option>
+            <option value="151">เลโซโท</option>
+            <option value="152">ไลบีเรีย</option>
+            <option value="153">สวาซิแลนด์</option>
+            <option value="154">สาธารณรัฐคองโก</option>
+            <option value="155">สาธารณรัฐแอฟริกากลาง</option>
+            <option value="156">อิเควทอเรียลกินี</option>
+            <option value="157">อียิปต์</option>
+            <option value="158">เอธิโอเปีย</option>
+            <option value="159">เอริเทรีย</option>
+            <option value="160">เอสวาตีนี</option>
+            <option value="161">แองโกลา</option>
+            <option value="162">แอฟริกาใต้</option>
+            <option value="163">แอลจีเรีย</option>
+            <option value="164">กัวเตมาลา</option>
+            <option value="165">เกรเนดา</option>
+            <option value="166">คอสตาริกา</option>
+            <option value="167">คิวบา</option>
+            <option value="168">แคนาดา</option>
+            <option value="169">จาเมกา</option>
+            <option value="170">เซนต์คิตส์และเนวิส</option>
+            <option value="171">เซนต์ลูเซีย</option>
+            <option value="172">เซนต์วินเซนต์และเกรนาดีนส์</option>
+            <option value="173">โดมินิกา</option>
+            <option value="174">ตรินิแดดและโตเมโก</option>
+            <option value="175">นิการากัว</option>
+            <option value="176">บาร์เบโดส</option>
+            <option value="177">บาฮามาส</option>
+            <option value="178">เบลีซ</option>
+            <option value="179">ปานามา</option>
+            <option value="180">เม็กซิโก</option>
+            <option value="181">สหรัฐอเมริกา</option>
+            <option value="182">สาธารณรัฐโดมินิกัน</option>
+            <option value="183">เอลซัลวาดอร์</option>
+            <option value="184">แอนติกาและบาร์บูดา</option>
+            <option value="185">ฮอนดูรัส</option>
+            <option value="186">เฮติ</option>
+            <option value="187">กายอานา</option>
+            <option value="188">โคลอมเบีย</option>
+            <option value="189">ชิลี</option>
+            <option value="190">ซูรินาเม</option>
+            <option value="191">บราซิล</option>
+            <option value="192">โบลิเวีย</option>
+            <option value="193">ปารากวัย</option>
+            <option value="194">เปรู</option>
+            <option value="195">เวเนซุเอลา</option>
+            <option value="196">อาร์เจนตินา</option>
+            <option value="197">อุรุกวัย</option>
+            <option value="198">เอกวาดอร์</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <!-- Dropdown: ระดับ -->
+          <label>ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+          <div class="dropdown mb-3">
+            <button id="levelDropdown" class="dropdown-toggle" type="button"
+              data-bs-toggle="dropdown">เลือกระดับ</button>
+            <ul class="dropdown-menu">
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">ปริญญาตรี</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ">ป.ตรี ภาคปกติ</a></li>
+                  <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ">ป.ตรี
+                      หลักสูตรนานาชาติ</a></li>
+                </ul>
+              </li>
+              <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน">ป.ตรี
+                  หลักสูตรเทียบโอน</a></li>
+              <li><a class="dropdown-item level-option" href="#" data-level="ป.โท">ปริญญาโท</a></li>
+            </ul>
+          </div>
+
+          <!-- Dropdown: คณะ -->
+          <label>คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+          <div class="dropdown mb-3">
+            <button id="facultyDropdown" class="dropdown-toggle" type="button"
+              data-bs-toggle="dropdown">เลือกคณะ</button>
+            <ul class="dropdown-menu" id="facultyOptions"></ul>
+          </div>
+
+          <!-- Dropdown: สาขา -->
+          <label>สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+          <div class="dropdown mb-4">
+            <button id="majorDropdown" class="dropdown-toggle" type="button"
+              data-bs-toggle="dropdown">เลือกสาขา</button>
+            <ul class="dropdown-menu" id="majorOptions"></ul>
+          </div>
+
+          <!-- Input hidden สำหรับส่งข้อมูล -->
+          <input type="hidden" name="level" id="hiddenLevel">
+          <input type="hidden" name="fac" id="hiddenFac">
+          <input type="hidden" name="major" id="hiddenMajor">
+
+          <!-- ปุ่มส่ง -->
+          <button type="submit" class="btn btn-primary">ส่งข้อมูล</button>
+        </div>
+    </form>
+  </section>
+  <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
+  <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
   <script>
     // ตัวอย่างข้อมูล
@@ -546,12 +797,12 @@
       optionsArray.forEach(option => select.appendChild(option));
     });
   </script>
-  
+
   <!-- Bootstrap JS Bundle (รวม Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
-    
+
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
 
 </body>
