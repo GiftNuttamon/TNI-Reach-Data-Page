@@ -8,6 +8,7 @@ const { addRow } = require("./googleSheet.js");  //เรียกใช้ Node
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // เพิ่มบรรทัดนี้เพื่อรองรับข้อมูลจากฟอร์ม HTML
 app.use(cors());
 
 // Route สำหรับรับข้อมูลจากฟอร์ม
