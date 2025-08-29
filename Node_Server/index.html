@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>บันทึกข้อมูลไป Google Sheets</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -22,121 +23,90 @@
 
     body {
       font-family: 'Kanit', sans-serif;
-      /* ใช้ Font Sarabun ที่ดูเป็นทางการและอ่านง่าย */
       display: flex;
-      /* ใช้ Flexbox สำหรับจัดกึ่งกลางเนื้อหา */
       flex-direction: column;
       justify-content: center;
-      /* จัดเนื้อหาให้อยู่กึ่งกลางแนวนอน */
       align-items: center;
-      /* จัดเนื้อหาให้อยู่กึ่งกลางแนวตั้ง */
       min-height: 100vh;
-      /* กำหนดความสูงขั้นต่ำให้เต็มหน้าจอ */
       margin: 0;
-      /* ลบ margin เริ่มต้นของ body */
       padding: 20px;
-      /* เพิ่ม padding รอบๆ เพื่อไม่ให้เนื้อหาชิดขอบ */
       box-sizing: border-box;
-      /* ให้ padding และ border รวมอยู่ในความกว้าง/สูง */
     }
 
-    .container {
+    .container-fluid {
       background-color: #ffffff;
-      /* สีพื้นหลังของ container เป็นสีขาว */
       padding: 40px;
-      /* เพิ่ม padding ด้านใน container ให้มากขึ้น */
       border-radius: 12px;
-      /* ทำให้มุมของ container โค้งมนสวยงาม */
       width: 100%;
-      /* ให้ container ขยายเต็มความกว้างที่มี */
       box-sizing: border-box;
-      /* ให้ padding และ border รวมอยู่ในความกว้าง/สูง */
     }
 
     h2 {
       color: #007bff;
-      /* ใช้สีน้ำเงินที่เป็นธีมหลัก */
       text-align: center;
-      /* จัดข้อความหัวข้อให้อยู่กึ่งกลาง */
       margin-bottom: 30px;
-      /* เพิ่มระยะห่างด้านล่างหัวข้อ */
       font-weight: 700;
-      /* ทำให้ตัวอักษรหัวข้อหนาขึ้น */
     }
 
     .form-group label {
-      font-weight: 600;
-      /* ทำให้ label ของฟอร์มหนาขึ้นเล็กน้อย */
-      color: #343a40;
-      /* สีข้อความ label ให้เข้มขึ้น */
       margin-bottom: 8px;
-      /* เพิ่มระยะห่างด้านล่าง label */
       display: block;
-      /* ทำให้ label อยู่ในบรรทัดของตัวเอง */
+    }
+
+    .lm label {
+      margin-left: 70px;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: 200px;
+      color: white;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .form-control,
     .form-select {
       border-radius: 8px;
-      /* ทำให้ขอบของ input และ select โค้งมน */
       border: 1px solid #ced4da;
-      /* สีขอบ input */
       padding: 12px 15px;
-      /* เพิ่ม padding ด้านใน input */
       margin-bottom: 15px;
-      /* เพิ่มระยะห่างด้านล่าง input */
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-      /* เพิ่มเงาด้านในเล็กน้อย */
       transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      /* เพิ่ม transition */
       width: 70%;
     }
 
     .form-control:focus,
     .form-select:focus {
       border-color: #80bdff;
-      /* สีขอบเมื่อ focus */
       box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
-      /* เพิ่มเงารอบๆ เมื่อ focus */
       outline: none;
-      /* ลบ outline เริ่มต้น */
     }
 
     .btn-primary {
       background-color: #007bff;
-      /* สีพื้นหลังปุ่มหลัก */
       border-color: #007bff;
-      /* สีขอบปุ่มหลัก */
       padding: 12px 25px;
-      /* เพิ่ม padding ด้านในปุ่ม */
       border-radius: 8px;
-      /* ทำให้มุมปุ่มโค้งมน */
       font-size: 1.1rem;
-      /* เพิ่มขนาดตัวอักษรปุ่ม */
       font-weight: 600;
-      /* ทำให้ตัวอักษรปุ่มหนาขึ้น */
       transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-      /* เพิ่ม transition */
       display: block;
-      /* ทำให้ปุ่มอยู่เต็มความกว้าง */
       width: 30%;
-      /* ให้ปุ่มขยายเต็มความกว้าง */
       margin-top: 20px;
-      /* เพิ่มระยะห่างด้านบนปุ่ม */
     }
 
     .btn-primary:hover {
       background-color: #0056b3;
-      /* สีพื้นหลังปุ่มเมื่อ hover */
       border-color: #0056b3;
-      /* สีขอบปุ่มเมื่อ hover */
       transform: translateY(-2px);
-      /* ทำให้ปุ่มขยับขึ้นเล็กน้อยเมื่อ hover */
       box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-      /* เพิ่มเงาเมื่อ hover */
     }
 
-    /* เพิ่ม CSS สำหรับการจัดเรียง form-row ให้สวยงาม */
     .form-row {
       display: flex;
       flex-wrap: wrap;
@@ -149,41 +119,12 @@
       padding-right: 15px;
       padding-left: 15px;
       flex: 0 0 50%;
-      /* ทำให้แต่ละคอลัมน์ใช้พื้นที่ 50% */
       max-width: 50%;
     }
 
-    /* ปรับสำหรับหน้าจอขนาดเล็ก */
-    @media (max-width: 768px) {
-      .container {
-        padding: 25px;
-        margin: 10px;
-      }
-
-      h2 {
-        font-size: 1.8rem;
-      }
-
-      .form-row>.col-md-6 {
-        flex: 0 0 100%;
-        /* ให้แต่ละคอลัมน์ใช้พื้นที่ 100% บนมือถือ */
-        max-width: 100%;
-      }
-    }
-
-    label {
-      color: white;
-      font-size: 20px;
-      display: block;
-      /* margin-bottom: 5px; */
-      font-weight: 500;
-    }
-
-    .form-group {
-      max-width: 400px;
-      margin: 10px auto;
-      padding: 0 10px;
-      margin-left: -1%;
+    .form-group input {
+      width: 80%;
+      margin: auto;
     }
 
     input[type="text"],
@@ -198,19 +139,7 @@
       box-sizing: border-box;
       margin-bottom: 15px;
       appearance: none;
-      /* ปิด default dropdown style (เฉพาะบางเบราว์เซอร์) */
       background-color: white;
-    }
-
-    @media (max-width: 576px) {
-
-      input[type="text"],
-      input[type="email"],
-      input[type="tel"],
-      select {
-        font-size: 0.9rem;
-        padding: 8px;
-      }
     }
 
     .dropdown-submenu {
@@ -234,24 +163,47 @@
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-  <div class="container-fluid">
+  <div id="s1" class="container-fluid">
 
     <!-- ***********************************************************Head*********************************************************** -->
-    <div class="row">
+    <div id="logo" class="row">
+      <style>
+        @media screen and (max-width: 768px) {
+          #logo {
+            flex-direction: column;
+          }
+
+          img {
+            height: auto !important;
+            width: 200px !important;
+            text-align: left !important;
+            padding-left: 0px !important;
+          }
+
+          #head1 {
+            width: 100% !important;
+            margin-top: 15px;
+          }
+
+          #s1{
+            padding: 10px;
+          }
+        }
+      </style>
 
       <!-- โลโก้มอซ้ายบน -->
-      <div class="col-6">
+      <div class="col-6 col-md-6 col-sm-12">
         <img src="img/TNIHeader.png" alt="homelogoTNI"
-          style="width: 70%; max-width: 400px; height: auto; display: block; margin-left: 50px; padding-left: 15px;">
+          style="width: 100%; max-width: 400px; height: auto; display: block; padding-left: 15px;">
       </div>
 
+
       <!-- Text แนะนำเว็บขวาบน -->
-      <div class="col-6">
+      <div id="head1" class="col-6 col-md-6 col-sm-12">
         <h1>Thai Nichi Institute Of Technology</h1>
         <h1>สนใจเรียนต่อ ณ</h1>
         <h1>สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
-        <button
-          style="
+        <button style="
           background-color: #b20025;
           color: white; 
           padding: 10px 20px; 
@@ -262,36 +214,61 @@
           display: inline-block; 
           cursor: pointer; 
           transition: background-color 0.3s, transform 0.3s; 
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
-          onmouseover="this.style.transform='translateY(-2px)'; 
-            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';"
-            onmouseout="this.style.transform='translateY(0)';
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onmouseover="this.style.transform='translateY(-2px)'; 
+            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';
             this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
           <a href="#" style="color: inherit; text-decoration: none;">สนใจศึกษา</a>
         </button>
       </div>
-
     </div>
   </div>
   <!-- ***********************************************************END Head*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
-  <section class="container" style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 70%;">
+  <section id="sc1" class="container-fluid"
+    style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 80%; padding-left: 100px;">
     <form id="myForm" method="POST" action="http://localhost:3000/submit">
-      <div class="row" style="align-items: center; justify-content: space-between;">
-    <div class="col-9">
-        <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">
+      <div id="blue-row" class="row" style="align-items: center; justify-content: space-between;">
+        <style>
+          @media screen and (max-width: 768px) {
+            #blue-row {
+              flex-direction: column;
+            }
+
+            #sc1 {
+              padding-left: 0px !important;
+              width: 100% !important;
+              margin-top: 7px !important;
+            }
+
+            #blue-row {
+              flex-direction: row !important;
+            }
+
+            #txt1b {
+              padding-left: 40px;
+            }
+
+            #langThBtn,
+            #langEnBtn {
+              padding: 10px 10px !important;
+            }
+          }
+        </style>
+        <div id="txt1b" class="col-9">
+          <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">
             กำลังวางแผนเรียนต่อ<br>
             สถาบันเทคโนโลยีไทย-ญี่ปุ่น<br>
             อยู่รึป่าว ?
-        </h1>
-        <p style="color: #cce8ff; font-size: 1.1rem;">
+          </h1>
+          <p style="color: #cce8ff; font-size: 1.1rem;">
             กรอกข้อมูลของคุณแล้วเราจะติดต่อหา !
-        </p>
-    </div>
-    <div class="col-3 text-center" style="display: flex; gap: 10px; justify-content: flex-start;; align-items: center;">
-        <button id="langThBtn"  type="button" style="
+          </p>
+        </div>
+        <div class="col-3 text-center"
+          style="display: flex; gap: 10px; justify-content: flex-start;; align-items: center;">
+          <button id="langThBtn" type="button" style="
             background-color: #007bff; /* สีพื้นหลังสำหรับ TH */
             color: white;
             padding: 8px 15px;
@@ -301,14 +278,12 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease-in-out;"
-            onmouseover="this.style.transform='translateY(-2px)'; 
-            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';"
-            onmouseout="this.style.transform='translateY(0)';
+            transition: all 0.2s ease-in-out;" onmouseover="this.style.transform='translateY(-2px)'; 
+            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';
             this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
             TH
-        </button>
-        <button id="langEnBtn"  type="button" style="
+          </button>
+          <button id="langEnBtn" type="button" style="
             background-color: #6c757d; /* สีพื้นหลังสำหรับ EN */
             color: white;
             padding: 8px 15px;
@@ -319,21 +294,53 @@
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease-in-out;
-        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
+        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
             EN
-        </button>
-    </div>
-</div>
-      <div class="row" style="text-align: left;">
-        <div class="col-6">
+          </button>
+        </div>
+      </div>
+      <style>
+        @media screen and (max-width: 768px) {
+          #cl1 {
+            flex-direction: column;
+          }
+
+          input[type="text"],
+          input[type="email"],
+          input[type="tel"],
+          select {
+            width: 100%;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            appearance: none;
+            background-color: white;
+            margin-left: 40px !important;
+            padding-left: 250px;
+          }
+          #grade,#country{
+            width: 188%;
+          }
+        }
+      </style>
+
+      <div id="cl1" class="row" style="text-align: left;">
+        <div class="col-6 col-md-6 col-sm-12 lm">
+
           <label for="fname">ชื่อ <span style="color: #b20025;">*</span></label>
-          <input type="text" id="fname" name="fname" class="form-control mb-2" required>
+          <input type="text" id="fname" name="fname" class="form-control mb-2" style="margin: auto;" placeholder="กรอกชื่อของคุณ"  required>
+
 
           <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></span></label>
-          <input type="text" id="lname" name="lname" class="form-control mb-2" required>
+          <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;" required>
+
+
 
           <label for="grade">ระดับชั้น <span style="color: #b20025;">*</span></label>
-          <select id="grade" name="grade" class="form-control mb-3" required>
+          <select id="grade" name="grade" class="form-control mb-3" style="margin: auto;">
             <option value="">เลือกระดับชั้น</option>
             <option value="ม.4 (Grade 10 /Year 11)">ม.4 (Grade 10 /Year 11)</option>
             <option value="ม.5 (Grade 11 /Year 12)">ม.5 (Grade 11 /Year 12)</option>
@@ -351,8 +358,9 @@
             <option value="เทียบโอน">เทียบโอน</option>
           </select>
 
+
           <label for="email">อีเมล <span style="color: #b20025;">*</span></label>
-          <input type="email" id="email" name="email" class="form-control mb-2" required>
+          <input style="margin: auto;" type="email" id="email" name="email" class="form-control mb-2" required>
           <script>
             // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
             document.addEventListener('DOMContentLoaded', function () {
@@ -400,7 +408,7 @@
           </script>
 
           <label for="phone">เบอร์โทร <span style="color: #b20025;">*</span></label>
-          <input type="tel" id="phone" name="phone" class="form-control mb-2" required>
+          <input style="margin: auto;" type="tel" id="phone" name="phone" class="form-control mb-2" required>
           <script>
             // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
             document.addEventListener('DOMContentLoaded', function () {
@@ -464,10 +472,10 @@
           </script>
 
           <label for="lineid">LINE ID</label>
-          <input type="text" id="lineid" name="lineid" class="form-control mb-2">
+          <input style="margin: auto;" type="text" id="lineid" name="lineid" class="form-control mb-2">
 
           <label for="country">ประเทศ <span style="color: #b20025;">*</span></label>
-          <select id="country" name="country" class="form-control mb-3" required>
+          <select style="margin: auto;" id="country" name="country" class="form-control mb-3" required>
             <option value="">เลือกประเทศ</option>
             <option value="1">กัมพูชา</option>
             <option value="2">กาตาร์</option>
@@ -669,10 +677,10 @@
             <option value="198">เอกวาดอร์</option>
           </select>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-md-6 col-sm-12">
           <!-- Dropdown: ระดับ -->
-          <label>ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
-          <div class="dropdown mb-3">
+          <label id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+          <div class="dropdown mb-3" id="dd2">
             <button id="levelDropdown" class="dropdown-toggle" type="button"
               data-bs-toggle="dropdown">เลือกระดับ</button>
             <ul class="dropdown-menu">
@@ -691,16 +699,16 @@
           </div>
 
           <!-- Dropdown: คณะ -->
-          <label>คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
-          <div class="dropdown mb-3">
+          <label id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+          <div class="dropdown mb-3" id="dd2">
             <button id="facultyDropdown" class="dropdown-toggle" type="button"
               data-bs-toggle="dropdown">เลือกคณะ</button>
             <ul class="dropdown-menu" id="facultyOptions"></ul>
           </div>
 
           <!-- Dropdown: สาขา -->
-          <label>สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
-          <div class="dropdown mb-4">
+          <label id="dd3">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+          <div class="dropdown mb-4" id="dd2">
             <button id="majorDropdown" class="dropdown-toggle" type="button"
               data-bs-toggle="dropdown">เลือกสาขา</button>
             <ul class="dropdown-menu" id="majorOptions"></ul>
@@ -712,7 +720,8 @@
           <input type="hidden" name="major" id="hiddenMajor">
         </div>
     </form>
-    <!-- ปุ่มส่ง --><div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary">ส่งข้อมูล</button></div>
+    <!-- ปุ่มส่ง -->
+    <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary">ส่งข้อมูล</button></div>
   </section>
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -845,52 +854,76 @@
     });
   </script>
 
-<script>
-  function applyMobileStyles() {
-    // 1. เปลี่ยน col-6 เป็น col-12
-    const formCols = document.querySelectorAll('.form-row .col-md-6');
-    formCols.forEach(col => {
-      col.classList.remove('col-md-6');
-      col.classList.add('col-12');
-    });
 
-    // 2. จัดองค์ประกอบให้อยู่กึ่งกลางยกเว้น label
-    const formGroups = document.querySelectorAll('.form-group');
-    formGroups.forEach(group => {
-      // ใช้ Flexbox เพื่อจัด input และ select ให้อยู่กึ่งกลาง
-      group.style.display = 'flex';
-      group.style.flexDirection = 'column';
-      group.style.alignItems = 'center';
-    });
-
-    // 3. จัดให้ label อยู่ชิดซ้าย
-    const labels = document.querySelectorAll('.form-group label');
-    labels.forEach(label => {
-      label.style.width = '100%';
-      label.style.textAlign = 'left';
-    });
-  }
-
-  // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จสมบูรณ์
-  window.addEventListener('DOMContentLoaded', applyMobileStyles);
-
-  // เรียกใช้ฟังก์ชันทุกครั้งที่ขนาดหน้าจอเปลี่ยน
-  window.addEventListener('resize', () => {
-    // ตรวจสอบขนาดหน้าจอว่าเล็กกว่าหรือเท่ากับ 768px (ขนาดมาตรฐานของมือถือ)
-    if (window.innerWidth <= 768) {
-      applyMobileStyles();
-    } else {
-      // สามารถเพิ่มโค้ดเพื่อกลับไปใช้รูปแบบ desktop ได้ที่นี่
-      location.reload(); // วิธีที่ง่ายที่สุดคือรีโหลดหน้าเว็บ
-    }
-  });
-</script>
   <!-- Bootstrap JS Bundle (รวม Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
 
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
+
+  <!-- ตั้งค่ามือถือ -->
+  <style>
+    /* สำหรับมือถือและแท็บเล็ตแนวตั้ง */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 16px !important;
+      }
+
+      button {
+        font-size: 13px !important;
+      }
+
+      h2 {
+        font-size: 12px !important;
+      }
+
+      p {
+        font-size: 12px !important;
+      }
+
+      label {
+        font-size: 15px !important;
+        margin-left: 40px !important;
+      }
+
+      .dropdown-toggle {
+        text-align: center;
+      }
+
+      .dropdown-menu {
+        text-align: center;
+        font-size: 11px;
+        ;
+      }
+
+      .dropdown-submenu {
+        text-align: center;
+      }
+
+      #dd2 {
+        text-align: center !important;
+      }
+
+      #dd3 {
+        margin-left: 70px;
+      }
+
+      option {
+        font-size: 12px !important;
+      }
+
+      select#country {
+        font-size: 13px;
+        text-align: center;
+      }
+
+      select#grade {
+        font-size: 13px;
+        text-align: center;
+      }
+    }
+  </style>
 
 </body>
 
