@@ -310,7 +310,7 @@
           input[type="email"],
           input[type="tel"],
           select {
-            width: 100%;
+            width: 190%;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -319,7 +319,6 @@
             appearance: none;
             background-color: white;
             margin-left: 40px !important;
-            padding-left: 250px;
           }
           #grade,#country{
             width: 188%;
@@ -335,7 +334,7 @@
 
 
           <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></span></label>
-          <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;" required>
+          <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;" placeholder="กรอกนามสกุลของคุณ" required>
 
 
 
@@ -360,7 +359,7 @@
 
 
           <label for="email">อีเมล <span style="color: #b20025;">*</span></label>
-          <input style="margin: auto;" type="email" id="email" name="email" class="form-control mb-2" required>
+          <input style="margin: auto;" type="email" id="email" name="email" class="form-control mb-2" placeholder="กรอกอีเมลของคุณ" required>
           <script>
             // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
             document.addEventListener('DOMContentLoaded', function () {
@@ -408,7 +407,7 @@
           </script>
 
           <label for="phone">เบอร์โทร <span style="color: #b20025;">*</span></label>
-          <input style="margin: auto;" type="tel" id="phone" name="phone" class="form-control mb-2" required>
+          <input style="margin: auto;" type="tel" id="phone" name="phone" class="form-control mb-2" placeholder="กรอกเบอร์ติดต่อของคุณ" required>
           <script>
             // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
             document.addEventListener('DOMContentLoaded', function () {
@@ -472,7 +471,7 @@
           </script>
 
           <label for="lineid">LINE ID</label>
-          <input style="margin: auto;" type="text" id="lineid" name="lineid" class="form-control mb-2">
+          <input style="margin: auto;" type="text" id="lineid" name="lineid" placeholder="กรอกเบอร์ติดต่อของคุณ (ถ้ามี)" class="form-control mb-2">
 
           <label for="country">ประเทศ <span style="color: #b20025;">*</span></label>
           <select style="margin: auto;" id="country" name="country" class="form-control mb-3" required>
@@ -677,7 +676,21 @@
             <option value="198">เอกวาดอร์</option>
           </select>
         </div>
-        <div class="col-6 col-md-6 col-sm-12">
+
+        <style>
+          @media screen and (max-width: 768px){
+            #bll{
+              width: 100%;
+            }
+            #levelDropdown{
+              width: 80%;
+            }
+            #dd2{
+
+            }
+          }
+        </style>
+        <div id="bll" class="col-6 col-md-6 col-sm-12">
           <!-- Dropdown: ระดับ -->
           <label id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-3" id="dd2">
@@ -697,7 +710,6 @@
               <li><a class="dropdown-item level-option" href="#" data-level="ป.โท">ปริญญาโท</a></li>
             </ul>
           </div>
-
           <!-- Dropdown: คณะ -->
           <label id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-3" id="dd2">
@@ -883,7 +895,7 @@
       }
 
       label {
-        font-size: 15px !important;
+        font-size: 16px !important;
         margin-left: 40px !important;
       }
 
@@ -902,7 +914,7 @@
       }
 
       #dd2 {
-        text-align: center !important;
+        /* text-align: center !important; */
       }
 
       #dd3 {
@@ -914,12 +926,12 @@
       }
 
       select#country {
-        font-size: 13px;
+        font-size: 16px;
         text-align: center;
       }
 
       select#grade {
-        font-size: 13px;
+        font-size: 16x;
         text-align: center;
       }
     }
