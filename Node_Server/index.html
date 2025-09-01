@@ -152,14 +152,6 @@
       margin-top: -0.5rem;
     }
 
-    .dropdown-toggle {
-      width: 70%;
-      text-align: left;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #fff;
-    }
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -168,7 +160,7 @@
     <!-- ***********************************************************Head*********************************************************** -->
     <div id="logo" class="row">
       <style>
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1280px) {
           #logo {
             flex-direction: column;
           }
@@ -185,7 +177,7 @@
             margin-top: 15px;
           }
 
-          #s1{
+          #s1 {
             padding: 10px;
           }
         }
@@ -231,7 +223,7 @@
     <form id="myForm" method="POST" action="http://localhost:3000/submit">
       <div id="blue-row" class="row" style="align-items: center; justify-content: space-between;">
         <style>
-          @media screen and (max-width: 768px) {
+          @media screen and (max-width: 1280px) {
             #blue-row {
               flex-direction: column;
             }
@@ -301,7 +293,7 @@
         </div>
       </div>
       <style>
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1280px) {
           #cl1 {
             flex-direction: column;
           }
@@ -320,7 +312,9 @@
             background-color: white;
             margin-left: 40px !important;
           }
-          #grade,#country{
+
+          #grade,
+          #country {
             width: 188%;
           }
         }
@@ -330,11 +324,13 @@
         <div class="col-6 col-md-6 col-sm-12 lm">
 
           <label for="fname">ชื่อ <span style="color: #b20025;">*</span></label>
-          <input type="text" id="fname" name="fname" class="form-control mb-2" style="margin: auto;" placeholder="กรอกชื่อของคุณ"  required>
+          <input type="text" id="fname" name="fname" class="form-control mb-2" style="margin: auto;"
+            placeholder="กรอกชื่อของคุณ" required>
 
 
           <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></span></label>
-          <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;" placeholder="กรอกนามสกุลของคุณ" required>
+          <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;"
+            placeholder="กรอกนามสกุลของคุณ" required>
 
 
 
@@ -359,7 +355,8 @@
 
 
           <label for="email">อีเมล <span style="color: #b20025;">*</span></label>
-          <input style="margin: auto;" type="email" id="email" name="email" class="form-control mb-2" placeholder="กรอกอีเมลของคุณ" required>
+          <input style="margin: auto;" type="email" id="email" name="email" class="form-control mb-2"
+            placeholder="กรอกอีเมลของคุณ" required>
           <script>
             // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
             document.addEventListener('DOMContentLoaded', function () {
@@ -407,7 +404,8 @@
           </script>
 
           <label for="phone">เบอร์โทร <span style="color: #b20025;">*</span></label>
-          <input style="margin: auto;" type="tel" id="phone" name="phone" class="form-control mb-2" placeholder="กรอกเบอร์ติดต่อของคุณ" required>
+          <input style="margin: auto;" type="tel" id="phone" name="phone" class="form-control mb-2"
+            placeholder="กรอกเบอร์ติดต่อของคุณ" required>
           <script>
             // ดักจับเหตุการณ์ DOMContentLoaded เพื่อให้แน่ใจว่า input element พร้อมใช้งาน
             document.addEventListener('DOMContentLoaded', function () {
@@ -471,7 +469,8 @@
           </script>
 
           <label for="lineid">LINE ID</label>
-          <input style="margin: auto;" type="text" id="lineid" name="lineid" placeholder="กรอกเบอร์ติดต่อของคุณ (ถ้ามี)" class="form-control mb-2">
+          <input style="margin: auto;" type="text" id="lineid" name="lineid" placeholder="กรอกเบอร์ติดต่อของคุณ (ถ้ามี)"
+            class="form-control mb-2">
 
           <label for="country">ประเทศ <span style="color: #b20025;">*</span></label>
           <select style="margin: auto;" id="country" name="country" class="form-control mb-3" required>
@@ -678,27 +677,40 @@
         </div>
 
         <style>
-          @media screen and (max-width: 768px){
-            #bll{
+          @media screen and (max-width: 1280px) {
+            #bll {
               width: 100%;
             }
-            #levelDropdown{
-              width: 80%;
+
+            #dd2 {
+              text-align: center !important;
+              margin-left: 10px;
+              width: 107%;
             }
-            #dd2{
-              
-            }
+          }
+
+          .inher {
+            width: 80%;
+            height: 45px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      margin-bottom: 0px;
+      appearance: none;
+      background-color: white;
+      font-size: 16px !important;
           }
         </style>
         <div id="bll" class="col-6 col-md-6 col-sm-12">
           <!-- Dropdown: ระดับ -->
           <label id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-3" id="dd2">
-            <button id="levelDropdown" class="dropdown-toggle" type="button"
-              data-bs-toggle="dropdown">เลือกระดับ</button>
+            <button id="levelDropdown" type="button"
+              data-bs-toggle="dropdown" class="inher">เลือกระดับ</button>
             <ul class="dropdown-menu">
               <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-toggle" href="#">ปริญญาตรี</a>
+                <a class="dropdown-item" href="#">ปริญญาตรี</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ">ป.ตรี ภาคปกติ</a></li>
                   <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ">ป.ตรี
@@ -713,16 +725,16 @@
           <!-- Dropdown: คณะ -->
           <label id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-3" id="dd2">
-            <button id="facultyDropdown" class="dropdown-toggle" type="button"
-              data-bs-toggle="dropdown">เลือกคณะ</button>
+            <button id="facultyDropdown" type="button"
+              data-bs-toggle="dropdown" class="inher">เลือกคณะ</button>
             <ul class="dropdown-menu" id="facultyOptions"></ul>
           </div>
 
           <!-- Dropdown: สาขา -->
           <label id="dd3">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-4" id="dd2">
-            <button id="majorDropdown" class="dropdown-toggle" type="button"
-              data-bs-toggle="dropdown">เลือกสาขา</button>
+            <button id="majorDropdown" type="button"
+              data-bs-toggle="dropdown" class="inher">เลือกสาขา</button>
             <ul class="dropdown-menu" id="majorOptions"></ul>
           </div>
 
@@ -877,7 +889,7 @@
   <!-- ตั้งค่ามือถือ -->
   <style>
     /* สำหรับมือถือและแท็บเล็ตแนวตั้ง */
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1280px) {
       h1 {
         font-size: 16px !important;
       }
@@ -899,26 +911,14 @@
         margin-left: 40px !important;
       }
 
-      .dropdown-toggle {
-        text-align: center;
-      }
-
       .dropdown-menu {
         text-align: center;
         font-size: 11px;
-        
+
       }
 
       .dropdown-submenu {
         text-align: center;
-      }
-
-      #dd2 {
-        text-align: center !important;
-      }
-
-      #dd3 {
-        margin-left: 70px;
       }
 
       option {
