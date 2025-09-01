@@ -54,7 +54,7 @@
     }
 
     .lm label {
-      margin-left: 70px;
+      margin-left: 80px;
     }
 
     label {
@@ -152,6 +152,18 @@
       margin-top: -0.5rem;
     }
 
+    .inher {
+      width: 80%;
+      height: 45px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      margin-bottom: 0px;
+      appearance: none;
+      background-color: white;
+      font-size: 16px !important;
+    }
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -159,46 +171,24 @@
 
     <!-- ***********************************************************Head*********************************************************** -->
     <div id="logo" class="row">
-      <style>
-        @media screen and (max-width: 1280px) {
-          #logo {
-            flex-direction: column;
-          }
 
-          img {
-            height: auto !important;
-            width: 200px !important;
-            text-align: left !important;
-            padding-left: 0px !important;
-          }
-
-          #head1 {
-            width: 100% !important;
-            margin-top: 15px;
-          }
-
-          #s1 {
-            padding: 10px;
-          }
-        }
-      </style>
 
       <!-- โลโก้มอซ้ายบน -->
-      <div class="col-6 col-md-6 col-sm-12">
+      <div class="col-6">
         <img src="img/TNIHeader.png" alt="homelogoTNI"
           style="width: 100%; max-width: 400px; height: auto; display: block; padding-left: 15px;">
       </div>
 
 
       <!-- Text แนะนำเว็บขวาบน -->
-      <div id="head1" class="col-6 col-md-6 col-sm-12">
-        <h1>Thai Nichi Institute Of Technology</h1>
-        <h1>สนใจเรียนต่อ ณ</h1>
-        <h1>สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
-        <button style="
+      <div id="head1" class="col-6">
+        <h1 id="hh1">Thai Nichi Institute Of Technology <br>
+        สนใจเรียนต่อ ณ <br>
+        สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
+        <button id="b1" style="
           background-color: #b20025;
           color: white; 
-          padding: 10px 20px; 
+          padding: 10px 20px;
           border: none; 
           border-radius: 5px; 
           font-weight: bold; 
@@ -222,32 +212,7 @@
     style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 80%; padding-left: 100px;">
     <form id="myForm" method="POST" action="http://localhost:3000/submit">
       <div id="blue-row" class="row" style="align-items: center; justify-content: space-between;">
-        <style>
-          @media screen and (max-width: 1280px) {
-            #blue-row {
-              flex-direction: column;
-            }
 
-            #sc1 {
-              padding-left: 0px !important;
-              width: 100% !important;
-              margin-top: 7px !important;
-            }
-
-            #blue-row {
-              flex-direction: row !important;
-            }
-
-            #txt1b {
-              padding-left: 40px;
-            }
-
-            #langThBtn,
-            #langEnBtn {
-              padding: 10px 10px !important;
-            }
-          }
-        </style>
         <div id="txt1b" class="col-9">
           <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">
             กำลังวางแผนเรียนต่อ<br>
@@ -292,33 +257,7 @@
           </button>
         </div>
       </div>
-      <style>
-        @media screen and (max-width: 1280px) {
-          #cl1 {
-            flex-direction: column;
-          }
 
-          input[type="text"],
-          input[type="email"],
-          input[type="tel"],
-          select {
-            width: 190%;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-bottom: 15px;
-            appearance: none;
-            background-color: white;
-            margin-left: 40px !important;
-          }
-
-          #grade,
-          #country {
-            width: 188%;
-          }
-        }
-      </style>
 
       <div id="cl1" class="row" style="text-align: left;">
         <div class="col-6 col-md-6 col-sm-12 lm">
@@ -676,39 +615,13 @@
           </select>
         </div>
 
-        <style>
-          @media screen and (max-width: 1280px) {
-            #bll {
-              width: 100%;
-            }
 
-            #dd2 {
-              text-align: center !important;
-              margin-left: 10px;
-              width: 107%;
-            }
-          }
-
-          .inher {
-            width: 80%;
-            height: 45px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-      margin-bottom: 0px;
-      appearance: none;
-      background-color: white;
-      font-size: 16px !important;
-          }
-        </style>
         <div id="bll" class="col-6 col-md-6 col-sm-12">
           <!-- Dropdown: ระดับ -->
           <label id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-3" id="dd2">
-            <button id="levelDropdown" type="button"
-              data-bs-toggle="dropdown" class="inher">เลือกระดับ</button>
-            <ul class="dropdown-menu">
+            <button id="levelDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกระดับ</button>
+            <ul id="sub1" class="dropdown-menu">
               <li class="dropdown-submenu">
                 <a class="dropdown-item" href="#">ปริญญาตรี</a>
                 <ul class="dropdown-menu">
@@ -725,16 +638,14 @@
           <!-- Dropdown: คณะ -->
           <label id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-3" id="dd2">
-            <button id="facultyDropdown" type="button"
-              data-bs-toggle="dropdown" class="inher">เลือกคณะ</button>
+            <button id="facultyDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกคณะ</button>
             <ul class="dropdown-menu" id="facultyOptions"></ul>
           </div>
 
           <!-- Dropdown: สาขา -->
           <label id="dd3">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
           <div class="dropdown mb-4" id="dd2">
-            <button id="majorDropdown" type="button"
-              data-bs-toggle="dropdown" class="inher">เลือกสาขา</button>
+            <button id="majorDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกสาขา</button>
             <ul class="dropdown-menu" id="majorOptions"></ul>
           </div>
 
@@ -745,7 +656,7 @@
         </div>
     </form>
     <!-- ปุ่มส่ง -->
-    <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary">ส่งข้อมูล</button></div>
+    <div id="bb2" class="d-flex justify-content-center"><button id="b2" type="submit" class="btn btn-primary">ส่งข้อมูล</button></div>
   </section>
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -888,8 +799,27 @@
 
   <!-- ตั้งค่ามือถือ -->
   <style>
-    /* สำหรับมือถือและแท็บเล็ตแนวตั้ง */
-    @media screen and (max-width: 1280px) {
+    /* สำหรับมือถือ*/
+    @media screen and (max-device-width: 600px) and (orientation: portrait){
+      #b2{
+        width: 200px;
+      }
+
+      #bb2{
+        margin-left: 20px;
+      }
+      
+      #b1{
+        margin-left: 115px;
+      }
+
+      #sub1{
+        inset: 0px auto auto -30px !important;
+      }
+      
+      #hh1{
+        text-align: center;
+      }
       h1 {
         font-size: 16px !important;
       }
@@ -913,14 +843,14 @@
 
       .dropdown-menu {
         text-align: center;
-        font-size: 11px;
-
+        font-size: 14px;
       }
 
-      .dropdown-submenu {
-        text-align: center;
+      .dropdown-item{
+        padding : 0px;
+        margin: 0px;
       }
-
+     
       option {
         font-size: 12px !important;
       }
@@ -934,6 +864,232 @@
         font-size: 16x;
         text-align: center;
       }
+
+      #bll {
+        width: 100%;
+      }
+
+      #dd2 {
+        text-align: center !important;
+        margin-left: 10px;
+        width: 107%;
+      }
+
+      #logo {
+        flex-direction: column;
+      }
+
+      img {
+        height: auto !important;
+        width: 200px !important;
+        text-align: left !important;
+        padding-left: 0px !important;
+        margin-left: 40% !important;
+      }
+
+      #head1 {
+        width: 100% !important;
+        margin-top: 15px;
+      }
+
+      #s1 {
+        padding: 10px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select {
+        width: 260px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        appearance: none;
+        background-color: white;
+        margin-left: 40px !important;
+      }
+
+      #grade,
+      #country {
+        width: 260px;
+      }
+
+      #blue-row {
+        flex-direction: column;
+      }
+
+      #sc1 {
+        padding-left: 0px !important;
+        width: 100% !important;
+        margin-top: 7px !important;
+      }
+
+      #blue-row {
+        flex-direction: row !important;
+      }
+
+      #txt1b {
+        padding-left: 40px;
+      }
+
+      #langThBtn,
+      #langEnBtn {
+        padding: 10px 10px !important;
+      }
+    }
+
+    /* แท็บเล็ตแนวตั้งงงงงงงงงงงงงงงงงงงงงงงงงงงงงงงงงงงง /////////////////////////////////////////////////////////////////////////////////////////*/
+    @media screen and (min-device-width: 601px) and (max-device-width: 900px) and (orientation: portrait){
+      h1 {
+        font-size: 30px !important;
+      }
+
+      #hh1{
+        text-align: center;
+      }
+
+      #b1{
+        margin-left: 290px;
+      }
+
+      button {
+        font-size: 18px !important;
+      }
+
+      .container-fluid{
+        margin-left: 30px;
+      }
+
+      h2 {
+        font-size: 12px !important;
+      }
+
+      p {
+        font-size: 20px !important;
+      }
+
+      label {
+        font-size: 28px !important;
+        margin-left: 65px !important;
+      }
+
+      .row{
+        flex-direction: row !important;
+      }
+
+      .dropdown-menu {
+        text-align: center;
+        font-size: 20px;
+
+      }
+
+      .dropdown-submenu {
+        text-align: center;
+      }
+
+      option {
+        font-size: 12px !important;
+      }
+
+      select#country {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      select#grade {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      #bll {
+        width: 100%;
+      }
+
+      #dd2 {
+        text-align: left !important;
+        margin-left: 65px;
+        width: 107%;
+      }
+
+      #logo {
+        flex-direction: row;
+      }
+
+      img {
+        height: auto !important;
+        width: 500px !important;
+        text-align: left !important;
+        padding-left: 0px !important;
+        margin-left: 150px !important;
+      }
+
+      #head1 {
+        width: 100% !important;
+        margin-top: 15px;
+      }
+
+      #s1 {
+        padding: 10px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select {
+        width: 580px;
+        font-size: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        appearance: none;
+        background-color: white;
+        margin-left: 65px !important;
+        text-align: center;
+      }
+
+      #grade,
+      #country {
+        width: 580px;
+      }
+
+      #blue-row {
+        flex-direction: column;
+      }
+
+      #sc1 {
+        padding-left: 0px !important;
+        width: 100% !important;
+        margin-top: 7px !important;
+      }
+
+      #blue-row {
+        flex-direction: row !important;
+      }
+
+      #txt1b {
+        padding-left: 80px;
+      }
+
+      #langThBtn,
+      #langEnBtn {
+        padding: 10px 10px !important;
+      }
+
+      .inher {
+      width: 80%;
+      height: 55px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      margin-bottom: 0px;
+      appearance: none;
+      background-color: white;
+      font-size: 20px !important;
+    }
     }
   </style>
 
