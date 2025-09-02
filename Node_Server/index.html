@@ -164,6 +164,17 @@
       background-color: white;
       font-size: 16px !important;
     }
+
+    .valid {
+      color: green;
+      font-size: 0.9em;
+      margin-left: 5px;
+    }
+    .invalid {
+      color: red;
+      font-size: 0.9em;
+      margin-left: 5px;
+    }
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -267,9 +278,29 @@
             placeholder="กรอกชื่อของคุณ" required>
 
 
-          <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></span></label>
+          <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></label>
           <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;"
             placeholder="กรอกนามสกุลของคุณ" required>
+
+          <script>
+            function validateName(input, msgId) {
+              const msg = document.getElementById(msgId);
+              const regex = /^[^0-9]+$/; // อนุญาตทุกอย่าง ยกเว้นตัวเลข
+
+              if (input.value === "") {
+                msg.textContent = ""; // ถ้ายังไม่กรอก ไม่ต้องแสดง
+                return;
+              }
+
+              if (regex.test(input.value)) {
+                msg.textContent = "ข้อมูลถูกต้อง ✅";
+                msg.className = "valid";
+              } else {
+                msg.textContent = "ข้อมูลห้ามมีตัวเลข ❌";
+                msg.className = "invalid";
+              }
+            }
+          </script>
 
 
 
@@ -521,7 +552,7 @@
             <button id="levelDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกระดับ ▾</button>
             <ul id="sub1" class="dropdown-menu">
               <li class="dropdown-submenu">
-                <a class="dropdown-item" href="#">ปริญญาตรี  ▶</a>
+                <a class="dropdown-item" href="#">ปริญญาตรี ▶</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ">ป.ตรี ภาคปกติ</a></li>
                   <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ">ป.ตรี
@@ -562,191 +593,191 @@
 
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
   <script>
-  // ข้อมูลคณะตามระดับ
-  const facultiesByLevel = {
-    "ป.ตรี-ปกติ": [
-      "คณะบริหารธุรกิจ",
-      "คณะสื่อสารสากล",
-      "คณะวิศวกรรมศาสตร์",
-      "คณะเทคโนโลยีสารสนเทศ",
-      "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม"
-    ],
-    "ป.ตรี-นานาชาติ": [
-      "วิศวกรรมดิจิทัล (DGE)",
-      "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
-      "ธุรกิจระหว่างประเทศ และการเป็นผู้ประกอบการ (IBN)"
-    ],
-    "ป.ตรี-เทียบโอน": [
-      "คณะบริหารธุรกิจ",
-      "คณะวิศวกรรมศาสตร์",
-      "คณะเทคโนโลยีสารสนเทศ",
-      "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม"
-    ],
-    "ป.โท": [
-      "คณะบริหารธุรกิจแบบญี่ปุ่น",
-      "คณะเทคโนโลยีสารสนเทศ",
-      "คณะวิศวกรรมศาสตร์"
-    ]
-  };
+    // ข้อมูลคณะตามระดับ
+    const facultiesByLevel = {
+      "ป.ตรี-ปกติ": [
+        "คณะบริหารธุรกิจ",
+        "คณะสื่อสารสากล",
+        "คณะวิศวกรรมศาสตร์",
+        "คณะเทคโนโลยีสารสนเทศ",
+        "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม"
+      ],
+      "ป.ตรี-นานาชาติ": [
+        "วิศวกรรมดิจิทัล (DGE)",
+        "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
+        "ธุรกิจระหว่างประเทศ และการเป็นผู้ประกอบการ (IBN)"
+      ],
+      "ป.ตรี-เทียบโอน": [
+        "คณะบริหารธุรกิจ",
+        "คณะวิศวกรรมศาสตร์",
+        "คณะเทคโนโลยีสารสนเทศ",
+        "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม"
+      ],
+      "ป.โท": [
+        "คณะบริหารธุรกิจแบบญี่ปุ่น",
+        "คณะเทคโนโลยีสารสนเทศ",
+        "คณะวิศวกรรมศาสตร์"
+      ]
+    };
 
-  // ข้อมูลสาขา แยกตามระดับ + คณะ
-  const majorsByLevelAndFaculty = {
-    "ป.ตรี-ปกติ": {
-      "คณะวิศวกรรมศาสตร์": ["วิศวกรรมยานยนต์ (AE)", "วิศวกรรมหุ่นยนต์และระบบอัตโนมัติแบบลีน (RE)", "วิศวกรรมคอมพิวเตอร์และปัญญาประดิษฐ์ (CE)","วิศวกรรมอุตสาหการ (IE)","วิศวกรรมไฟฟ้า (EE)","วิศวกรรมเซมิคอนดักเตอร์ (SC)"],
-      "คณะเทคโนโลยีสารสนเทศ": ["เทคโนโลยีสารสนเทศ (IT)", "เทคโนโลยีมัลติมีเดีย (MT)","เทคโนโลยีสารสนเทศทางธุรกิจดิจิทัล (BI)","เทคโนโลยีดิจิทัลทางสื่อสารมวลชน (DC)","วิทยาการข้อมูลและการวิเคราะห์ข้อมูล (DS)"],
-      "คณะบริหารธุรกิจ" : ["การพัฒนาธุรกิจเพื่อความยั่งยืน (BD)","บริหารธุรกิจญี่ปุ่น (BJ)","การจัดการธุรกิจระหว่างประเทศ (IB)","การบัญชี (AC)","บริหารทรัพยากรมนุษย์แบบญี่ปุ่น (HR)","การตลาดดิจิทัล (DM)","การสร้างสรรค์ธุรกิจบริการสไตล์ญี่ปุ่น (SB)"],
-      "คณะสื่อสารสากล" : ["ภาษาญี่ปุ่นเพื่อธุรกิจ ระหว่างประเทศ (JIB)", "สื่อสารสากล (GLC)"],
-      "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม" : ["โลจิสติกส์และดิจิทัลซัพพลายเชน (LD)", "เทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม (DT)"]
-    },
-    "ป.โท": {
-      "คณะวิศวกรรมศาสตร์": ["เทคโนโลยีวิศวกรรม (MET)"],
-      "คณะเทคโนโลยีสารสนเทศ": ["เทคโนโลยีสารสนเทศ (MIT)"],
-      "คณะบริหารธุรกิจแบบญี่ปุ่น": ["Business Management and Japanese (MBJ)","Business Creation and Innovation (MBI)",
-        "Lean Manufacturing System and Logistics Management (LMS)"]
-    },
-    "ป.ตรี-เทียบโอน" : {
-      "คณะบริหารธุรกิจ" : ["การบัญชี (AC)","การบริหารทรัพยากรมนุษย์แบบญี่ปุ่น (HR)","การพัฒนาธุรกิจเพื่อความยั่งยืน (BD)"],
-      "คณะเทคโนโลยีสารสนเทศ" : ["เทคโนโลยีสารสนเทศ (IT)", "เทคโนโลยีสารสนเทศทางธุรกิจดิจิทัล (BI)"],
-      "คณะวิศวกรรมศาสตร์" : ["วิศวกรรมหุ่นยนต์และระบบอัตโนมัติแบบลีน (RE)", "วิศวกรรมอุตสาหการ (IE)"],
-      "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม" : ["โลจิสติกส์และดิจิทัลซัพพลายเชน (LD)", "เทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม (DT)"]
-    }
-  };
-
-  const levelDropdown = document.getElementById("levelDropdown");
-  const facultyDropdown = document.getElementById("facultyDropdown");
-  const majorDropdown = document.getElementById("majorDropdown");
-  const facultyOptions = document.getElementById("facultyOptions");
-  const majorOptions = document.getElementById("majorOptions");
-
-  // Hidden inputs
-  const hiddenLevel = document.getElementById("hiddenLevel");
-  const hiddenFac = document.getElementById("hiddenFac");
-  const hiddenMajor = document.getElementById("hiddenMajor");
-
-  // เปิด/ปิด submenu
-  document.querySelectorAll('.dropdown-submenu > a').forEach(el => {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const submenu = this.nextElementSibling;
-      document.querySelectorAll('.dropdown-submenu .dropdown-menu').forEach(menu => {
-        if (menu !== submenu) menu.classList.remove('show');
-      });
-      submenu.classList.toggle('show');
-    });
-  });
-
-  // เลือกระดับ
-  document.querySelectorAll('.level-option').forEach(item => {
-    item.addEventListener('click', function (e) {
-      e.preventDefault();
-      const level = this.dataset.level;
-      const label = this.textContent;
-
-      // ตั้งค่า dropdown และ hidden input
-      levelDropdown.textContent = label;
-      hiddenLevel.value = level;
-
-      facultyDropdown.textContent = "เลือกคณะ";
-      majorDropdown.textContent = "เลือกสาขา";
-      hiddenFac.value = "";
-      hiddenMajor.value = "";
-      facultyOptions.innerHTML = "";
-      majorOptions.innerHTML = "";
-
-      // โหลดคณะตามระดับ
-      if (facultiesByLevel[level]) {
-        facultiesByLevel[level].forEach(fac => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.href = "#";
-          a.className = "dropdown-item";
-          a.textContent = fac;
-
-          // เมื่อเลือกคณะ
-          a.addEventListener("click", function (e) {
-            e.preventDefault();
-            facultyDropdown.textContent = fac;
-            hiddenFac.value = fac;
-
-            majorDropdown.textContent = "เลือกสาขา";
-            hiddenMajor.value = "";
-            majorOptions.innerHTML = "";
-
-            // โหลดสาขาตามระดับและคณะ
-            if (
-              majorsByLevelAndFaculty[level] &&
-              majorsByLevelAndFaculty[level][fac]
-            ) {
-              majorsByLevelAndFaculty[level][fac].forEach(major => {
-                const mli = document.createElement("li");
-                const ma = document.createElement("a");
-                ma.href = "#";
-                ma.className = "dropdown-item";
-                ma.textContent = major;
-
-                // เมื่อเลือกสาขา
-                ma.addEventListener("click", function (e) {
-                  e.preventDefault();
-                  majorDropdown.textContent = major;
-                  hiddenMajor.value = major;
-                });
-
-                mli.appendChild(ma);
-                majorOptions.appendChild(mli);
-              });
-            }
-          });
-
-          li.appendChild(a);
-          facultyOptions.appendChild(li);
-        });
+    // ข้อมูลสาขา แยกตามระดับ + คณะ
+    const majorsByLevelAndFaculty = {
+      "ป.ตรี-ปกติ": {
+        "คณะวิศวกรรมศาสตร์": ["วิศวกรรมยานยนต์ (AE)", "วิศวกรรมหุ่นยนต์และระบบอัตโนมัติแบบลีน (RE)", "วิศวกรรมคอมพิวเตอร์และปัญญาประดิษฐ์ (CE)", "วิศวกรรมอุตสาหการ (IE)", "วิศวกรรมไฟฟ้า (EE)", "วิศวกรรมเซมิคอนดักเตอร์ (SC)"],
+        "คณะเทคโนโลยีสารสนเทศ": ["เทคโนโลยีสารสนเทศ (IT)", "เทคโนโลยีมัลติมีเดีย (MT)", "เทคโนโลยีสารสนเทศทางธุรกิจดิจิทัล (BI)", "เทคโนโลยีดิจิทัลทางสื่อสารมวลชน (DC)", "วิทยาการข้อมูลและการวิเคราะห์ข้อมูล (DS)"],
+        "คณะบริหารธุรกิจ": ["การพัฒนาธุรกิจเพื่อความยั่งยืน (BD)", "บริหารธุรกิจญี่ปุ่น (BJ)", "การจัดการธุรกิจระหว่างประเทศ (IB)", "การบัญชี (AC)", "บริหารทรัพยากรมนุษย์แบบญี่ปุ่น (HR)", "การตลาดดิจิทัล (DM)", "การสร้างสรรค์ธุรกิจบริการสไตล์ญี่ปุ่น (SB)"],
+        "คณะสื่อสารสากล": ["ภาษาญี่ปุ่นเพื่อธุรกิจ ระหว่างประเทศ (JIB)", "สื่อสารสากล (GLC)"],
+        "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม": ["โลจิสติกส์และดิจิทัลซัพพลายเชน (LD)", "เทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม (DT)"]
+      },
+      "ป.โท": {
+        "คณะวิศวกรรมศาสตร์": ["เทคโนโลยีวิศวกรรม (MET)"],
+        "คณะเทคโนโลยีสารสนเทศ": ["เทคโนโลยีสารสนเทศ (MIT)"],
+        "คณะบริหารธุรกิจแบบญี่ปุ่น": ["Business Management and Japanese (MBJ)", "Business Creation and Innovation (MBI)",
+          "Lean Manufacturing System and Logistics Management (LMS)"]
+      },
+      "ป.ตรี-เทียบโอน": {
+        "คณะบริหารธุรกิจ": ["การบัญชี (AC)", "การบริหารทรัพยากรมนุษย์แบบญี่ปุ่น (HR)", "การพัฒนาธุรกิจเพื่อความยั่งยืน (BD)"],
+        "คณะเทคโนโลยีสารสนเทศ": ["เทคโนโลยีสารสนเทศ (IT)", "เทคโนโลยีสารสนเทศทางธุรกิจดิจิทัล (BI)"],
+        "คณะวิศวกรรมศาสตร์": ["วิศวกรรมหุ่นยนต์และระบบอัตโนมัติแบบลีน (RE)", "วิศวกรรมอุตสาหการ (IE)"],
+        "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม": ["โลจิสติกส์และดิจิทัลซัพพลายเชน (LD)", "เทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม (DT)"]
       }
-    });
-  });
+    };
 
-  // ปิด submenu ทั้งหมดเมื่อ dropdown ปิด
-  document.querySelectorAll('.dropdown').forEach(drop => {
-    drop.addEventListener('hidden.bs.dropdown', function () {
-      drop.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-        menu.classList.remove('show');
+    const levelDropdown = document.getElementById("levelDropdown");
+    const facultyDropdown = document.getElementById("facultyDropdown");
+    const majorDropdown = document.getElementById("majorDropdown");
+    const facultyOptions = document.getElementById("facultyOptions");
+    const majorOptions = document.getElementById("majorOptions");
+
+    // Hidden inputs
+    const hiddenLevel = document.getElementById("hiddenLevel");
+    const hiddenFac = document.getElementById("hiddenFac");
+    const hiddenMajor = document.getElementById("hiddenMajor");
+
+    // เปิด/ปิด submenu
+    document.querySelectorAll('.dropdown-submenu > a').forEach(el => {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const submenu = this.nextElementSibling;
+        document.querySelectorAll('.dropdown-submenu .dropdown-menu').forEach(menu => {
+          if (menu !== submenu) menu.classList.remove('show');
+        });
+        submenu.classList.toggle('show');
       });
     });
-  });
-</script>
 
-<script>
-  // เพิ่ม event listener หลังโหลดหน้า
-  document.addEventListener('DOMContentLoaded', function () {
-    // ติดตามทุกการคลิกของระดับ
+    // เลือกระดับ
     document.querySelectorAll('.level-option').forEach(item => {
-      item.addEventListener('click', function () {
-        const selectedLevel = this.dataset.level;
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        const level = this.dataset.level;
+        const label = this.textContent;
 
-        const majorDropdown = document.getElementById("majorDropdown");
-        const majorOptions = document.getElementById("majorOptions");
-        const hiddenMajor = document.getElementById("hiddenMajor");
+        // ตั้งค่า dropdown และ hidden input
+        levelDropdown.textContent = label;
+        hiddenLevel.value = level;
 
-        if (selectedLevel === "ป.ตรี-นานาชาติ") {
-          // ปิดการใช้งาน dropdown สาขา
-          majorDropdown.classList.add("disabled");
-          majorDropdown.style.pointerEvents = "none";
-          majorDropdown.style.opacity = "0.6"; // เทาๆ
+        facultyDropdown.textContent = "เลือกคณะ";
+        majorDropdown.textContent = "เลือกสาขา";
+        hiddenFac.value = "";
+        hiddenMajor.value = "";
+        facultyOptions.innerHTML = "";
+        majorOptions.innerHTML = "";
 
-          // ล้างค่าที่เคยเลือกไว้
-          majorOptions.innerHTML = "";
-          hiddenMajor.value = "";
-          majorDropdown.textContent = "เลือกสาขา";
-        } else {
-          // เปิดใช้งาน dropdown สาขา
-          majorDropdown.classList.remove("disabled");
-          majorDropdown.style.pointerEvents = "auto";
-          majorDropdown.style.opacity = "1";
+        // โหลดคณะตามระดับ
+        if (facultiesByLevel[level]) {
+          facultiesByLevel[level].forEach(fac => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = "#";
+            a.className = "dropdown-item";
+            a.textContent = fac;
+
+            // เมื่อเลือกคณะ
+            a.addEventListener("click", function (e) {
+              e.preventDefault();
+              facultyDropdown.textContent = fac;
+              hiddenFac.value = fac;
+
+              majorDropdown.textContent = "เลือกสาขา";
+              hiddenMajor.value = "";
+              majorOptions.innerHTML = "";
+
+              // โหลดสาขาตามระดับและคณะ
+              if (
+                majorsByLevelAndFaculty[level] &&
+                majorsByLevelAndFaculty[level][fac]
+              ) {
+                majorsByLevelAndFaculty[level][fac].forEach(major => {
+                  const mli = document.createElement("li");
+                  const ma = document.createElement("a");
+                  ma.href = "#";
+                  ma.className = "dropdown-item";
+                  ma.textContent = major;
+
+                  // เมื่อเลือกสาขา
+                  ma.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    majorDropdown.textContent = major;
+                    hiddenMajor.value = major;
+                  });
+
+                  mli.appendChild(ma);
+                  majorOptions.appendChild(mli);
+                });
+              }
+            });
+
+            li.appendChild(a);
+            facultyOptions.appendChild(li);
+          });
         }
       });
     });
-  });
-</script>
+
+    // ปิด submenu ทั้งหมดเมื่อ dropdown ปิด
+    document.querySelectorAll('.dropdown').forEach(drop => {
+      drop.addEventListener('hidden.bs.dropdown', function () {
+        drop.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+          menu.classList.remove('show');
+        });
+      });
+    });
+  </script>
+
+  <script>
+    // เพิ่ม event listener หลังโหลดหน้า
+    document.addEventListener('DOMContentLoaded', function () {
+      // ติดตามทุกการคลิกของระดับ
+      document.querySelectorAll('.level-option').forEach(item => {
+        item.addEventListener('click', function () {
+          const selectedLevel = this.dataset.level;
+
+          const majorDropdown = document.getElementById("majorDropdown");
+          const majorOptions = document.getElementById("majorOptions");
+          const hiddenMajor = document.getElementById("hiddenMajor");
+
+          if (selectedLevel === "ป.ตรี-นานาชาติ") {
+            // ปิดการใช้งาน dropdown สาขา
+            majorDropdown.classList.add("disabled");
+            majorDropdown.style.pointerEvents = "none";
+            majorDropdown.style.opacity = "0.6"; // เทาๆ
+
+            // ล้างค่าที่เคยเลือกไว้
+            majorOptions.innerHTML = "";
+            hiddenMajor.value = "";
+            majorDropdown.textContent = "เลือกสาขา";
+          } else {
+            // เปิดใช้งาน dropdown สาขา
+            majorDropdown.classList.remove("disabled");
+            majorDropdown.style.pointerEvents = "auto";
+            majorDropdown.style.opacity = "1";
+          }
+        });
+      });
+    });
+  </script>
 
   <script>
     window.addEventListener('DOMContentLoaded', function () {
@@ -780,6 +811,10 @@
   <style>
     /* สำหรับมือถือ*/
     @media screen and (max-device-width: 600px) and (orientation: portrait) {
+      .inher {
+        height: 80px !important;
+      }
+
       #b2 {
         width: 200px;
       }
