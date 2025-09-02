@@ -199,9 +199,9 @@
     }
 
     span#fname-msg,
-span#lname-msg {
-    display: inline;
-}
+    span#lname-msg {
+      display: inline;
+    }
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -631,16 +631,14 @@ span#lname-msg {
             <button id="levelDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกระดับ ▾</button>
             <ul id="sub1" class="dropdown-menu">
               <li class="dropdown-submenu">
-                <a class="dropdown-item" href="#">ปริญญาตรี ▶</a>
+                <a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #6c757d !important;" class="dropdown-item" href="#"><span>ปริญญาตรี ▶</span></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ">ป.ตรี ภาคปกติ</a></li>
-                  <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ">ป.ตรี
-                      หลักสูตรนานาชาติ</a></li>
+                  <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #a6d5ff !important;" class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ"><span>ป.ตรี ภาคปกติ</span></a></li>
+                  <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #e0adff !important;" class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ"><span>ป.ตรี หลักสูตรนานาชาติ</span></a></li>
                 </ul>
               </li>
-              <li><a class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน">ป.ตรี
-                  หลักสูตรเทียบโอน</a></li>
-              <li><a class="dropdown-item level-option" href="#" data-level="ป.โท">ปริญญาโท</a></li>
+              <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #ff676e !important;" class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน"><span>ป.ตรี หลักสูตรเทียบโอน</span></a></li>
+              <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #80ff08 !important;" class="dropdown-item level-option" href="#" data-level="ป.โท"><span>ปริญญาโท</span></a></li>
             </ul>
           </div>
           <!-- Dropdown: คณะ -->
@@ -858,67 +856,67 @@ span#lname-msg {
     });
   </script>
 
-<script>
-            document.querySelectorAll('.dropdown-item').forEach(div => {
-              div.setAttribute('data-value', div.textContent.trim());
-            });
-          </script>
-          <script>
-            document.addEventListener('DOMContentLoaded', function () {
-    // กำหนดตัวแปรสำหรับปุ่มส่งข้อมูลและฟอร์ม
-    const submitButton = document.getElementById('b2');
-    const form = document.getElementById('myForm'); 
+  <script>
+    document.querySelectorAll('.dropdown-item').forEach(div => {
+      div.setAttribute('data-value', div.textContent.trim());
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // กำหนดตัวแปรสำหรับปุ่มส่งข้อมูลและฟอร์ม
+      const submitButton = document.getElementById('b2');
+      const form = document.getElementById('myForm');
 
-    // ตัวแปรสำหรับส่วนของประเทศ
-    const countryInput = document.getElementById('countryInput');
-    const countryDropdown = document.getElementById('countryDropdown');
-    const countryItemsArray = Array.from(countryDropdown.getElementsByClassName('dropdown-item'));
-    const validCountries = countryItemsArray.map(item => item.textContent.trim());
+      // ตัวแปรสำหรับส่วนของประเทศ
+      const countryInput = document.getElementById('countryInput');
+      const countryDropdown = document.getElementById('countryDropdown');
+      const countryItemsArray = Array.from(countryDropdown.getElementsByClassName('dropdown-item'));
+      const validCountries = countryItemsArray.map(item => item.textContent.trim());
 
-    // จัดเรียงรายการประเทศตามพยัญชนะไทย
-    countryItemsArray.sort((a, b) => a.textContent.localeCompare(b.textContent, 'th', { sensitivity: 'base' }));
-    countryDropdown.innerHTML = '';
-    countryItemsArray.forEach(item => {
+      // จัดเรียงรายการประเทศตามพยัญชนะไทย
+      countryItemsArray.sort((a, b) => a.textContent.localeCompare(b.textContent, 'th', { sensitivity: 'base' }));
+      countryDropdown.innerHTML = '';
+      countryItemsArray.forEach(item => {
         countryDropdown.appendChild(item);
-    });
+      });
 
-    // Event listeners สำหรับ dropdown ประเทศ
-    countryInput.addEventListener('focus', function () {
+      // Event listeners สำหรับ dropdown ประเทศ
+      countryInput.addEventListener('focus', function () {
         countryDropdown.style.display = 'block';
-    });
-    countryInput.addEventListener('keyup', function () {
+      });
+      countryInput.addEventListener('keyup', function () {
         const filter = countryInput.value.toLowerCase();
         for (let i = 0; i < countryItemsArray.length; i++) {
-            const text = countryItemsArray[i].textContent.toLowerCase();
-            if (text.includes(filter)) {
-                countryItemsArray[i].style.display = 'block';
-            } else {
-                countryItemsArray[i].style.display = 'none';
-            }
+          const text = countryItemsArray[i].textContent.toLowerCase();
+          if (text.includes(filter)) {
+            countryItemsArray[i].style.display = 'block';
+          } else {
+            countryItemsArray[i].style.display = 'none';
+          }
         }
-    });
-    document.addEventListener('click', function (e) {
+      });
+      document.addEventListener('click', function (e) {
         if (!e.target.closest('.custom-select-container')) {
-            countryDropdown.style.display = 'none';
+          countryDropdown.style.display = 'none';
         }
-    });
-    for (let i = 0; i < countryItemsArray.length; i++) {
+      });
+      for (let i = 0; i < countryItemsArray.length; i++) {
         countryItemsArray[i].addEventListener('click', function () {
-            countryInput.value = this.textContent.trim();
-            countryDropdown.style.display = 'none';
+          countryInput.value = this.textContent.trim();
+          countryDropdown.style.display = 'none';
         });
-    }
+      }
 
-    // ตัวแปรสำหรับส่วนของระดับชั้น
-    const gradeSelect = document.getElementById('grade');
+      // ตัวแปรสำหรับส่วนของระดับชั้น
+      const gradeSelect = document.getElementById('grade');
 
-    // ตัวแปรสำหรับส่วนของระดับ, คณะ, สาขา (hidden inputs)
-    const hiddenLevel = document.getElementById('hiddenLevel');
-    const hiddenFac = document.getElementById('hiddenFac');
-    const hiddenMajor = document.getElementById('hiddenMajor');
+      // ตัวแปรสำหรับส่วนของระดับ, คณะ, สาขา (hidden inputs)
+      const hiddenLevel = document.getElementById('hiddenLevel');
+      const hiddenFac = document.getElementById('hiddenFac');
+      const hiddenMajor = document.getElementById('hiddenMajor');
 
-    // เพิ่ม Event Listener สำหรับการคลิกที่ปุ่ม "ส่งข้อมูล"
-    submitButton.addEventListener('click', function (e) {
+      // เพิ่ม Event Listener สำหรับการคลิกที่ปุ่ม "ส่งข้อมูล"
+      submitButton.addEventListener('click', function (e) {
         e.preventDefault();
 
         // ตรวจสอบค่าจากทุกช่องที่จำเป็น
@@ -933,13 +931,13 @@ span#lname-msg {
 
         // ตรวจสอบว่าทุกช่องที่จำเป็นถูกกรอก/เลือกแล้ว
         if (!grade || !country || !validCountries.includes(country) || !level || !fac || (!isInternational && !major)) {
-            alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องทุกช่องที่มีเครื่องหมาย *");
+          alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องทุกช่องที่มีเครื่องหมาย *");
         } else {
-            // ถ้าข้อมูลครบถ้วนและถูกต้อง ให้ทำการส่งฟอร์ม
-            form.submit();
+          // ถ้าข้อมูลครบถ้วนและถูกต้อง ให้ทำการส่งฟอร์ม
+          form.submit();
         }
+      });
     });
-});
   </script>
 
 
@@ -956,13 +954,13 @@ span#lname-msg {
   <style>
     /* สำหรับมือถือ*/
     @media screen and (max-device-width: 600px) and (orientation: portrait) {
-      #majorOptions{
+      #majorOptions {
         font-size: 12px !important;
         padding: 5px 10px !important;
         inset: 0px auto auto 30px !important;
       }
 
-      #facultyOptions{
+      #facultyOptions {
         white-space: normal;
         overflow-wrap: break-word;
         font-size: 12px !important;
@@ -979,14 +977,55 @@ span#lname-msg {
       }
 
       .dropdown-menu {
-        text-align: center;
+        text-align: left;
         font-size: 14px;
+      }
+
+      .dropdown-menu span {
+        padding-left: 10px;
       }
 
       .dropdown-item {
         padding: 0px;
         margin: 0px;
       }
+
+      label {
+        display: flex !important;
+        /* ใช้ Flexbox เพื่อจัดเรียงในบรรทัดเดียวกัน */
+        align-items: center;
+        /* จัดให้อยู่กึ่งกลางในแนวตั้ง */
+        font-size: 16px !important;
+        margin-left: 40px !important;
+        display: inline-block !important;
+        white-space: nowrap;
+      }
+
+      label span {
+        display: inline-block;
+        /* ทำให้ span แสดงในบรรทัดเดียวกัน */
+        margin-left: 5px;
+        /* เพิ่มระยะห่างระหว่าง Label กับข้อความสถานะ */
+      }
+
+      span#fname-msg,
+      span#lname-msg,
+      span#email-msg,
+      span#phone-msg {
+        display: inline-block !important;
+        /* ยืนยันว่าอยู่ในบรรทัดเดียวกัน */
+        font-size: 14px;
+        white-space: nowrap;
+        /* ป้องกันการขึ้นบรรทัดใหม่ */
+      }
+
+      #countryDropdown {
+    width: 200px !important; /* กำหนดความกว้าง 90% ของหน้าจอ */
+    margin: 0px 60px; /* จัดกึ่งกลางในแนวนอน */
+    text-align: center !important; /* จัดข้อความชิดซ้าย */
+    font-size: 16px; /* ปรับขนาดฟอนต์ให้เหมาะสม */
+    
+  }
 
       option {
         font-size: 12px !important;
@@ -1032,11 +1071,6 @@ span#lname-msg {
 
       p {
         font-size: 12px !important;
-      }
-
-      label {
-        font-size: 16px !important;
-        margin-left: 40px !important;
       }
 
       #bll {
@@ -1266,6 +1300,10 @@ span#lname-msg {
       }
     }
   </style>
+
+
+
+
 
 </body>
 
