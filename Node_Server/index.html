@@ -165,6 +165,8 @@
       appearance: none;
       background-color: white;
       font-size: 16px !important;
+      white-space: normal;
+      overflow-wrap: break-word;
     }
 
     .valid {
@@ -195,6 +197,11 @@
     .dropdown-item:hover {
       background: #f1f1f1;
     }
+
+    span#fname-msg,
+span#lname-msg {
+    display: inline;
+}
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -613,56 +620,9 @@
               <div class="dropdown-item">อาร์เจนตินา</div>
               <div class="dropdown-item">อุรุกวัย</div>
               <div class="dropdown-item">เอกวาดอร์</div>
-
             </div>
           </div>
-
-          <script>
-            document.addEventListener('DOMContentLoaded', function () {
-              const input = document.getElementById('countryInput');
-              const dropdown = document.getElementById('countryDropdown');
-              const items = dropdown.getElementsByClassName('dropdown-item');
-
-              // Show dropdown when input is focused
-              input.addEventListener('focus', function () {
-                dropdown.style.display = 'block';
-              });
-
-              // Filter items when user types
-              input.addEventListener('keyup', function () {
-                const filter = input.value.toLowerCase();
-                for (let i = 0; i < items.length; i++) {
-                  const text = items[i].textContent.toLowerCase();
-                  if (text.includes(filter)) {
-                    items[i].style.display = 'block';
-                  } else {
-                    items[i].style.display = 'none';
-                  }
-                }
-              });
-
-              // Hide dropdown when clicking outside
-              document.addEventListener('click', function (e) {
-                if (!e.target.closest('.custom-select-container')) {
-                  dropdown.style.display = 'none';
-                }
-              });
-
-              // Select an item and close dropdown
-              for (let i = 0; i < items.length; i++) {
-                items[i].addEventListener('click', function () {
-                  input.value = this.textContent;
-                  dropdown.style.display = 'none';
-                });
-              }
-            });
-          </script>
-
-
-
         </div>
-
-
 
         <div id="bll" class="col-6 col-md-6 col-sm-12">
           <!-- Dropdown: ระดับ -->
@@ -724,7 +684,7 @@
       "ป.ตรี-นานาชาติ": [
         "วิศวกรรมดิจิทัล (DGE)",
         "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
-        "ธุรกิจระหว่างประเทศ และการเป็นผู้ประกอบการ (IBN)"
+        "ธุรกิจระหว่างประเทศและการเป็นผู้ประกอบการ (IBN)"
       ],
       "ป.ตรี-เทียบโอน": [
         "คณะบริหารธุรกิจ",
@@ -751,8 +711,8 @@
       "ป.โท": {
         "คณะวิศวกรรมศาสตร์": ["เทคโนโลยีวิศวกรรม (MET)"],
         "คณะเทคโนโลยีสารสนเทศ": ["เทคโนโลยีสารสนเทศ (MIT)"],
-        "คณะบริหารธุรกิจแบบญี่ปุ่น": ["Business Management and Japanese (MBJ)", "Business Creation and Innovation (MBI)",
-          "Lean Manufacturing System and Logistics Management (LMS)"]
+        "คณะบริหารธุรกิจแบบญี่ปุ่น": ["กลุ่มแขนงการบริหารธุรกิจและภาษาญี่ปุ่น (MBJ)", "กลุ่มแขนงการสร้างสรรค์และนวัตกรรมธุรกิจ (MBI)",
+          "กลุ่มแขนงการจัดการระบบการผลิตและโลจิสติกส์แบบลีน (LMS)"]
       },
       "ป.ตรี-เทียบโอน": {
         "คณะบริหารธุรกิจ": ["การบัญชี (AC)", "การบริหารทรัพยากรมนุษย์แบบญี่ปุ่น (HR)", "การพัฒนาธุรกิจเพื่อความยั่งยืน (BD)"],
@@ -898,25 +858,89 @@
     });
   </script>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', function () {
-      const select = document.getElementById('country');
-      if (!select) return;
+<script>
+            document.querySelectorAll('.dropdown-item').forEach(div => {
+              div.setAttribute('data-value', div.textContent.trim());
+            });
+          </script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+    // กำหนดตัวแปรสำหรับปุ่มส่งข้อมูลและฟอร์ม
+    const submitButton = document.getElementById('b2');
+    const form = document.getElementById('myForm'); 
 
-      // ดึง options ทั้งหมด ยกเว้นตัวแรก (เช่น "เลือกประเทศ")
-      const firstOption = select.options[0];
-      const optionsArray = Array.from(select.options).slice(1);
+    // ตัวแปรสำหรับส่วนของประเทศ
+    const countryInput = document.getElementById('countryInput');
+    const countryDropdown = document.getElementById('countryDropdown');
+    const countryItemsArray = Array.from(countryDropdown.getElementsByClassName('dropdown-item'));
+    const validCountries = countryItemsArray.map(item => item.textContent.trim());
 
-      // เรียง options ตามตัวอักษรไทย
-      optionsArray.sort((a, b) => a.text.localeCompare(b.text, 'th'));
-
-      // ล้าง options เดิม แล้วใส่ใหม่เรียงตามลำดับ
-      select.innerHTML = '';
-      select.appendChild(firstOption);
-      optionsArray.forEach(option => select.appendChild(option));
+    // จัดเรียงรายการประเทศตามพยัญชนะไทย
+    countryItemsArray.sort((a, b) => a.textContent.localeCompare(b.textContent, 'th', { sensitivity: 'base' }));
+    countryDropdown.innerHTML = '';
+    countryItemsArray.forEach(item => {
+        countryDropdown.appendChild(item);
     });
-  </script>
 
+    // Event listeners สำหรับ dropdown ประเทศ
+    countryInput.addEventListener('focus', function () {
+        countryDropdown.style.display = 'block';
+    });
+    countryInput.addEventListener('keyup', function () {
+        const filter = countryInput.value.toLowerCase();
+        for (let i = 0; i < countryItemsArray.length; i++) {
+            const text = countryItemsArray[i].textContent.toLowerCase();
+            if (text.includes(filter)) {
+                countryItemsArray[i].style.display = 'block';
+            } else {
+                countryItemsArray[i].style.display = 'none';
+            }
+        }
+    });
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.custom-select-container')) {
+            countryDropdown.style.display = 'none';
+        }
+    });
+    for (let i = 0; i < countryItemsArray.length; i++) {
+        countryItemsArray[i].addEventListener('click', function () {
+            countryInput.value = this.textContent.trim();
+            countryDropdown.style.display = 'none';
+        });
+    }
+
+    // ตัวแปรสำหรับส่วนของระดับชั้น
+    const gradeSelect = document.getElementById('grade');
+
+    // ตัวแปรสำหรับส่วนของระดับ, คณะ, สาขา (hidden inputs)
+    const hiddenLevel = document.getElementById('hiddenLevel');
+    const hiddenFac = document.getElementById('hiddenFac');
+    const hiddenMajor = document.getElementById('hiddenMajor');
+
+    // เพิ่ม Event Listener สำหรับการคลิกที่ปุ่ม "ส่งข้อมูล"
+    submitButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // ตรวจสอบค่าจากทุกช่องที่จำเป็น
+        const grade = gradeSelect.value;
+        const country = countryInput.value.trim();
+        const level = hiddenLevel.value;
+        const fac = hiddenFac.value;
+        const major = hiddenMajor.value;
+
+        // เงื่อนไขสำหรับ ป.ตรี-นานาชาติ ที่ไม่ต้องมีสาขา
+        const isInternational = level === "ป.ตรี-นานาชาติ";
+
+        // ตรวจสอบว่าทุกช่องที่จำเป็นถูกกรอก/เลือกแล้ว
+        if (!grade || !country || !validCountries.includes(country) || !level || !fac || (!isInternational && !major)) {
+            alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องทุกช่องที่มีเครื่องหมาย *");
+        } else {
+            // ถ้าข้อมูลครบถ้วนและถูกต้อง ให้ทำการส่งฟอร์ม
+            form.submit();
+        }
+    });
+});
+  </script>
 
 
   <!-- Bootstrap JS Bundle (รวม Popper) -->
@@ -932,8 +956,50 @@
   <style>
     /* สำหรับมือถือ*/
     @media screen and (max-device-width: 600px) and (orientation: portrait) {
+      #majorOptions{
+        font-size: 12px !important;
+        padding: 5px 10px !important;
+        inset: 0px auto auto 30px !important;
+      }
+
+      #facultyOptions{
+        white-space: normal;
+        overflow-wrap: break-word;
+        font-size: 12px !important;
+        inset: 0px auto auto 0px !important;
+        padding: 5px 10px !important;
+      }
+
+      #sub1 {
+        inset: 0px auto auto -20px !important;
+      }
+
       .inher {
         height: 80px !important;
+      }
+
+      .dropdown-menu {
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .dropdown-item {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      option {
+        font-size: 12px !important;
+      }
+
+      select#country {
+        font-size: 16px;
+        text-align: center;
+      }
+
+      select#grade {
+        font-size: 16x;
+        text-align: center;
       }
 
       #b2 {
@@ -946,10 +1012,6 @@
 
       #b1 {
         margin-left: 115px;
-      }
-
-      #sub1 {
-        inset: 0px auto auto -30px !important;
       }
 
       #hh1 {
@@ -975,30 +1037,6 @@
       label {
         font-size: 16px !important;
         margin-left: 40px !important;
-      }
-
-      .dropdown-menu {
-        text-align: center;
-        font-size: 14px;
-      }
-
-      .dropdown-item {
-        padding: 0px;
-        margin: 0px;
-      }
-
-      option {
-        font-size: 12px !important;
-      }
-
-      select#country {
-        font-size: 16px;
-        text-align: center;
-      }
-
-      select#grade {
-        font-size: 16x;
-        text-align: center;
       }
 
       #bll {
