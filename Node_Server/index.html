@@ -10,6 +10,8 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
 </head>
 
 <body>
@@ -166,14 +168,32 @@
     }
 
     .valid {
-      color: green;
+      color: rgb(186, 255, 186);
       font-size: 0.9em;
       margin-left: 5px;
     }
+
     .invalid {
-      color: red;
+      color: rgb(255, 155, 155);
       font-size: 0.9em;
       margin-left: 5px;
+    }
+
+    .custom-dropdown-list {
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #fff;
+      z-index: 1000;
+    }
+
+    .dropdown-item {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+      background: #f1f1f1;
     }
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
@@ -273,14 +293,20 @@
       <div id="cl1" class="row" style="text-align: left;">
         <div class="col-6 col-md-6 col-sm-12 lm">
 
-          <label for="fname">ชื่อ <span style="color: #b20025;">*</span></label>
-          <input type="text" id="fname" name="fname" class="form-control mb-2" style="margin: auto;"
-            placeholder="กรอกชื่อของคุณ" required>
+          <label for="fname">
+            ชื่อ <span style="color: #b20025;">*</span>
+            <span id="fname-msg"></span>
+          </label>
+          <input type="text" id="fname" name="fname" class="form-control mb-2" placeholder="กรอกชื่อของคุณ" required
+            oninput="validateName(this, 'fname-msg')" style="margin: auto;">
 
-
-          <label for="lname">นามสกุล <span style="color: #b20025;"><span style="color: #b20025;">*</span></label>
-          <input type="text" id="lname" name="lname" class="form-control mb-2" style="margin: auto;"
-            placeholder="กรอกนามสกุลของคุณ" required>
+          <!-- ช่องกรอกนามสกุล -->
+          <label for="lname">
+            นามสกุล <span style="color: #b20025;">*</span>
+            <span id="lname-msg"></span>
+          </label>
+          <input type="text" id="lname" name="lname" class="form-control mb-2" placeholder="กรอกนามสกุลของคุณ" required
+            oninput="validateName(this, 'lname-msg')" style="margin: auto;">
 
           <script>
             function validateName(input, msgId) {
@@ -324,226 +350,319 @@
           </select>
 
 
-          <label for="email">อีเมล <span style="color: #b20025;">*</span></label>
-          <input style="margin: auto;" type="email" id="email" name="email" class="form-control mb-2"
-            placeholder="กรอกอีเมลของคุณ" required>
+          <label for="email">
+            อีเมล <span style="color: #b20025;">*</span>
+            <span id="email-msg"></span>
+          </label>
+          <input type="email" id="email" name="email" class="form-control mb-2" style="margin: auto;"
+            placeholder="กรอกอีเมลของคุณ" required oninput="validateEmail(this, 'email-msg')" style="margin: auto;">
 
-          <label for="phone">เบอร์โทร <span style="color: #b20025;">*</span></label>
-          <input style="margin: auto;" type="tel" id="phone" name="phone" class="form-control mb-2"
-            placeholder="กรอกเบอร์ติดต่อของคุณ" required>
+          <script>
+            function validateEmail(input, msgId) {
+              const msg = document.getElementById(msgId);
+              const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // รูปแบบอีเมลทั่วไป
+
+              if (input.value === "") {
+                msg.textContent = ""; // ถ้ายังไม่กรอก ไม่ต้องแสดง
+                return;
+              }
+
+              if (regex.test(input.value)) {
+                msg.textContent = "อีเมลถูกต้อง ✅";
+                msg.className = "valid";
+              } else {
+                msg.textContent = "กรุณากรอกอีเมลให้ถูกต้อง";
+                msg.className = "invalid";
+              }
+            }
+          </script>
+
+          <label for="phone">
+            เบอร์โทร <span style="color: #b20025;">*</span>
+            <span id="phone-msg"></span>
+          </label>
+          <input type="tel" id="phone" name="phone" class="form-control mb-2" style="margin: auto;"
+            placeholder="กรอกเบอร์ติดต่อของคุณ" required oninput="validatePhone(this, 'phone-msg')" maxlength="10"
+            style="margin: auto;">
+
+          <script>
+            function validatePhone(input, msgId) {
+              const msg = document.getElementById(msgId);
+              const regex = /^[0][0-9]{9}$/; // ต้องขึ้นต้น 0 และมีตัวเลข 10 ตัวทั้งหมด
+
+              if (input.value === "") {
+                msg.textContent = ""; // ถ้ายังไม่กรอก
+                return;
+              }
+
+              if (regex.test(input.value)) {
+                msg.textContent = "เบอร์ถูกต้อง ✅";
+                msg.className = "valid";
+              } else {
+                msg.textContent = "กรอกเบอร์ให้ถูกต้อง ❌";
+                msg.className = "invalid";
+              }
+            }
+          </script>
+
 
           <label for="lineid">LINE ID</label>
-          <input style="margin: auto;" type="text" id="lineid" name="lineid" placeholder="กรอกเบอร์ติดต่อของคุณ (ถ้ามี)"
+          <input style="margin: auto;" type="text" id="lineid" name="lineid" placeholder="กรอกไอดีไลน์ของคุณ (ถ้ามี)"
             class="form-control mb-2">
 
-          <label for="country">ประเทศ <span style="color: #b20025;">*</span></label>
-          <select style="margin: auto;" id="country" name="country" class="form-control mb-3" required>
-            <option value="">เลือกประเทศ ▾</option>
-            <option value="กัมพูชา">กัมพูชา</option>
-            <option value="กาตาร์">กาตาร์</option>
-            <option value="เกาหลีใต้">เกาหลีใต้</option>
-            <option value="เกาหลีเหนือ">เกาหลีเหนือ</option>
-            <option value="คาซัคสถาน">คาซัคสถาน</option>
-            <option value="คีร์กีซสถาน">คีร์กีซสถาน</option>
-            <option value="คูเวต">คูเวต</option>
-            <option value="จอร์เจีย">จอร์เจีย</option>
-            <option value="จอร์แดน">จอร์แดน</option>
-            <option value="จีน">จีน</option>
-            <option value="ซาอุดิอาระเบีย">ซาอุดิอาระเบีย</option>
-            <option value="ซีเรีย">ซีเรีย</option>
-            <option value="ญี่ปุ่น">ญี่ปุ่น</option>
-            <option value="ติมอร์-เลสเต / ติมอร์ตะวันออก">ติมอร์-เลสเต / ติมอร์ตะวันออก</option>
-            <option value="ตุรกี">ตุรกี</option>
-            <option value="เติร์กเมนิสถาน">เติร์กเมนิสถาน</option>
-            <option value="ไต้หวัน">ไต้หวัน</option>
-            <option value="ทาจิกิสถาน">ทาจิกิสถาน</option>
-            <option value="ไทย">ไทย</option>
-            <option value="เนปาล">เนปาล</option>
-            <option value="บรูไนดารุสซาลาม">บรูไนดารุสซาลาม</option>
-            <option value="บังกลาเทศ">บังกลาเทศ</option>
-            <option value="บาห์เรน">บาห์เรน</option>
-            <option value="ปากีสถาน">ปากีสถาน</option>
-            <option value="ปาเลสไตน์">ปาเลสไตน์</option>
-            <option value="พม่า / เมียนมา">พม่า / เมียนมา</option>
-            <option value="ฟิลิปปินส์">ฟิลิปปินส์</option>
-            <option value="ภูฏาน">ภูฏาน</option>
-            <option value="มองโกเลีย">มองโกเลีย</option>
-            <option value="มัลดีฟส์">มัลดีฟส์</option>
-            <option value="มาเลเซีย">มาเลเซีย</option>
-            <option value="เยเมน">เยเมน</option>
-            <option value="รัสเซีย">รัสเซีย</option>
-            <option value="ลาว">ลาว</option>
-            <option value="เลบานอน">เลบานอน</option>
-            <option value="เวียดนาม">เวียดนาม</option>
-            <option value="ศรีลังกา">ศรีลังกา</option>
-            <option value="สหรัฐอาหรับเอมิเรตส์">สหรัฐอาหรับเอมิเรตส์</option>
-            <option value="สิงคโปร์">สิงคโปร์</option>
-            <option value="อัฟกานิสถาน">อัฟกานิสถาน</option>
-            <option value="อาเซอร์ไบจาน">อาเซอร์ไบจาน</option>
-            <option value="อาร์มีเนีย">อาร์มีเนีย</option>
-            <option value="อินเดีย">อินเดีย</option>
+          <label for="countryInput">ประเทศ <span style="color: #b20025;">*</span></label>
+          <div class="custom-select-container">
+            <input style="margin: auto;" type="text" id="countryInput" name="country" class="form-control mb-3"
+              placeholder="เลือกหรือพิมพ์ชื่อประเทศ" required>
+            <div id="countryDropdown" class="custom-dropdown-list" style="display: none;">
+              <div class="dropdown-item">กัมพูชา</div>
+              <div class="dropdown-item">กาตาร์</div>
+              <div class="dropdown-item">เกาหลีใต้</div>
+              <div class="dropdown-item">เกาหลีเหนือ</div>
+              <div class="dropdown-item">คาซัคสถาน</div>
+              <div class="dropdown-item">คีร์กีซสถาน</div>
+              <div class="dropdown-item">คูเวต</div>
+              <div class="dropdown-item">จอร์เจีย</div>
+              <div class="dropdown-item">จอร์แดน</div>
+              <div class="dropdown-item">จีน</div>
+              <div class="dropdown-item">ซาอุดิอาระเบีย</div>
+              <div class="dropdown-item">ซีเรีย</div>
+              <div class="dropdown-item">ญี่ปุ่น</div>
+              <div class="dropdown-item">ติมอร์-เลสเต / ติมอร์ตะวันออก</div>
+              <div class="dropdown-item">ตุรกี</div>
+              <div class="dropdown-item">เติร์กเมนิสถาน</div>
+              <div class="dropdown-item">ไต้หวัน</div>
+              <div class="dropdown-item">ทาจิกิสถาน</div>
+              <div class="dropdown-item">ไทย</div>
+              <div class="dropdown-item">เนปาล</div>
+              <div class="dropdown-item">บรูไนดารุสซาลาม</div>
+              <div class="dropdown-item">บังกลาเทศ</div>
+              <div class="dropdown-item">บาห์เรน</div>
+              <div class="dropdown-item">ปากีสถาน</div>
+              <div class="dropdown-item">ปาเลสไตน์</div>
+              <div class="dropdown-item">พม่า / เมียนมา</div>
+              <div class="dropdown-item">ฟิลิปปินส์</div>
+              <div class="dropdown-item">ภูฏาน</div>
+              <div class="dropdown-item">มองโกเลีย</div>
+              <div class="dropdown-item">มัลดีฟส์</div>
+              <div class="dropdown-item">มาเลเซีย</div>
+              <div class="dropdown-item">เยเมน</div>
+              <div class="dropdown-item">รัสเซีย</div>
+              <div class="dropdown-item">ลาว</div>
+              <div class="dropdown-item">เลบานอน</div>
+              <div class="dropdown-item">เวียดนาม</div>
+              <div class="dropdown-item">ศรีลังกา</div>
+              <div class="dropdown-item">สหรัฐอาหรับเอมิเรตส์</div>
+              <div class="dropdown-item">สิงคโปร์</div>
+              <div class="dropdown-item">อัฟกานิสถาน</div>
+              <div class="dropdown-item">อาเซอร์ไบจาน</div>
+              <div class="dropdown-item">อาร์มีเนีย</div>
+              <div class="dropdown-item">อินเดีย</div>
+              <div class="dropdown-item">อินโดนีเซีย</div>
+              <div class="dropdown-item">อิรัก</div>
+              <div class="dropdown-item">อิสราเอล</div>
+              <div class="dropdown-item">อิหร่าน</div>
+              <div class="dropdown-item">อุซเบกิสถาน</div>
+              <div class="dropdown-item">โอมาน</div>
+              <div class="dropdown-item">คิริบาส</div>
+              <div class="dropdown-item">ซามัว</div>
+              <div class="dropdown-item">ตองกา</div>
+              <div class="dropdown-item">ตูวาลู</div>
+              <div class="dropdown-item">นาอูรู</div>
+              <div class="dropdown-item">นิวซีแลนด์</div>
+              <div class="dropdown-item">ปาปัวนิวกินี</div>
+              <div class="dropdown-item">ปาเลา</div>
+              <div class="dropdown-item">ฟิจิ</div>
+              <div class="dropdown-item">ไมโครนีเซีย</div>
+              <div class="dropdown-item">วานูอาตู</div>
+              <div class="dropdown-item">หมู่เกาะโซโลมอน</div>
+              <div class="dropdown-item">หมู่เกาะมาร์แชลล์</div>
+              <div class="dropdown-item">ออสเตรเลีย</div>
+              <div class="dropdown-item">กรีซ</div>
+              <div class="dropdown-item">โครเอเชีย</div>
+              <div class="dropdown-item">ซานมารีโน</div>
+              <div class="dropdown-item">เซอร์เบีย</div>
+              <div class="dropdown-item">ไซปรัส</div>
+              <div class="dropdown-item">เดนมาร์ก</div>
+              <div class="dropdown-item">นครรัฐวาติกัน</div>
+              <div class="dropdown-item">นอร์เวย์</div>
+              <div class="dropdown-item">เนเธอร์แลนด์</div>
+              <div class="dropdown-item">บอสเนียและเฮอร์เซโกวีนา</div>
+              <div class="dropdown-item">บัลแกเรีย</div>
+              <div class="dropdown-item">เบลเยียม</div>
+              <div class="dropdown-item">เบลารุส</div>
+              <div class="dropdown-item">โปรตุเกส</div>
+              <div class="dropdown-item">โปแลนด์</div>
+              <div class="dropdown-item">ฝรั่งเศส</div>
+              <div class="dropdown-item">ฟินแลนด์</div>
+              <div class="dropdown-item">มอนเตเนโกร</div>
+              <div class="dropdown-item">มอลโดวา</div>
+              <div class="dropdown-item">มอลตา</div>
+              <div class="dropdown-item">โมนาโก</div>
+              <div class="dropdown-item">ยูเครน</div>
+              <div class="dropdown-item">เยอรมนี</div>
+              <div class="dropdown-item">โรมาเนีย</div>
+              <div class="dropdown-item">ลักเซมเบิร์ก</div>
+              <div class="dropdown-item">ลัตเวีย</div>
+              <div class="dropdown-item">ลิกเตนสไตน์</div>
+              <div class="dropdown-item">ลิทัวเนีย</div>
+              <div class="dropdown-item">เวลส์</div>
+              <div class="dropdown-item">สกอตแลนด์</div>
+              <div class="dropdown-item">สเปน</div>
+              <div class="dropdown-item">สโลวาเกีย</div>
+              <div class="dropdown-item">สโลวีเนีย</div>
+              <div class="dropdown-item">สวิตเซอร์แลนด์</div>
+              <div class="dropdown-item">สวีเดน</div>
+              <div class="dropdown-item">สหราชอาณาจักร</div>
+              <div class="dropdown-item">สาธารณรัฐเช็ก</div>
+              <div class="dropdown-item">มาซิโดเนีย</div>
+              <div class="dropdown-item">ออสเตรีย</div>
+              <div class="dropdown-item">อังกฤษ</div>
+              <div class="dropdown-item">อันดอร์รา</div>
+              <div class="dropdown-item">อิตาลี</div>
+              <div class="dropdown-item">เอสโตเนีย</div>
+              <div class="dropdown-item">แอลเบเนีย</div>
+              <div class="dropdown-item">ไอซ์แลนด์</div>
+              <div class="dropdown-item">ไอร์แลนด์</div>
+              <div class="dropdown-item">ฮังการี</div>
+              <div class="dropdown-item">กานา</div>
+              <div class="dropdown-item">กาบอง</div>
+              <div class="dropdown-item">กินี</div>
+              <div class="dropdown-item">กินี-บิสเซา</div>
+              <div class="dropdown-item">แกมเบีย</div>
+              <div class="dropdown-item">โกตดิวัวร์ / ไอวอรีโคสต์</div>
+              <div class="dropdown-item">คอโมโรส</div>
+              <div class="dropdown-item">เคนยา</div>
+              <div class="dropdown-item">เคปเวิร์ด</div>
+              <div class="dropdown-item">แคเมอรูน</div>
+              <div class="dropdown-item">จิบูตี</div>
+              <div class="dropdown-item">ชาด</div>
+              <div class="dropdown-item">ซิมบับเว</div>
+              <div class="dropdown-item">ซูดาน</div>
+              <div class="dropdown-item">เซเชลส์</div>
+              <div class="dropdown-item">เซเนกัล</div>
+              <div class="dropdown-item">เซาตูเมและปรินซิปี</div>
+              <div class="dropdown-item">เซียร์ราลีโอน</div>
+              <div class="dropdown-item">แซมเบีย</div>
+              <div class="dropdown-item">โซมาเลีย</div>
+              <div class="dropdown-item">ตูนิเซีย</div>
+              <div class="dropdown-item">โตโก</div>
+              <div class="dropdown-item">แทนซาเนีย</div>
+              <div class="dropdown-item">นามิเบีย</div>
+              <div class="dropdown-item">ไนจีเรีย</div>
+              <div class="dropdown-item">ไนเจอร์</div>
+              <div class="dropdown-item">บอตสวานา</div>
+              <div class="dropdown-item">บุรุนดี</div>
+              <div class="dropdown-item">บูร์กินาฟาโซ</div>
+              <div class="dropdown-item">เบนิน</div>
+              <div class="dropdown-item">มอริเซียส</div>
+              <div class="dropdown-item">มอริเตเนีย</div>
+              <div class="dropdown-item">มาดากัสการ์</div>
+              <div class="dropdown-item">มาลาวี</div>
+              <div class="dropdown-item">มาลี</div>
+              <div class="dropdown-item">โมซัมบิก</div>
+              <div class="dropdown-item">โมร็อกโก</div>
+              <div class="dropdown-item">ยูกันดา</div>
+              <div class="dropdown-item">รวันดา</div>
+              <div class="dropdown-item">ลิเบีย</div>
+              <div class="dropdown-item">เลโซโท</div>
+              <div class="dropdown-item">ไลบีเรีย</div>
+              <div class="dropdown-item">สวาซิแลนด์</div>
+              <div class="dropdown-item">สาธารณรัฐคองโก</div>
+              <div class="dropdown-item">สาธารณรัฐแอฟริกากลาง</div>
+              <div class="dropdown-item">อิเควทอเรียลกินี</div>
+              <div class="dropdown-item">อียิปต์</div>
+              <div class="dropdown-item">เอธิโอเปีย</div>
+              <div class="dropdown-item">เอริเทรีย</div>
+              <div class="dropdown-item">เอสวาตีนี</div>
+              <div class="dropdown-item">แองโกลา</div>
+              <div class="dropdown-item">แอฟริกาใต้</div>
+              <div class="dropdown-item">แอลจีเรีย</div>
+              <div class="dropdown-item">กัวเตมาลา</div>
+              <div class="dropdown-item">เกรเนดา</div>
+              <div class="dropdown-item">คอสตาริกา</div>
+              <div class="dropdown-item">คิวบา</div>
+              <div class="dropdown-item">แคนาดา</div>
+              <div class="dropdown-item">จาเมกา</div>
+              <div class="dropdown-item">เซนต์คิตส์และเนวิส</div>
+              <div class="dropdown-item">เซนต์ลูเซีย</div>
+              <div class="dropdown-item">เซนต์วินเซนต์และเกรนาดีนส์</div>
+              <div class="dropdown-item">โดมินิกา</div>
+              <div class="dropdown-item">ตรินิแดดและโตเมโก</div>
+              <div class="dropdown-item">นิการากัว</div>
+              <div class="dropdown-item">บาร์เบโดส</div>
+              <div class="dropdown-item">บาฮามาส</div>
+              <div class="dropdown-item">เบลีซ</div>
+              <div class="dropdown-item">ปานามา</div>
+              <div class="dropdown-item">เม็กซิโก</div>
+              <div class="dropdown-item">สหรัฐอเมริกา</div>
+              <div class="dropdown-item">สาธารณรัฐโดมินิกัน</div>
+              <div class="dropdown-item">เอลซัลวาดอร์</div>
+              <div class="dropdown-item">แอนติกาและบาร์บูดา</div>
+              <div class="dropdown-item">ฮอนดูรัส</div>
+              <div class="dropdown-item">เฮติ</div>
+              <div class="dropdown-item">กายอานา</div>
+              <div class="dropdown-item">โคลอมเบีย</div>
+              <div class="dropdown-item">ชิลี</div>
+              <div class="dropdown-item">ซูรินาเม</div>
+              <div class="dropdown-item">บราซิล</div>
+              <div class="dropdown-item">โบลิเวีย</div>
+              <div class="dropdown-item">ปารากวัย</div>
+              <div class="dropdown-item">เปรู</div>
+              <div class="dropdown-item">เวเนซุเอลา</div>
+              <div class="dropdown-item">อาร์เจนตินา</div>
+              <div class="dropdown-item">อุรุกวัย</div>
+              <div class="dropdown-item">เอกวาดอร์</div>
 
-            <option value="อินโดนีเซีย">อินโดนีเซีย</option>
-            <option value="อิรัก">อิรัก</option>
-            <option value="อิสราเอล">อิสราเอล</option>
-            <option value="อิหร่าน">อิหร่าน</option>
-            <option value="อุซเบกิสถาน">อุซเบกิสถาน</option>
-            <option value="โอมาน">โอมาน</option>
-            <option value="คิริบาส">คิริบาส</option>
-            <option value="ซามัว">ซามัว</option>
-            <option value="ตองกา">ตองกา</option>
-            <option value="ตูวาลู">ตูวาลู</option>
-            <option value="นาอูรู">นาอูรู</option>
-            <option value="นิวซีแลนด์">นิวซีแลนด์</option>
-            <option value="ปาปัวนิวกินี">ปาปัวนิวกินี</option>
-            <option value="ปาเลา">ปาเลา</option>
-            <option value="ฟิจิ">ฟิจิ</option>
-            <option value="ไมโครนีเซีย">ไมโครนีเซีย</option>
-            <option value="วานูอาตู">วานูอาตู</option>
-            <option value="หมู่เกาะโซโลมอน">หมู่เกาะโซโลมอน</option>
-            <option value="หมู่เกาะมาร์แชลล์">หมู่เกาะมาร์แชลล์</option>
-            <option value="ออสเตรเลีย">ออสเตรเลีย</option>
+            </div>
+          </div>
 
-            <option value="กรีซ">กรีซ</option>
-            <option value="โครเอเชีย">โครเอเชีย</option>
-            <option value="ซานมารีโน">ซานมารีโน</option>
-            <option value="เซอร์เบีย">เซอร์เบีย</option>
-            <option value="ไซปรัส">ไซปรัส</option>
-            <option value="เดนมาร์ก">เดนมาร์ก</option>
-            <option value="นครรัฐวาติกัน">นครรัฐวาติกัน</option>
-            <option value="นอร์เวย์">นอร์เวย์</option>
-            <option value="เนเธอร์แลนด์">เนเธอร์แลนด์</option>
-            <option value="บอสเนียและเฮอร์เซโกวีนา">บอสเนียและเฮอร์เซโกวีนา</option>
-            <option value="บัลแกเรีย">บัลแกเรีย</option>
-            <option value="เบลเยียม">เบลเยียม</option>
-            <option value="เบลารุส">เบลารุส</option>
-            <option value="โปรตุเกส">โปรตุเกส</option>
-            <option value="โปแลนด์">โปแลนด์</option>
-            <option value="ฝรั่งเศส">ฝรั่งเศส</option>
-            <option value="ฟินแลนด์">ฟินแลนด์</option>
-            <option value="มอนเตเนโกร">มอนเตเนโกร</option>
-            <option value="มอลโดวา">มอลโดวา</option>
-            <option value="มอลตา">มอลตา</option>
-            <option value="โมนาโก">โมนาโก</option>
-            <option value="ยูเครน">ยูเครน</option>
-            <option value="เยอรมนี">เยอรมนี</option>
-            <option value="โรมาเนีย">โรมาเนีย</option>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const input = document.getElementById('countryInput');
+              const dropdown = document.getElementById('countryDropdown');
+              const items = dropdown.getElementsByClassName('dropdown-item');
 
-            <option value="ลักเซมเบิร์ก">ลักเซมเบิร์ก</option>
-            <option value="ลัตเวีย">ลัตเวีย</option>
-            <option value="ลิกเตนสไตน์">ลิกเตนสไตน์</option>
-            <option value="ลิทัวเนีย">ลิทัวเนีย</option>
-            <option value="เวลส์">เวลส์</option>
-            <option value="สกอตแลนด์">สกอตแลนด์</option>
-            <option value="สเปน">สเปน</option>
-            <option value="สโลวาเกีย">สโลวาเกีย</option>
-            <option value="สโลวีเนีย">สโลวีเนีย</option>
-            <option value="สวิตเซอร์แลนด์">สวิตเซอร์แลนด์</option>
-            <option value="สวีเดน">สวีเดน</option>
-            <option value="สหราชอาณาจักร">สหราชอาณาจักร</option>
-            <option value="สาธารณรัฐเช็ก">สาธารณรัฐเช็ก</option>
-            <option value="มาซิโดเนีย">มาซิโดเนีย</option>
-            <option value="ออสเตรีย">ออสเตรีย</option>
-            <option value="อังกฤษ">อังกฤษ</option>
-            <option value="อันดอร์รา">อันดอร์รา</option>
-            <option value="อิตาลี">อิตาลี</option>
-            <option value="เอสโตเนีย">เอสโตเนีย</option>
-            <option value="แอลเบเนีย">แอลเบเนีย</option>
-            <option value="ไอซ์แลนด์">ไอซ์แลนด์</option>
-            <option value="ไอร์แลนด์">ไอร์แลนด์</option>
-            <option value="ฮังการี">ฮังการี</option>
-            <option value="กานา">กานา</option>
-            <option value="กาบอง">กาบอง</option>
-            <option value="กินี">กินี</option>
-            <option value="กินี-บิสเซา">กินี-บิสเซา</option>
-            <option value="แกมเบีย">แกมเบีย</option>
-            <option value="โกตดิวัวร์ / ไอวอรีโคสต์">โกตดิวัวร์ / ไอวอรีโคสต์</option>
-            <option value="คอโมโรส">คอโมโรส</option>
-            <option value="เคนยา">เคนยา</option>
-            <option value="เคปเวิร์ด">เคปเวิร์ด</option>
-            <option value="แคเมอรูน">แคเมอรูน</option>
-            <option value="จิบูตี">จิบูตี</option>
-            <option value="ชาด">ชาด</option>
-            <option value="ซิมบับเว">ซิมบับเว</option>
-            <option value="ซูดาน">ซูดาน</option>
-            <option value="เซเชลส์">เซเชลส์</option>
-            <option value="เซเนกัล">เซเนกัล</option>
-            <option value="เซาตูเมและปรินซิปี">เซาตูเมและปรินซิปี</option>
-            <option value="เซียร์ราลีโอน">เซียร์ราลีโอน</option>
-            <option value="แซมเบีย">แซมเบีย</option>
-            <option value="โซมาเลีย">โซมาเลีย</option>
-            <option value="ตูนิเซีย">ตูนิเซีย</option>
-            <option value="โตโก">โตโก</option>
+              // Show dropdown when input is focused
+              input.addEventListener('focus', function () {
+                dropdown.style.display = 'block';
+              });
 
-            <option value="แทนซาเนีย">แทนซาเนีย</option>
-            <option value="นามิเบีย">นามิเบีย</option>
-            <option value="ไนจีเรีย">ไนจีเรีย</option>
-            <option value="ไนเจอร์">ไนเจอร์</option>
-            <option value="บอตสวานา">บอตสวานา</option>
-            <option value="บุรุนดี">บุรุนดี</option>
-            <option value="บูร์กินาฟาโซ">บูร์กินาฟาโซ</option>
-            <option value="เบนิน">เบนิน</option>
-            <option value="มอริเซียส">มอริเซียส</option>
-            <option value="มอริเตเนีย">มอริเตเนีย</option>
-            <option value="มาดากัสการ์">มาดากัสการ์</option>
-            <option value="มาลาวี">มาลาวี</option>
-            <option value="มาลี">มาลี</option>
-            <option value="โมซัมบิก">โมซัมบิก</option>
-            <option value="โมร็อกโก">โมร็อกโก</option>
-            <option value="ยูกันดา">ยูกันดา</option>
-            <option value="รวันดา">รวันดา</option>
-            <option value="ลิเบีย">ลิเบีย</option>
-            <option value="เลโซโท">เลโซโท</option>
-            <option value="ไลบีเรีย">ไลบีเรีย</option>
-            <option value="สวาซิแลนด์">สวาซิแลนด์</option>
-            <option value="สาธารณรัฐคองโก">สาธารณรัฐคองโก</option>
-            <option value="สาธารณรัฐแอฟริกากลาง">สาธารณรัฐแอฟริกากลาง</option>
-            <option value="อิเควทอเรียลกินี">อิเควทอเรียลกินี</option>
-            <option value="อียิปต์">อียิปต์</option>
-            <option value="เอธิโอเปีย">เอธิโอเปีย</option>
-            <option value="เอริเทรีย">เอริเทรีย</option>
-            <option value="เอสวาตีนี">เอสวาตีนี</option>
-            <option value="แองโกลา">แองโกลา</option>
-            <option value="แอฟริกาใต้">แอฟริกาใต้</option>
-            <option value="แอลจีเรีย">แอลจีเรีย</option>
-            <option value="กัวเตมาลา">กัวเตมาลา</option>
-            <option value="เกรเนดา">เกรเนดา</option>
-            <option value="คอสตาริกา">คอสตาริกา</option>
-            <option value="คิวบา">คิวบา</option>
-            <option value="แคนาดา">แคนาดา</option>
-            <option value="จาเมกา">จาเมกา</option>
-            <option value="เซนต์คิตส์และเนวิส">เซนต์คิตส์และเนวิส</option>
-            <option value="เซนต์ลูเซีย">เซนต์ลูเซีย</option>
-            <option value="เซนต์วินเซนต์และเกรนาดีนส์">เซนต์วินเซนต์และเกรนาดีนส์</option>
-            <option value="โดมินิกา">โดมินิกา</option>
-            <option value="ตรินิแดดและโตเมโก">ตรินิแดดและโตเมโก</option>
-            <option value="นิการากัว">นิการากัว</option>
-            <option value="บาร์เบโดส">บาร์เบโดส</option>
-            <option value="บาฮามาส">บาฮามาส</option>
-            <option value="เบลีซ">เบลีซ</option>
-            <option value="ปานามา">ปานามา</option>
-            <option value="เม็กซิโก">เม็กซิโก</option>
-            <option value="สหรัฐอเมริกา">สหรัฐอเมริกา</option>
-            <option value="สาธารณรัฐโดมินิกัน">สาธารณรัฐโดมินิกัน</option>
-            <option value="เอลซัลวาดอร์">เอลซัลวาดอร์</option>
-            <option value="แอนติกาและบาร์บูดา">แอนติกาและบาร์บูดา</option>
-            <option value="ฮอนดูรัส">ฮอนดูรัส</option>
-            <option value="เฮติ">เฮติ</option>
-            <option value="กายอานา">กายอานา</option>
-            <option value="โคลอมเบีย">โคลอมเบีย</option>
-            <option value="ชิลี">ชิลี</option>
-            <option value="ซูรินาเม">ซูรินาเม</option>
-            <option value="บราซิล">บราซิล</option>
-            <option value="โบลิเวีย">โบลิเวีย</option>
-            <option value="ปารากวัย">ปารากวัย</option>
-            <option value="เปรู">เปรู</option>
-            <option value="เวเนซุเอลา">เวเนซุเอลา</option>
-            <option value="อาร์เจนตินา">อาร์เจนตินา</option>
-            <option value="อุรุกวัย">อุรุกวัย</option>
-            <option value="เอกวาดอร์">เอกวาดอร์</option>
+              // Filter items when user types
+              input.addEventListener('keyup', function () {
+                const filter = input.value.toLowerCase();
+                for (let i = 0; i < items.length; i++) {
+                  const text = items[i].textContent.toLowerCase();
+                  if (text.includes(filter)) {
+                    items[i].style.display = 'block';
+                  } else {
+                    items[i].style.display = 'none';
+                  }
+                }
+              });
 
-          </select>
+              // Hide dropdown when clicking outside
+              document.addEventListener('click', function (e) {
+                if (!e.target.closest('.custom-select-container')) {
+                  dropdown.style.display = 'none';
+                }
+              });
+
+              // Select an item and close dropdown
+              for (let i = 0; i < items.length; i++) {
+                items[i].addEventListener('click', function () {
+                  input.value = this.textContent;
+                  dropdown.style.display = 'none';
+                });
+              }
+            });
+          </script>
+
+
+
         </div>
+
+
 
         <div id="bll" class="col-6 col-md-6 col-sm-12">
           <!-- Dropdown: ระดับ -->
@@ -804,6 +923,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
 
