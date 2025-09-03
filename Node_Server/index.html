@@ -300,6 +300,55 @@
       <div id="cl1" class="row" style="text-align: left;">
         <div class="col-6 col-md-6 col-sm-12 lm">
 
+          <label for="title">คำนำหน้าชื่อ <span style="color: #b20025;">*</span></label>
+          <select id="title" name="title" class="form-control mb-3" style="margin: auto;">
+            <option value="">เลือกคำนำหน้าชื่อ ▾</option>
+
+            <!-- คำนำหน้าชื่อทั่วไปในไทย -->
+            <option value="นาย">นาย</option>
+            <option value="นาง">นาง</option>
+            <option value="นางสาว">นางสาว</option>
+            <option value="เด็กชาย">เด็กชาย</option>
+            <option value="เด็กหญิง">เด็กหญิง</option>
+
+            <!-- คำนำหน้าทางวิชาการ/วิชาชีพ -->
+            <option value="ดร.">ดร.</option>
+            <option value="ศ.">ศ.</option>
+            <option value="รศ.">รศ.</option>
+            <option value="ผศ.">ผศ.</option>
+            <option value="นพ.">นพ.</option>
+            <option value="พญ.">พญ.</option>
+            <option value="ทันตแพทย์">ทันตแพทย์</option>
+            <option value="สัตวแพทย์">สัตวแพทย์</option>
+            <option value="เภสัชกร">เภสัชกร</option>
+            <option value="อาจารย์">อาจารย์</option>
+
+            <!-- คำนำหน้าทางทหาร/ตำรวจ -->
+            <option value="พล.อ.">พล.อ.</option>
+            <option value="พล.ร.อ.">พล.ร.อ.</option>
+            <option value="พล.อากาศเอก">พล.อากาศเอก</option>
+            <option value="พล.ต.อ.">พล.ต.อ.</option>
+            <option value="พ.ต.ท.">พ.ต.ท.</option>
+            <option value="ร.ต.อ.">ร.ต.อ.</option>
+            <option value="ร.ต.ท.">ร.ต.ท.</option>
+            <option value="ด.ต.">ด.ต.</option>
+            <option value="จ.ส.ต.">จ.ส.ต.</option>
+
+            <!-- คำนำหน้าสากล -->
+            <option value="Mr.">Mr.</option>
+            <option value="Mrs.">Mrs.</option>
+            <option value="Miss">Miss</option>
+            <option value="Ms.">Ms.</option>
+            <option value="Mx.">Mx.</option>
+            <option value="Dr.">Dr.</option>
+            <option value="Prof.">Prof.</option>
+            <option value="Sir">Sir</option>
+            <option value="Madam">Madam</option>
+            <option value="Lord">Lord</option>
+            <option value="Lady">Lady</option>
+          </select>
+
+
           <label for="fname">
             ชื่อ <span style="color: #b20025;">*</span>
             <span id="fname-msg"></span>
@@ -624,42 +673,70 @@
           </div>
         </div>
 
-        <div id="bll" class="col-6 col-md-6 col-sm-12">
-          <!-- Dropdown: ระดับ -->
-          <label id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
-          <div class="dropdown mb-3" id="dd2">
-            <button id="levelDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกระดับ ▾</button>
-            <ul id="sub1" class="dropdown-menu">
-              <li class="dropdown-submenu">
-                <a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #6c757d !important;" class="dropdown-item" href="#"><span>ปริญญาตรี ▶</span></a>
-                <ul class="dropdown-menu">
-                  <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #a6d5ff !important;" class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ"><span>ป.ตรี ภาคปกติ</span></a></li>
-                  <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #e0adff !important;" class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ"><span>ป.ตรี หลักสูตรนานาชาติ</span></a></li>
-                </ul>
-              </li>
-              <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #ff676e !important;" class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน"><span>ป.ตรี หลักสูตรเทียบโอน</span></a></li>
-              <li><a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #80ff08 !important;" class="dropdown-item level-option" href="#" data-level="ป.โท"><span>ปริญญาโท</span></a></li>
-            </ul>
+        <label for="provinceInput">ประเทศ <span style="color: #b20025;">*</span></label>
+        <div class="custom-select-container">
+          <input style="margin: auto;" type="text" id="provinceInput" name="province" class="form-control mb-3"
+            placeholder="เลือกหรือพิมพ์ชื่อประเทศ" required>
+          <div id="provinceDropdown" class="custom-dropdown-list" style="display: none;">
+            <div class="dropdown-item">กรุงเทพ</div>
+            <div class="dropdown-item">เชียงใหม่</div>
+            <div class="dropdown-item">ชลบุรี</div>
+            <div class="dropdown-item">โคราช</div>
           </div>
-          <!-- Dropdown: คณะ -->
-          <label id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
-          <div class="dropdown mb-3" id="dd2">
-            <button id="facultyDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกคณะ ▾</button>
-            <ul class="dropdown-menu" id="facultyOptions"></ul>
-          </div>
-
-          <!-- Dropdown: สาขา -->
-          <label id="dd3">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
-          <div class="dropdown mb-4" id="dd2">
-            <button id="majorDropdown" type="button" data-bs-toggle="dropdown" class="inher">เลือกสาขา ▾</button>
-            <ul class="dropdown-menu" id="majorOptions"></ul>
-          </div>
-
-          <!-- Input hidden สำหรับส่งข้อมูล -->
-          <input type="hidden" name="level" id="hiddenLevel">
-          <input type="hidden" name="fac" id="hiddenFac">
-          <input type="hidden" name="major" id="hiddenMajor">
         </div>
+      </div>
+
+      <div id="bll" class="col-6 col-md-6 col-sm-12">
+        <!-- Dropdown: ระดับ -->
+        <label style="margin: 0px 55px;" id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+        <div class="dropdown mb-3" id="dd2">
+          <button style="margin: auto;" id="levelDropdown" type="button" data-bs-toggle="dropdown"
+            class="inher form-control mb-2">เลือกระดับ ▾</button>
+          <ul id="sub1" class="dropdown-menu">
+            <li class="dropdown-submenu">
+              <a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #6c757d !important;"
+                class="dropdown-item" href="#"><span>ปริญญาตรี ▶</span></a>
+              <ul class="dropdown-menu">
+                <li><a
+                    style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #a6d5ff !important;"
+                    class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ"><span>ป.ตรี ภาคปกติ</span></a>
+                </li>
+                <li><a
+                    style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #e0adff !important;"
+                    class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ"><span>ป.ตรี
+                      หลักสูตรนานาชาติ</span></a></li>
+              </ul>
+            </li>
+            <li><a
+                style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #ff676e !important;"
+                class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน"><span>ป.ตรี
+                  หลักสูตรเทียบโอน</span></a></li>
+            <li><a
+                style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #80ff08 !important;"
+                class="dropdown-item level-option" href="#" data-level="ป.โท"><span>ปริญญาโท</span></a></li>
+          </ul>
+        </div>
+        <!-- Dropdown: คณะ -->
+        <label style="margin: 0px 55px;" id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+        <div class="dropdown mb-3" id="dd2">
+          <button id="facultyDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
+            class="inher form-control mb-2">เลือกคณะ ▾</button>
+          <ul class="dropdown-menu" id="facultyOptions"></ul>
+        </div>
+
+        <!-- Dropdown: สาขา -->
+        <label style="margin: 0px 55px;" id="dd3">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+        <div class="dropdown mb-4" id="dd2">
+          <button id="majorDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
+            class="inher form-control mb-2">เลือกสาขา ▾</button>
+          <ul class="dropdown-menu" id="majorOptions"></ul>
+        </div>
+
+        <!-- Input hidden สำหรับส่งข้อมูล -->
+        <input type="hidden" name="level" id="hiddenLevel">
+        <input type="hidden" name="fac" id="hiddenFac">
+        <input type="hidden" name="major" id="hiddenMajor">
+      </div>
     </form>
     <!-- ปุ่มส่ง -->
     <div id="bb2" class="d-flex justify-content-center"><button id="b2" type="submit"
@@ -907,7 +984,49 @@
         });
       }
 
+      // ตัวแปรสำหรับส่วนของจังหวัด
+      const provinceInput = document.getElementById('provinceInput');
+      const provinceDropdown = document.getElementById('provinceDropdown');
+      const provinceItemsArray = Array.from(provinceDropdown.getElementsByClassName('dropdown-item'));
+      const validProvinces = provinceItemsArray.map(item => item.textContent.trim());
+
+      // จัดเรียงรายการจังหวัดตามพยัญชนะไทย
+      provinceItemsArray.sort((a, b) => a.textContent.localeCompare(b.textContent, 'th', { sensitivity: 'base' }));
+      provinceDropdown.innerHTML = '';
+      provinceItemsArray.forEach(item => {
+        provinceDropdown.appendChild(item);
+      });
+
+      // Event listeners สำหรับ dropdown จังหวัด
+      provinceInput.addEventListener('focus', function () {
+        provinceDropdown.style.display = 'block';
+      });
+      provinceInput.addEventListener('keyup', function () {
+        const filter = provinceInput.value.toLowerCase();
+        for (let i = 0; i < provinceItemsArray.length; i++) {
+          const text = provinceItemsArray[i].textContent.toLowerCase();
+          if (text.includes(filter)) {
+            provinceItemsArray[i].style.display = 'block';
+          } else {
+            provinceItemsArray[i].style.display = 'none';
+          }
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.custom-select-container')) {
+          provinceDropdown.style.display = 'none';
+        }
+      });
+      for (let i = 0; i < provinceItemsArray.length; i++) {
+        provinceItemsArray[i].addEventListener('click', function () {
+          provinceInput.value = this.textContent.trim();
+          provinceDropdown.style.display = 'none';
+        });
+      }
+
+
       // ตัวแปรสำหรับส่วนของระดับชั้น
+      const titleSelect = document.getElementById('title');
       const gradeSelect = document.getElementById('grade');
 
       // ตัวแปรสำหรับส่วนของระดับ, คณะ, สาขา (hidden inputs)
@@ -920,8 +1039,10 @@
         e.preventDefault();
 
         // ตรวจสอบค่าจากทุกช่องที่จำเป็น
+        const title = titleSelect.value;
         const grade = gradeSelect.value;
         const country = countryInput.value.trim();
+        const province = provinceInput.value.trim();
         const level = hiddenLevel.value;
         const fac = hiddenFac.value;
         const major = hiddenMajor.value;
@@ -930,7 +1051,7 @@
         const isInternational = level === "ป.ตรี-นานาชาติ";
 
         // ตรวจสอบว่าทุกช่องที่จำเป็นถูกกรอก/เลือกแล้ว
-        if (!grade || !country || !validCountries.includes(country) || !level || !fac || (!isInternational && !major)) {
+        if (!title || !grade || !country || !province || !validCountries.includes(country) || !level || !fac || (!isInternational && !major)) {
           alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องทุกช่องที่มีเครื่องหมาย *");
         } else {
           // ถ้าข้อมูลครบถ้วนและถูกต้อง ให้ทำการส่งฟอร์ม
@@ -1019,24 +1140,31 @@
         /* ป้องกันการขึ้นบรรทัดใหม่ */
       }
 
-      #countryDropdown {
-    width: 200px !important; /* กำหนดความกว้าง 90% ของหน้าจอ */
-    margin: 0px 60px; /* จัดกึ่งกลางในแนวนอน */
-    text-align: center !important; /* จัดข้อความชิดซ้าย */
-    font-size: 16px; /* ปรับขนาดฟอนต์ให้เหมาะสม */
-    
-  }
+      #countryDropdown,
+      #provinceDropdown {
+        width: 200px !important;
+        /* กำหนดความกว้าง 90% ของหน้าจอ */
+        margin: 0px 60px;
+        /* จัดกึ่งกลางในแนวนอน */
+        text-align: center !important;
+        /* จัดข้อความชิดซ้าย */
+        font-size: 16px;
+        /* ปรับขนาดฟอนต์ให้เหมาะสม */
+
+      }
 
       option {
         font-size: 12px !important;
       }
 
-      select#country {
+      select#country,
+      select#province {
         font-size: 16px;
         text-align: center;
       }
 
-      select#grade {
+      select#grade,
+      select#title {
         font-size: 16x;
         text-align: center;
       }
@@ -1120,7 +1248,9 @@
       }
 
       #grade,
-      #country {
+      #country,
+      #title,
+      #province {
         width: 260px;
       }
 
@@ -1201,12 +1331,14 @@
         font-size: 12px !important;
       }
 
-      select#country {
+      select#country,
+      select#province {
         font-size: 20px;
         text-align: center;
       }
 
-      select#grade {
+      select#grade,
+      select#title {
         font-size: 20px;
         text-align: center;
       }
@@ -1259,7 +1391,9 @@
       }
 
       #grade,
-      #country {
+      #country,
+      #title,
+      #province {
         width: 580px;
       }
 
@@ -1302,7 +1436,47 @@
   </style>
 
 
-
+  <div class="container">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+      <div class="col mb-3"> <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none"
+          aria-label="Bootstrap"> <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+            <use xlink:href="#bootstrap"></use>
+          </svg> </a>
+        <p class="text-body-secondary">© 2025</p>
+      </div>
+      <div class="col mb-3"></div>
+      <div class="col mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+      <div class="col mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+      <div class="col mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
 
 
 </body>

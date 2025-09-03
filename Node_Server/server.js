@@ -14,16 +14,28 @@ app.use(cors());
 // Route สำหรับรับข้อมูลจากฟอร์ม
 app.post("/submit", async (req, res) => {
   try {
-    const { fname, lname, grade, email, phone, lineid, country, level, fac, major } = req.body;
+    const { title, fname, lname, age, grade, email, phone, lineid, country, province, level, fac, major } = req.body;
     
+    // ตรวจสอบว่า country เป็นไทย
+    let provinceValue = "";
+    if (country === "ไทย" || country.toLowerCase() === "thailand") {
+      if (!province || province.trim() === "") {
+        return res.status(400).send("❌ โปรดเลือกจังหวัดด้วย"); // ถ้าไม่กรอกจะ error
+      }
+      provinceValue = province;
+    }
+
     const rowData = [
+      title,
       fname, 
       lname, 
+      age,
       grade, 
       email, 
       phone, 
       lineid,
       country,
+      province,
       level,
       fac,
       major,
