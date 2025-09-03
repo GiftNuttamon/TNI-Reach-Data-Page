@@ -14,7 +14,7 @@ app.use(cors());
 // Route สำหรับรับข้อมูลจากฟอร์ม
 app.post("/submit", async (req, res) => {
   try {
-    const { title, fname, lname, age, grade, email, phone, lineid, country, province, level, fac, major } = req.body;
+    const { title, fname, lname, grade, email, phone, lineid, country, province, level, fac, major } = req.body;
     
     // ตรวจสอบว่า country เป็นไทย
     let provinceValue = "";
@@ -29,7 +29,6 @@ app.post("/submit", async (req, res) => {
       title,
       fname, 
       lname, 
-      age,
       grade, 
       email, 
       phone, 

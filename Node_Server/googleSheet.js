@@ -28,8 +28,8 @@ async function addRow(sheetName, values) {
   const existingRows = response.data.values ? response.data.values.length : 0;
   const newRowNumber = existingRows; // ลำดับใหม่คนที่ ...
 
-  // 2. เพิ่มลำดับคนที่ลงในอาร์เรย์ values
-  const updatedValues = [...values, newRowNumber];
+  // 2. เพิ่มลำดับเป็นคอลัมน์แรก
+  const updatedValues = [newRowNumber, ...values];
 
   // 3. เพิ่มข้อมูลลงในชีต
   await sheets.spreadsheets.values.append({
@@ -41,7 +41,8 @@ async function addRow(sheetName, values) {
       values: [updatedValues],
     },
   });
-  console.log("✅ Data added to Google Sheets"); //แจ้งเตือนใน LOG ว่าต่อดาต้าเบสสมบูณร์
+  console.log("✅ Data added to Google Sheets"); 
 }
+
 
 module.exports = { addRow };
