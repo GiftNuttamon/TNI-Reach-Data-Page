@@ -19,6 +19,22 @@
 </head>
 
 <body>
+  <!-- ดึง Sidebar HTML -->
+<div id="sidebar-container"></div>
+
+<!-- โหลด CSS และ JS ของ Sidebar -->
+<link rel="stylesheet" href="sidebar.css" />
+<script src="sidebar.js" defer></script>
+
+<script>
+  // โหลด HTML ของ Sidebar ผ่าน fetch()
+  fetch("sidebar.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+    });
+</script>
+
 
   <!-- ***********************************************************Style*********************************************************** -->
   <style>
@@ -1922,265 +1938,6 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
   <script>
     AOS.init();
   </script>
-
-  <!-- ปุ่ม Hamburger Sticky -->
-<div id="hamburger" onclick="openNav()">
-  &#9776; <span>Get to know the faculty</span>
-</div>
-
-<!-- Sidebar -->
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  
-  <div class="faculty">
-    <button class="dropdown-btn">คณะวิศวกรรมศาสตร์ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_re">วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ (RE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ce">วิศวกรรมคอมพิวเตอร์และ AI (CE)</a>
-    </div>
-  </div>
-
-  <div class="faculty">
-    <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/it/major_it">เทคโนโลยีสารสนเทศ (IT)</a>
-      <a href="#" data-url="https://www.tni.ac.th/it/major_mt">เทคโนโลยีมัลติมีเดีย (MT)</a>
-    </div>
-  </div>
-
-  <div class="faculty">
-    <button class="dropdown-btn">คณะบริหารธุรกิจ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/business/major_bd">การพัฒนาธุรกิจ (BD)</a>
-      <a href="#" data-url="https://www.tni.ac.th/business/major_ib">ธุรกิจระหว่างประเทศ (IB)</a>
-    </div>
-  </div>
-</div>
-
-<!-- ส่วนแสดง iframe -->
-<div id="iframe-container">
-  <iframe id="faculty-iframe" src="" frameborder="0"></iframe>
-</div>
-
-<div id="overlay" onclick="closeNav()"></div>
-
-<script>
-  // เปิด Sidebar
-function openNav() {
-  document.getElementById("mySidenav").style.width = "300px";
-}
-
-// ปิด Sidebar
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-
-// Dropdown เปิด/ปิด
-const dropdownBtns = document.querySelectorAll(".dropdown-btn");
-dropdownBtns.forEach(btn => {
-  btn.addEventListener("click", function() {
-    this.classList.toggle("active");
-    const dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-});
-
-// แสดง iframe เมื่อกดสาขา
-const majorLinks = document.querySelectorAll(".dropdown-container a");
-majorLinks.forEach(link => {
-  link.addEventListener("click", function(e) {
-    e.preventDefault();
-    const url = this.dataset.url;
-    document.getElementById("faculty-iframe").src = url;
-    closeNav();
-  });
-});
-</script>
-
-<style>
-  /* ========== Hamburger Sticky Button ========== */
-#hamburger {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background-color: #210f90;
-  color: white;
-  padding: 10px 14px;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 2000;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease-in-out;
-}
-#hamburger:hover {
-  background-color: #0056b3;
-}
-#hamburger span {
-  display: inline;
-  font-weight: 500;
-}
-
-/* ========== Sidebar Container ========== */
-.sidenav {
-  height: 100%;
-  width: 0; /* เริ่มต้นเป็นปิด */
-  position: fixed;
-  z-index: 1500;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: width 0.3s ease-in-out;
-  padding-top: 60px;
-}
-
-/* ปุ่มปิด Sidebar */
-.sidenav .closebtn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 35px;
-  color: white;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
-}
-.sidenav .closebtn:hover {
-  color: #ff5c5c;
-}
-
-/* ========== Dropdown Button คณะ ========== */
-.dropdown-btn {
-  padding: 12px 32px;
-  text-align: left;
-  font-size: 18px;
-  color: #f1f1f1;
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-}
-.dropdown-btn:hover {
-  color: #00cfff;
-  background-color: #1a1a1a;
-}
-
-/* ========== Dropdown Container สาขา ========== */
-.dropdown-container {
-  display: none; /* เริ่มปิดไว้ */
-  background-color: #262626;
-  padding-left: 32px;
-  transition: max-height 0.3s ease-in-out;
-}
-.dropdown-container a {
-  display: block;
-  padding: 8px 0;
-  font-size: 16px;
-  color: #bfbfbf;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-.dropdown-container a:hover {
-  color: #fff;
-}
-
-/* ========== Overlay คลุมหน้าเมื่อ Sidebar เปิด ========== */
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1400;
-  display: none; /* เริ่มซ่อน */
-  transition: 0.3s ease-in-out;
-}
-
-/* ========== Iframe Container ========== */
-#iframe-container {
-  margin: 80px auto 20px auto;
-  width: 90%;
-  max-width: 1200px;
-  height: 700px;
-}
-#faculty-iframe {
-  width: 100%;
-  height: 100%;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-}
-
-/* ========== Responsive Design ========== */
-
-/* แท็บเล็ตแนวนอน / Desktop เล็ก */
-@media screen and (max-width: 1024px) {
-  .sidenav {
-    width: 0;
-  }
-  #iframe-container {
-    height: 600px;
-  }
-}
-
-/* แท็บเล็ตแนวตั้ง */
-@media screen and (max-width: 768px) {
-  #hamburger {
-    font-size: 16px;
-    padding: 8px 12px;
-  }
-  .sidenav {
-    width: 0;
-    padding-top: 50px;
-  }
-  .dropdown-btn {
-    font-size: 16px;
-    padding: 10px 24px;
-  }
-  #iframe-container {
-    height: 500px;
-  }
-}
-
-/* มือถือ */
-@media screen and (max-width: 480px) {
-  #hamburger {
-    font-size: 18px;
-    padding: 10px;
-    gap: 0;
-  }
-  #hamburger span {
-    display: none; /* ซ่อนข้อความบนมือถือ เหลือแค่ไอคอน */
-  }
-  .sidenav {
-    width: 0;
-    padding-top: 40px;
-  }
-  .dropdown-btn {
-    font-size: 14px;
-    padding: 8px 20px;
-  }
-  .dropdown-container a {
-    font-size: 14px;
-  }
-  #iframe-container {
-    height: 400px;
-    width: 95%;
-  }
-}
-
-</style>
 
 </body>
 
