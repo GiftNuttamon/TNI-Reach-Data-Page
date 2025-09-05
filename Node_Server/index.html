@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="th">
 
+
+  <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:;"> -->
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>บันทึกข้อมูลไป Google Sheets</title>
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:;">
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
@@ -29,7 +34,7 @@
 
 <!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
-  <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+  
 
   <!-- คณะวิศวกรรมศาสตร์ -->
   <div class="faculty">
@@ -1947,26 +1952,29 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
     }
 
     .social-float .instagram {
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, 
-    #fd5949 45%, #d6249f 60%, #285AEB 90%);
-  color: #fff; /* ไอคอนเป็นขาว */
+      background: white;
+    }
+
+    /* เอฟเฟกต์ hover ปกติของปุ่ม social */
+.social-float a:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
 }
 
+/* 🚫 ยกเลิก hover effect เฉพาะปุ่ม IG ที่อยู่ใน .social-float */
+.social-float a.instagram:hover {
+  transform: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
 
-    /* Hover Effect */
-    .social-float a:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-    }
   </style>
 
   <!-- Floating Social Icons -->
   <div class="social-float">
-  <a href="https://www.instagram.com/thai_nichi" target="_blank" class="instagram">
-    <img style="width: 62%;" src="img/whiteIG.png" alt="">
-  </a>
-</div>
-
+    <a href="https://www.instagram.com/thai_nichi" target="_blank" class="instagram">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+  </div>
 
   <script>
     AOS.init();
