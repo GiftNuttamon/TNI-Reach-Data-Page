@@ -1,4 +1,4 @@
-/* ===== Hamburger Sticky Button ===== */
+/* ===== Hamburger Sticky ===== */
 #hamburger {
   position: fixed;
   top: 15px;
@@ -8,7 +8,7 @@
   padding: 10px 14px;
   font-size: 18px;
   cursor: pointer;
-  z-index: 2000;
+  z-index: 3000;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -24,16 +24,36 @@
   font-weight: 500;
 }
 
+/* ===== Overlay ===== */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1400;
+  display: none;
+}
+
+/* ===== ปิดการ Scroll ของ HTML หลักเมื่อ Sidebar เปิด ===== */
+body.body-no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
 /* ===== Sidebar ===== */
 .sidenav {
   height: 100%;
-  width: 0; /* เริ่มปิด */
+  width: 0; /* ปิดเริ่มต้น */
   position: fixed;
-  z-index: 1500;
+  z-index: 2000;
   top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
+  overflow-y: auto;    /* ✅ Scroll เฉพาะ Sidebar */
+  max-height: 100vh;   /* ✅ ไม่ยืดเกินจอ */
   transition: width 0.3s ease-in-out;
   padding-top: 60px;
 }
@@ -41,7 +61,7 @@
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size: 35px;
+  font-size: 30px;
   color: white;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
@@ -50,11 +70,11 @@
   color: #ff5c5c;
 }
 
-/* ===== Dropdown Button คณะ ===== */
+/* ===== Dropdown Buttons ===== */
 .dropdown-btn {
-  padding: 12px 32px;
+  padding: 12px 20px;
   text-align: left;
-  font-size: 18px;
+  font-size: 16px;
   color: #f1f1f1;
   background: none;
   border: none;
@@ -68,16 +88,16 @@
   background-color: #1a1a1a;
 }
 
-/* ===== Dropdown Container สาขา ===== */
+/* ===== Dropdown Container ===== */
 .dropdown-container {
   display: none;
   background-color: #262626;
-  padding-left: 32px;
+  padding-left: 20px;
 }
 .dropdown-container a {
   display: block;
   padding: 8px 0;
-  font-size: 16px;
+  font-size: 15px;
   color: #bfbfbf;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
@@ -86,81 +106,39 @@
   color: #fff;
 }
 
-/* ===== Overlay ===== */
-#overlay {
-  display: none;
+/* ===== Slide Panel ===== */
+.slide-panel {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 20%; /* ชิด Sidebar */
   height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2500;
-}
-
-/* ===== Popup iframe ===== */
-#iframePopup {
-  display: none;
-  position: fixed;
-  z-index: 3000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-#iframePopup .iframe-popup-content {
-  background-color: white;
-  border-radius: 8px;
-  padding: 10px;
-  width: 80%;
-  max-width: 1200px;
-  height: 80%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  width: 0; /* เริ่มซ่อน */
+  background-color: #fff;
+  transition: width 0.4s ease-in-out;
+  z-index: 2000;
+  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  position: relative;
+  overflow-y: auto;   /* ✅ Scroll เฉพาะ Panel */
+  max-height: 100vh;
 }
-.close-popup {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 30px;
-  cursor: pointer;
-  color: #333;
-  transition: color 0.2s;
-}
-.close-popup:hover {
-  color: red;
-}
-#iframePopup iframe {
+.slide-panel iframe {
   flex: 1;
   width: 100%;
+  height: 100%;
   border: none;
-  border-radius: 5px;
 }
 
 /* ===== Responsive ===== */
-
-/* Desktop: iframe popup อยู่ขวาของ Sidebar */
-@media screen and (min-width: 1024px) {
-  #iframePopup {
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-left: 320px; /* ระยะห่างจาก Sidebar */
-    padding-top: 20px;
+@media screen and (max-width: 1024px) {
+  #hamburger {
+    font-size: 16px;
+    padding: 8px 12px;
   }
-  #overlay {
-    display: none; /* Desktop ไม่ใช้ Overlay */
+  .dropdown-btn {
+    font-size: 15px;
   }
-}
-
-/* Mobile + Tablet: iframe popup เต็มจอกลาง */
-@media screen and (max-width: 1023px) {
-  #iframePopup {
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+  .dropdown-container a {
+    font-size: 14px;
   }
 }
