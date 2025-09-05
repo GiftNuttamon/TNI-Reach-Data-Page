@@ -7,20 +7,26 @@ let scrollY = 0; // เก็บตำแหน่ง Scroll ปัจจุบ�
 
 // ===== เปิด Sidebar =====
 function openNav() {
-  // เก็บตำแหน่ง Scroll ปัจจุบัน
-  scrollY = window.scrollY;
+  if (sidenav.style.width === "20%") {
+    // ถ้าเปิดอยู่แล้ว → ปิด
+    closeNav();
+  } else {
+    // เก็บตำแหน่ง Scroll ปัจจุบัน
+    scrollY = window.scrollY;
 
-  // ล็อกตำแหน่งของ body ไว้ไม่ให้หน้าเลื่อน
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${scrollY}px`;
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.width = "100%";
+    // ล็อกตำแหน่งของ body
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
 
-  // เปิด Sidebar และ Overlay
-  sidenav.style.width = "20%";
-  overlay.style.display = "block";
+    // เปิด Sidebar และ Overlay
+    sidenav.style.width = "20%";
+    overlay.style.display = "block";
+  }
 }
+
 
 // ===== ปิด Sidebar + Slide Panel =====
 function closeNav() {
@@ -73,11 +79,14 @@ majorLinks.forEach(link => {
     }
 
     if (window.innerWidth <= 768) {
-      // 📱 Mobile: Slide Panel เด้งขึ้นครึ่งจอ
-      slidePanel.style.height = "50%";
-    } else {
-      // 💻 Desktop: Slide Panel เปิดคงที่ 65% ของจอ
-      slidePanel.style.width = "65%";
-    }
+  // 📱 Mobile: Slide Panel เต็มจอแต่สูงครึ่งนึง
+  slidePanel.style.width = "60%";
+  slidePanel.style.height = "100%";
+} else {
+  // 💻 Desktop: Slide Panel เปิดคงที่ 65% ของจอ
+  slidePanel.style.width = "65%";
+  slidePanel.style.height = "100%";
+}
+
   });
 });

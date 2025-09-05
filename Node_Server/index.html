@@ -29,7 +29,7 @@
 
 <!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
 
   <!-- คณะวิศวกรรมศาสตร์ -->
   <div class="faculty">
@@ -1947,8 +1947,11 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
     }
 
     .social-float .instagram {
-      background: white;
-    }
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, 
+    #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #fff; /* ไอคอนเป็นขาว */
+}
+
 
     /* Hover Effect */
     .social-float a:hover {
@@ -1959,10 +1962,11 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
 
   <!-- Floating Social Icons -->
   <div class="social-float">
-    <a href="https://www.instagram.com/thai_nichi" target="_blank" class="instagram">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-  </div>
+  <a href="https://www.instagram.com/thai_nichi" target="_blank" class="instagram">
+    <img style="width: 62%;" src="img/whiteIG.png" alt="">
+  </a>
+</div>
+
 
   <script>
     AOS.init();
