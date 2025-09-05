@@ -202,6 +202,12 @@
     span#lname-msg {
       display: inline;
     }
+
+    .form-control {
+        width: 70% !important;
+        margin: auto;
+    }
+    
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -246,8 +252,8 @@
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
-  <section id="sc1" class="container-fluid"
-    style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 80%; padding-left: 100px;">
+  <section id="sc1" class="container-fluid mx-auto" style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 80%;">
+
     <form id="myForm" method="POST" action="http://localhost:3000/submit">
       <div id="blue-row" class="row" style="align-items: center; justify-content: space-between;">
 
@@ -298,7 +304,7 @@
 
 
       <div id="cl1" class="row" style="text-align: left;">
-        <div class="col-6 col-md-6 col-sm-12 lm">
+        <div id="bll" class="col-6 col-md-6 col-sm-12 lm">
 
           <label for="title">คำนำหน้าชื่อ <span style="color: #b20025;">*</span></label>
           <select id="title" name="title" class="form-control mb-3" style="margin: auto;">
@@ -1164,6 +1170,12 @@
 
   <!-- ตั้งค่ามือถือ -->
   <style>
+    @media (min-width: 768px) {
+    .row-cols-md-5>* {
+        flex: 0 0 auto;
+        width: 30%;
+    }
+}
     /* สำหรับมือถือ*/
     @media screen and (max-device-width: 600px) and (orientation: portrait) {
       #maptni, #iconadd{
@@ -1538,12 +1550,13 @@
 
 
   <div class="container">
-    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
+    <footer style="justify-content: space-between;" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
       <!-- ลิงก์ไป Bootstrap Icons -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-      <div id="iconadd" class="col-4 mb-3" style="width: 30%;">
+      <div id="iconadd" class="col-4 mb-3" style="width: 0%;">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        </div>
         <style>
           .fa {
             padding: 20px;
@@ -1596,38 +1609,30 @@
             transform: translateY(-6px) scale(1.1); /* ยกขึ้น + ขยายเล็กน้อย */
           }
         </style>
-        <div style="text-align: center;">
-          <a href="https://www.tiktok.com/@thai_nichi" target="_blank">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="https://www.instagram.com/instagram" target="_blank">
-                <i class="fa-brands fa-instagram"></i>
-            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="https://www.youtube.com/@thai_nichi" target="_blank">
-              <i class="fa-brands fa-youtube"></i>
-            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="https://openchat.line.me/join/xxxxxxxx" target="_blank">
-              <i class="fa-brands fa-line"></i>
-            </a>
-
-        </div>
-        
-            
-        
-        <!-- ปุ่ม Facebook 2 ปุ่ม -->
-        <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/tniadmission/?_rdc=1&_rdr#"
+      
+      <div class="col mb-3">
+        <h5 style="border-bottom: 2px solid #ccc; padding-bottom: 5px;">ช่องทางติดต่อ</h5>
+        <ul class="nav flex-column">
+          <div id="iconadd" class="col text-center d-flex justify-content-center gap-3 flex-wrap">
+    <a href="https://www.tiktok.com/@thai_nichi"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://www.instagram.com/instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@thai_nichi"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://openchat.line.me/join/xxxxxxxx"><i class="fa-brands fa-line"></i></a>
+</div>
+          <li class="nav-item mb-2">
+            <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/tniadmission/?_rdc=1&_rdr#"
           target="_blank" class="btn btn-primary d-flex align-items-center">
           <i class="bi bi-facebook me-2"></i> Thai-Nichi Admission Center
         </a>
-        <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/tnicinter" target="_blank"
+          </li>
+          <li class="nav-item mb-2">
+            <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/tnicinter" target="_blank"
           class="btn btn-primary d-flex align-items-center">
           <i class="bi bi-facebook me-2"></i> Thai-Nichi International College
         </a>
-        <!-- <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/ThaiNichi/?_rdc=1&_rdr#" target="_blank" class="btn btn-primary d-flex align-items-center">
-          <i class="bi bi-facebook me-2"></i> Thai-Nichi Institute of Technology 
-        </a> -->
+          </li>
+        </ul>
       </div>
-
       <div class="col mb-3">
         <h5 style="border-bottom: 2px solid #ccc; padding-bottom: 5px;">สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h5>
         <ul class="nav flex-column">
@@ -1710,7 +1715,7 @@
 
         </div>
 
-        <div class="col mb-3"></div>
+        <!-- <div class="col mb-3"></div> -->
 
         <!-- ถ้ายังไม่มี Bootstrap Icons ให้เพิ่ม -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
