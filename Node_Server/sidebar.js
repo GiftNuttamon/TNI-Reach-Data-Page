@@ -62,10 +62,22 @@ majorLinks.forEach(link => {
     e.preventDefault();
     const url = this.dataset.url;
 
-    // ตั้งค่า URL ให้ iframe
-    iframe.src = url;
+    // ถ้า URL เดิม ให้ force reload
+    if (iframe.src === url) {
+      iframe.src = "";       // reset
+      setTimeout(() => {
+        iframe.src = url;    // reload
+      }, 50);
+    } else {
+      iframe.src = url;      // โหลดใหม่ปกติ
+    }
 
-    // Slide Panel เปิดคงที่ 65% ของจอ
-    slidePanel.style.width = "65%";
+    if (window.innerWidth <= 768) {
+      // 📱 Mobile: Slide Panel เด้งขึ้นครึ่งจอ
+      slidePanel.style.height = "50%";
+    } else {
+      // 💻 Desktop: Slide Panel เปิดคงที่ 65% ของจอ
+      slidePanel.style.width = "65%";
+    }
   });
 });
