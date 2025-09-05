@@ -271,7 +271,7 @@
 
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
 
-  <section id="sc1" class="container-fluid mx-auto"
+  <section id="sc1" class=" container-fluid mx-auto"
     style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 80%;">
     <div data-aos="fade-up" data-aos-duration="1500">
       <form id="myForm" method="POST" action="http://localhost:3000/submit">
@@ -355,7 +355,7 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
   </script>
         <div id="cl1" class="row" style="text-align: left;">
           <div id="bll" class="col-6 col-md-6 col-sm-12 lm">
-            <div class="omg">
+            <div>
 <label for="title">คำนำหน้าชื่อ <span style="color: #b20025;">*</span></label>
             <select id="title" name="title" class="form-control mb-3" style="margin: auto;">
               <option value="">เลือกคำนำหน้าชื่อ ▾</option>
@@ -406,7 +406,7 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
             </div>
             
 
-            <div class="omg">
+            <div>
               <label for="fname">
                             ชื่อ <span style="color: #b20025;">*</span>
                             <span id="fname-msg"></span>
@@ -418,7 +418,7 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
             </div>
             
             <!-- ช่องกรอกนามสกุล -->
-             <div class="omg">
+             <div>
 <label for="lname">
               นามสกุล <span style="color: #b20025;">*</span>
               <span id="lname-msg"></span>
@@ -449,7 +449,7 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
             </script>
 
 
-            <div class="omg">
+            <div>
 <label for="grade">ระดับชั้น <span style="color: #b20025;">*</span></label>
             <select id="grade" name="grade" class="form-control mb-3" style="margin: auto;">
               <option value="">เลือกระดับชั้น ▾</option>
@@ -471,7 +471,7 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
             </div>
             
 
-            <div class="omg"><label for="email">
+            <div><label for="email">
               อีเมล <span style="color: #b20025;">*</span>
               <span id="email-msg"></span>
             </label>
@@ -498,7 +498,7 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
                 }
               }
             </script>
-            <div class="omg"><label for="phone">
+            <div><label for="phone">
               เบอร์โทร <span style="color: #b20025;">*</span>
               <span id="phone-msg"></span>
             </label>
@@ -529,11 +529,11 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
           </div>
 
           <div id="bll" class="col-6 col-md-6 col-sm-12">
-            <div class="omg"><label style="margin: 0px 80px;" for="lineid">LINE ID</label>
+            <div><label style="margin: 0px 80px;" for="lineid">LINE ID</label>
             <input style="margin: auto; width: 400px;" type="text" id="lineid" name="lineid"
               placeholder="กรอกไอดีไลน์ของคุณ (ถ้ามี)" class="form-control mb-2">
 </div>
-            <div class="omg"><label style="margin: 0px 80px;" for="countryInput">ประเทศ <span style="color: #b20025;">*</span></label>
+            <div><label style="margin: 0px 80px;" for="countryInput">ประเทศ <span style="color: #b20025;">*</span></label>
             <div class="custom-select-container">
               <input style="margin: auto; width: 400px;" type="text" id="countryInput" name="country"
                 class="form-control mb-3" placeholder="เลือกหรือพิมพ์ชื่อประเทศ" required>
@@ -894,11 +894,11 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
         "คณะเทคโนโลยีสารสนเทศ",
         "คณะเทคโนโลยีดิจิทัลเพื่อธุรกิจอุตสาหกรรม"
       ],
-      "ป.ตรี-นานาชาติ": [
-        "วิศวกรรมดิจิทัล (DGE)",
-        "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
-        "ธุรกิจระหว่างประเทศและการเป็นผู้ประกอบการ (IBN)"
-      ],
+      // "ป.ตรี-นานาชาติ": [
+      //   "วิศวกรรมดิจิทัล (DGE)",
+      //   "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
+      //   "ธุรกิจระหว่างประเทศและการเป็นผู้ประกอบการ (IBN)"
+      // ],
       "ป.ตรี-เทียบโอน": [
         "คณะบริหารธุรกิจ",
         "คณะวิศวกรรมศาสตร์",
@@ -1051,21 +1051,45 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
           const hiddenMajor = document.getElementById("hiddenMajor");
 
           if (selectedLevel === "ป.ตรี-นานาชาติ") {
-            // ปิดการใช้งาน dropdown สาขา
-            majorDropdown.classList.add("disabled");
-            majorDropdown.style.pointerEvents = "none";
-            majorDropdown.style.opacity = "0.6"; // เทาๆ
+    // ตั้งค่า TNIC ให้คณะโดยอัตโนมัติ
+    facultyDropdown.textContent = "TNIC";
+    hiddenFac.value = "TNIC";
 
-            // ล้างค่าที่เคยเลือกไว้
-            majorOptions.innerHTML = "";
-            hiddenMajor.value = "";
-            majorDropdown.textContent = "เลือกสาขา";
-          } else {
-            // เปิดใช้งาน dropdown สาขา
-            majorDropdown.classList.remove("disabled");
-            majorDropdown.style.pointerEvents = "auto";
-            majorDropdown.style.opacity = "1";
-          }
+    // เปิดใช้งาน dropdown สาขา
+    majorDropdown.classList.remove("disabled");
+    majorDropdown.style.pointerEvents = "auto";
+    majorDropdown.style.opacity = "1";
+
+    // ใส่สาขาของหลักสูตรนานาชาติโดยตรง
+    majorOptions.innerHTML = "";
+    const internationalMajors = [
+        "วิศวกรรมดิจิทัล (DGE)",
+        "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
+        "ธุรกิจระหว่างประเทศและการเป็นผู้ประกอบการ (IBN)"
+    ];
+    internationalMajors.forEach(major => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "#";
+        a.className = "dropdown-item";
+        a.textContent = major;
+
+        a.addEventListener("click", function (e) {
+            e.preventDefault();
+            majorDropdown.textContent = major;
+            hiddenMajor.value = major;
+        });
+
+        li.appendChild(a);
+        majorOptions.appendChild(li);
+    });
+} else {
+    // กรณีระดับอื่นทำงานปกติ
+    majorDropdown.classList.remove("disabled");
+    majorDropdown.style.pointerEvents = "auto";
+    majorDropdown.style.opacity = "1";
+}
+
         });
       });
     });
@@ -1898,6 +1922,265 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
   <script>
     AOS.init();
   </script>
+
+  <!-- ปุ่ม Hamburger Sticky -->
+<div id="hamburger" onclick="openNav()">
+  &#9776; <span>Get to know the faculty</span>
+</div>
+
+<!-- Sidebar -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  
+  <div class="faculty">
+    <button class="dropdown-btn">คณะวิศวกรรมศาสตร์ ▾</button>
+    <div class="dropdown-container">
+      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
+      <a href="#" data-url="https://www.tni.ac.th/engineering/major_re">วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ (RE)</a>
+      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ce">วิศวกรรมคอมพิวเตอร์และ AI (CE)</a>
+    </div>
+  </div>
+
+  <div class="faculty">
+    <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
+    <div class="dropdown-container">
+      <a href="#" data-url="https://www.tni.ac.th/it/major_it">เทคโนโลยีสารสนเทศ (IT)</a>
+      <a href="#" data-url="https://www.tni.ac.th/it/major_mt">เทคโนโลยีมัลติมีเดีย (MT)</a>
+    </div>
+  </div>
+
+  <div class="faculty">
+    <button class="dropdown-btn">คณะบริหารธุรกิจ ▾</button>
+    <div class="dropdown-container">
+      <a href="#" data-url="https://www.tni.ac.th/business/major_bd">การพัฒนาธุรกิจ (BD)</a>
+      <a href="#" data-url="https://www.tni.ac.th/business/major_ib">ธุรกิจระหว่างประเทศ (IB)</a>
+    </div>
+  </div>
+</div>
+
+<!-- ส่วนแสดง iframe -->
+<div id="iframe-container">
+  <iframe id="faculty-iframe" src="" frameborder="0"></iframe>
+</div>
+
+<div id="overlay" onclick="closeNav()"></div>
+
+<script>
+  // เปิด Sidebar
+function openNav() {
+  document.getElementById("mySidenav").style.width = "300px";
+}
+
+// ปิด Sidebar
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+// Dropdown เปิด/ปิด
+const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+dropdownBtns.forEach(btn => {
+  btn.addEventListener("click", function() {
+    this.classList.toggle("active");
+    const dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+});
+
+// แสดง iframe เมื่อกดสาขา
+const majorLinks = document.querySelectorAll(".dropdown-container a");
+majorLinks.forEach(link => {
+  link.addEventListener("click", function(e) {
+    e.preventDefault();
+    const url = this.dataset.url;
+    document.getElementById("faculty-iframe").src = url;
+    closeNav();
+  });
+});
+</script>
+
+<style>
+  /* ========== Hamburger Sticky Button ========== */
+#hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #210f90;
+  color: white;
+  padding: 10px 14px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 2000;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+#hamburger:hover {
+  background-color: #0056b3;
+}
+#hamburger span {
+  display: inline;
+  font-weight: 500;
+}
+
+/* ========== Sidebar Container ========== */
+.sidenav {
+  height: 100%;
+  width: 0; /* เริ่มต้นเป็นปิด */
+  position: fixed;
+  z-index: 1500;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: width 0.3s ease-in-out;
+  padding-top: 60px;
+}
+
+/* ปุ่มปิด Sidebar */
+.sidenav .closebtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+.sidenav .closebtn:hover {
+  color: #ff5c5c;
+}
+
+/* ========== Dropdown Button คณะ ========== */
+.dropdown-btn {
+  padding: 12px 32px;
+  text-align: left;
+  font-size: 18px;
+  color: #f1f1f1;
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.dropdown-btn:hover {
+  color: #00cfff;
+  background-color: #1a1a1a;
+}
+
+/* ========== Dropdown Container สาขา ========== */
+.dropdown-container {
+  display: none; /* เริ่มปิดไว้ */
+  background-color: #262626;
+  padding-left: 32px;
+  transition: max-height 0.3s ease-in-out;
+}
+.dropdown-container a {
+  display: block;
+  padding: 8px 0;
+  font-size: 16px;
+  color: #bfbfbf;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.dropdown-container a:hover {
+  color: #fff;
+}
+
+/* ========== Overlay คลุมหน้าเมื่อ Sidebar เปิด ========== */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1400;
+  display: none; /* เริ่มซ่อน */
+  transition: 0.3s ease-in-out;
+}
+
+/* ========== Iframe Container ========== */
+#iframe-container {
+  margin: 80px auto 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  height: 700px;
+}
+#faculty-iframe {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* ========== Responsive Design ========== */
+
+/* แท็บเล็ตแนวนอน / Desktop เล็ก */
+@media screen and (max-width: 1024px) {
+  .sidenav {
+    width: 0;
+  }
+  #iframe-container {
+    height: 600px;
+  }
+}
+
+/* แท็บเล็ตแนวตั้ง */
+@media screen and (max-width: 768px) {
+  #hamburger {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+  .sidenav {
+    width: 0;
+    padding-top: 50px;
+  }
+  .dropdown-btn {
+    font-size: 16px;
+    padding: 10px 24px;
+  }
+  #iframe-container {
+    height: 500px;
+  }
+}
+
+/* มือถือ */
+@media screen and (max-width: 480px) {
+  #hamburger {
+    font-size: 18px;
+    padding: 10px;
+    gap: 0;
+  }
+  #hamburger span {
+    display: none; /* ซ่อนข้อความบนมือถือ เหลือแค่ไอคอน */
+  }
+  .sidenav {
+    width: 0;
+    padding-top: 40px;
+  }
+  .dropdown-btn {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+  .dropdown-container a {
+    font-size: 14px;
+  }
+  #iframe-container {
+    height: 400px;
+    width: 95%;
+  }
+}
+
+</style>
 
 </body>
 

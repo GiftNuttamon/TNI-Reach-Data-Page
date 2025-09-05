@@ -1,0 +1,47 @@
+<!-- Sidebar Component -->
+<div id="hamburger" onclick="openNav()">
+  &#9776; <span>Get to know the faculty</span>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <!-- คณะวิศวกรรมศาสตร์ -->
+  <div class="faculty">
+    <button class="dropdown-btn">คณะวิศวกรรมศาสตร์ ▾</button>
+    <div class="dropdown-container">
+      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
+      <a href="#" data-url="https://www.tni.ac.th/engineering/major_re">วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ (RE)</a>
+      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ce">วิศวกรรมคอมพิวเตอร์และ AI (CE)</a>
+    </div>
+  </div>
+
+  <!-- คณะเทคโนโลยีสารสนเทศ -->
+  <div class="faculty">
+    <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
+    <div class="dropdown-container">
+      <a href="#" data-url="https://www.tni.ac.th/it/major_it">เทคโนโลยีสารสนเทศ (IT)</a>
+      <a href="#" data-url="https://www.tni.ac.th/it/major_mt">เทคโนโลยีมัลติมีเดีย (MT)</a>
+    </div>
+  </div>
+
+  <!-- คณะบริหารธุรกิจ -->
+  <div class="faculty">
+    <button class="dropdown-btn">คณะบริหารธุรกิจ ▾</button>
+    <div class="dropdown-container">
+      <a href="#" data-url="https://www.tni.ac.th/business/major_bd">การพัฒนาธุรกิจ (BD)</a>
+      <a href="#" data-url="https://www.tni.ac.th/business/major_ib">ธุรกิจระหว่างประเทศ (IB)</a>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<!-- Popup iframe -->
+<div id="iframePopup" class="iframe-popup">
+  <div class="iframe-popup-content">
+    <span id="closeIframePopup" class="close-popup">&times;</span>
+    <iframe id="faculty-iframe" src="" frameborder="0"></iframe>
+  </div>
+</div>
