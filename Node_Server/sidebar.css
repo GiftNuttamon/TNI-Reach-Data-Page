@@ -1,0 +1,166 @@
+/* ===== Hamburger Sticky Button ===== */
+#hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #210f90;
+  color: white;
+  padding: 10px 14px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 2000;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+#hamburger:hover {
+  background-color: #0056b3;
+}
+#hamburger span {
+  display: inline;
+  font-weight: 500;
+}
+
+/* ===== Sidebar ===== */
+.sidenav {
+  height: 100%;
+  width: 0; /* เริ่มปิด */
+  position: fixed;
+  z-index: 1500;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: width 0.3s ease-in-out;
+  padding-top: 60px;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+.sidenav .closebtn:hover {
+  color: #ff5c5c;
+}
+
+/* ===== Dropdown Button คณะ ===== */
+.dropdown-btn {
+  padding: 12px 32px;
+  text-align: left;
+  font-size: 18px;
+  color: #f1f1f1;
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.dropdown-btn:hover {
+  color: #00cfff;
+  background-color: #1a1a1a;
+}
+
+/* ===== Dropdown Container สาขา ===== */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 32px;
+}
+.dropdown-container a {
+  display: block;
+  padding: 8px 0;
+  font-size: 16px;
+  color: #bfbfbf;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.dropdown-container a:hover {
+  color: #fff;
+}
+
+/* ===== Overlay ===== */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2500;
+}
+
+/* ===== Popup iframe ===== */
+#iframePopup {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#iframePopup .iframe-popup-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  width: 80%;
+  max-width: 1200px;
+  height: 80%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.close-popup {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.close-popup:hover {
+  color: red;
+}
+#iframePopup iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+}
+
+/* ===== Responsive ===== */
+
+/* Desktop: iframe popup อยู่ขวาของ Sidebar */
+@media screen and (min-width: 1024px) {
+  #iframePopup {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 320px; /* ระยะห่างจาก Sidebar */
+    padding-top: 20px;
+  }
+  #overlay {
+    display: none; /* Desktop ไม่ใช้ Overlay */
+  }
+}
+
+/* Mobile + Tablet: iframe popup เต็มจอกลาง */
+@media screen and (max-width: 1023px) {
+  #iframePopup {
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+}
