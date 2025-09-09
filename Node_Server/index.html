@@ -34,42 +34,33 @@
 
 <!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
-  
-
-  <!-- คณะวิศวกรรมศาสตร์ -->
-  <div class="faculty">
-    <button class="dropdown-btn">คณะวิศวกรรมศาสตร์ ▾</button>
+  <!-- ระดับ ป.ตรี -->
+  <div class="level">
+    <button class="dropdown-btn">ป.ตรี ▾</button>
     <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_re">วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ (RE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ce">วิศวกรรมคอมพิวเตอร์และ AI (CE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
-    </div>
-  </div>
-
-  <!-- คณะเทคโนโลยีสารสนเทศ -->
-  <div class="faculty">
-    <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/it/major_it">เทคโนโลยีสารสนเทศ (IT)</a>
-      <a href="#" data-url="https://www.tni.ac.th/it/major_mt">เทคโนโลยีมัลติมีเดีย (MT)</a>
-    </div>
-  </div>
-
-  <!-- คณะบริหารธุรกิจ -->
-  <div class="faculty">
-    <button class="dropdown-btn">คณะบริหารธุรกิจ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/business/major_bd">การพัฒนาธุรกิจ (BD)</a>
-      <a href="#" data-url="https://www.tni.ac.th/business/major_ib">ธุรกิจระหว่างประเทศ (IB)</a>
+      <div class="faculty">
+        <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
+        <div class="dropdown-container">
+          <div class="major">
+            <a href="#" class="major-link">เทคโนโลยีมัลติมีเดีย (MT)</a>
+            <ul class="major-detail">
+              <li>เรียนรู้ ไปจนถึงสร้างเกม</li>
+              <li>ฝึกในห้องแลป</li>
+            </ul>
+          </div>
+          <div class="major">
+            <a href="#" class="major-link">เทคโนโลยีสารสนเทศ (IT)</a>
+            <ul class="major-detail">
+              <li>พัฒนาเว็บและแอปพลิเคชัน</li>
+              <li>การจัดการระบบเครือข่าย</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Slide Panel -->
-<div id="slidePanel" class="slide-panel">
-  <iframe id="faculty-iframe" src="" frameborder="0"></iframe>
-</div>
 
 <script src="sidebar.js"></script>
   <!-- ***********************************************************Style*********************************************************** -->
@@ -269,6 +260,12 @@
       flex-direction: column;
       align-items: flex-start;
     }
+
+    .disabled {
+  background-color: #e9ecef !important;
+  cursor: not-allowed;
+}
+
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -905,20 +902,29 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
               </ul>
             </div>
             <!-- Dropdown: คณะ -->
-            <label style="margin: 0px 80px;" id="dd3">คณะที่สนใจศึกษา</label>
-            <div class="dropdown mb-3" id="dd2">
-              <button id="facultyDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
-                class="inher form-control mb-2">เลือกคณะ ▾</button>
-              <ul class="dropdown-menu" id="facultyOptions"></ul>
-            </div>
+<label style="margin: 0px 80px;" id="dd3">
+  คณะที่สนใจศึกษา
+  <input type="checkbox" id="unsureFaculty" style="margin-left:10px;">
+  <span>ยังไม่แน่ใจ</span>
+</label>
+<div class="dropdown mb-3" id="dd2">
+  <button id="facultyDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
+    class="inher form-control mb-2">เลือกคณะ ▾</button>
+  <ul class="dropdown-menu" id="facultyOptions"></ul>
+</div>
 
-            <!-- Dropdown: สาขา -->
-            <label style="margin: 0px 80px;" id="dd3">สาขาที่สนใจศึกษา</label>
-            <div class="dropdown mb-4" id="dd2">
-              <button id="majorDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
-                class="inher form-control mb-2">เลือกสาขา ▾</button>
-              <ul class="dropdown-menu" id="majorOptions"></ul>
-            </div>
+<!-- Dropdown: สาขา -->
+<label style="margin: 0px 80px;" id="dd3">
+  สาขาที่สนใจศึกษา
+  <input type="checkbox" id="unsureMajor" style="margin-left:10px;">
+  <span>ยังไม่แน่ใจ</span>
+</label>
+<div class="dropdown mb-4" id="dd2">
+  <button id="majorDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
+    class="inher form-control mb-2">เลือกสาขา ▾</button>
+  <ul class="dropdown-menu" id="majorOptions"></ul>
+</div>
+
 
             <!-- Input hidden สำหรับส่งข้อมูล -->
             <input type="hidden" name="level" id="hiddenLevel">
@@ -1145,6 +1151,78 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
         });
       });
     });
+  </script>
+  <script>
+    // ===== ประกาศตัวแปรสำคัญ =====
+const unsureFaculty = document.getElementById("unsureFaculty");
+const unsureMajor = document.getElementById("unsureMajor");
+const facultyDropdownBtn = document.getElementById("facultyDropdown");
+const majorDropdownBtn = document.getElementById("majorDropdown");
+const facultyOptions = document.getElementById("facultyOptions");
+const majorOptions = document.getElementById("majorOptions");
+const hiddenFac = document.getElementById("hiddenFac");
+const hiddenMajor = document.getElementById("hiddenMajor");
+
+// ===== Event: Checkbox คณะ =====
+unsureFaculty.addEventListener("change", function () {
+  if (this.checked) {
+    // ปิดทั้งคณะและสาขา
+    facultyDropdownBtn.classList.add("disabled");
+    facultyDropdownBtn.style.pointerEvents = "none";
+    facultyDropdownBtn.style.opacity = "0.6";
+
+    majorDropdownBtn.classList.add("disabled");
+    majorDropdownBtn.style.pointerEvents = "none";
+    majorDropdownBtn.style.opacity = "0.6";
+
+    // รีเซ็ตค่า
+    facultyDropdownBtn.textContent = "ยังไม่แน่ใจ";
+    majorDropdownBtn.textContent = "ยังไม่แน่ใจ";
+    hiddenFac.value = "";
+    hiddenMajor.value = "";
+
+    facultyOptions.innerHTML = "";
+    majorOptions.innerHTML = "";
+  } else {
+    // เปิดปุ่มคณะ
+    facultyDropdownBtn.classList.remove("disabled");
+    facultyDropdownBtn.style.pointerEvents = "auto";
+    facultyDropdownBtn.style.opacity = "1";
+    facultyDropdownBtn.textContent = "เลือกคณะ";
+
+    // เปิดสาขา ถ้า "ยังไม่แน่ใจสาขา" ไม่ถูกติ๊ก
+    if (!unsureMajor.checked) {
+      majorDropdownBtn.classList.remove("disabled");
+      majorDropdownBtn.style.pointerEvents = "auto";
+      majorDropdownBtn.style.opacity = "1";
+      majorDropdownBtn.textContent = "เลือกสาขา";
+    }
+  }
+});
+
+// ===== Event: Checkbox สาขา =====
+unsureMajor.addEventListener("change", function () {
+  if (this.checked) {
+    // ปิดเฉพาะสาขา
+    majorDropdownBtn.classList.add("disabled");
+    majorDropdownBtn.style.pointerEvents = "none";
+    majorDropdownBtn.style.opacity = "0.6";
+
+    majorDropdownBtn.textContent = "ยังไม่แน่ใจ";
+    hiddenMajor.value = "";
+
+    majorOptions.innerHTML = "";
+  } else {
+    // เปิดสาขา ถ้า "ยังไม่แน่ใจคณะ" ไม่ถูกติ๊ก
+    if (!unsureFaculty.checked) {
+      majorDropdownBtn.classList.remove("disabled");
+      majorDropdownBtn.style.pointerEvents = "auto";
+      majorDropdownBtn.style.opacity = "1";
+      majorDropdownBtn.textContent = "เลือกสาขา";
+    }
+  }
+});
+
   </script>
 
   <script>

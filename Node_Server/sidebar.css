@@ -143,3 +143,22 @@ body.body-no-scroll {
   }
 }
 
+.modal-dialog {
+  max-width: 90%;
+}
+
+
+.major-detail {
+  display: none;
+  margin: 8px 0 8px 15px;
+  padding-left: 15px;
+  color: #ccc;
+  font-size: 14px;
+  list-style: disc;
+}
+.major-detail li {
+  margin-bottom: 5px;
+}
+.major-link.active + .major-detail {
+  display: block;
+}
