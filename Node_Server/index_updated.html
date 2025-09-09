@@ -1,77 +1,64 @@
 <!DOCTYPE html>
+
 <html lang="th">
-
-
-  <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:;"> -->
-
+<!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:;"> -->
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>บันทึกข้อมูลไป Google Sheets</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" rel="stylesheet" />
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
-
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link rel="stylesheet" href="sidebar.css">
-
+  <link href="sidebar.css" rel="stylesheet" />
 </head>
 
 <body>
   <!-- ปุ่ม Hamburger Sticky -->
-<div id="hamburger" onclick="openNav()">
-  &#9776; <span>Get to know the faculty</span>
-</div>
-
-<!-- Overlay คลุม HTML หลัก -->
-<div id="overlay" onclick="closeNav()"></div>
-
-<!-- Sidebar -->
-<div id="mySidenav" class="sidenav">
-  
-
-  <!-- คณะวิศวกรรมศาสตร์ -->
-  <div class="faculty">
-    <button class="dropdown-btn">คณะวิศวกรรมศาสตร์ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_re">วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ (RE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ce">วิศวกรรมคอมพิวเตอร์และ AI (CE)</a>
-      <a href="#" data-url="https://www.tni.ac.th/engineering/major_ae">วิศวกรรมยานยนต์ (AE)</a>
+  <div id="hamburger" onclick="openNav()">
+    ☰ <span>Get to know the faculty</span>
+  </div>
+  <!-- Overlay คลุม HTML หลัก -->
+  <div id="overlay" onclick="closeNav()"></div>
+  <!-- Sidebar -->
+  <div class="sidenav" id="mySidenav">
+    <!-- คณะวิศวกรรมศาสตร์ -->
+    <div class="faculty">
+      <button class="dropdown-btn">คณะวิศวกรรมศาสตร์ ▾</button>
+      <div class="dropdown-container">
+        <a data-url="https://www.tni.ac.th/engineering/major_ae" href="#">วิศวกรรมยานยนต์ (AE)</a>
+        <a data-url="https://www.tni.ac.th/engineering/major_re" href="#">วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ (RE)</a>
+        <a data-url="https://www.tni.ac.th/engineering/major_ce" href="#">วิศวกรรมคอมพิวเตอร์และ AI (CE)</a>
+        <a data-url="https://www.tni.ac.th/engineering/major_ae" href="#">วิศวกรรมยานยนต์ (AE)</a>
+      </div>
+    </div>
+    <!-- คณะเทคโนโลยีสารสนเทศ -->
+    <div class="faculty">
+      <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
+      <div class="dropdown-container">
+        <a data-url="https://www.tni.ac.th/it/major_it" href="#">เทคโนโลยีสารสนเทศ (IT)</a>
+        <a data-url="https://www.tni.ac.th/it/major_mt" href="#">เทคโนโลยีมัลติมีเดีย (MT)</a>
+      </div>
+    </div>
+    <!-- คณะบริหารธุรกิจ -->
+    <div class="faculty">
+      <button class="dropdown-btn">คณะบริหารธุรกิจ ▾</button>
+      <div class="dropdown-container">
+        <a data-url="https://www.tni.ac.th/business/major_bd" href="#">การพัฒนาธุรกิจ (BD)</a>
+        <a data-url="https://www.tni.ac.th/business/major_ib" href="#">ธุรกิจระหว่างประเทศ (IB)</a>
+      </div>
     </div>
   </div>
-
-  <!-- คณะเทคโนโลยีสารสนเทศ -->
-  <div class="faculty">
-    <button class="dropdown-btn">คณะเทคโนโลยีสารสนเทศ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/it/major_it">เทคโนโลยีสารสนเทศ (IT)</a>
-      <a href="#" data-url="https://www.tni.ac.th/it/major_mt">เทคโนโลยีมัลติมีเดีย (MT)</a>
-    </div>
+  <!-- Slide Panel -->
+  <div class="slide-panel" id="slidePanel">
+    <iframe frameborder="0" id="faculty-iframe" src=""></iframe>
   </div>
-
-  <!-- คณะบริหารธุรกิจ -->
-  <div class="faculty">
-    <button class="dropdown-btn">คณะบริหารธุรกิจ ▾</button>
-    <div class="dropdown-container">
-      <a href="#" data-url="https://www.tni.ac.th/business/major_bd">การพัฒนาธุรกิจ (BD)</a>
-      <a href="#" data-url="https://www.tni.ac.th/business/major_ib">ธุรกิจระหว่างประเทศ (IB)</a>
-    </div>
-  </div>
-</div>
-
-<!-- Slide Panel -->
-<div id="slidePanel" class="slide-panel">
-  <iframe id="faculty-iframe" src="" frameborder="0"></iframe>
-</div>
-
-<script src="sidebar.js"></script>
+  <script src="sidebar.js"></script>
   <!-- ***********************************************************Style*********************************************************** -->
   <style>
     h1 {
@@ -272,32 +259,27 @@
   </style>
   <!-- ***********************************************************Style*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-  <div id="s1" class="container-fluid">
-
+  <div class="container-fluid" id="s1">
     <!-- ***********************************************************Head*********************************************************** -->
-    <div id="logo" class="row">
-
-
+    <div class="row" id="logo">
       <!-- โลโก้มอซ้ายบน -->
-
       <div class="col-6">
         <div data-aos="zoom-in">
-          <img src="img/TNIHeader.png" alt="homelogoTNI"
-            style="width: 100%; max-width: 400px; height: auto; display: block; padding-left: 15px;">
+          <img alt="homelogoTNI" src="img/TNIHeader.png"
+            style="width: 100%; max-width: 400px; height: auto; display: block; padding-left: 15px;" />
         </div>
-
       </div>
-
-
       <!-- Text แนะนำเว็บขวาบน -->
-      <div id="head1" class="col-6">
+      <div class="col-6" id="head1">
         <div data-aos="zoom-in" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
-          <h1 id="hh1">Thai Nichi Institute Of Technology <br>
-            สนใจเรียนต่อ ณ <br>
+          <h1 id="hh1">Thai Nichi Institute Of Technology <br />
+            สนใจเรียนต่อ ณ <br />
             สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
         </div>
         <div data-aos="flip-left" data-aos-anchor-placement="center-bottom" data-aos-duration="1500">
-          <button id="b1" style="
+          <button id="b1" onmouseout="this.style.transform='translateY(0)';
+            this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';" onmouseover="this.style.transform='translateY(-2px)'; 
+            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" style="
           background-color: #b20025;
           color: white; 
           padding: 10px 20px;
@@ -308,45 +290,36 @@
           display: inline-block; 
           cursor: pointer; 
           transition: background-color 0.3s, transform 0.3s; 
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" onmouseover="this.style.transform='translateY(-2px)'; 
-            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';
-            this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <a href="#" style="color: inherit; text-decoration: none;">สนใจศึกษา</a>
           </button>
         </div>
-
       </div>
     </div>
   </div>
   <!-- ***********************************************************END Head*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
-
-  <section id="sc1" class=" container-fluid mx-auto"
+  <section class="container-fluid mx-auto" id="sc1"
     style="background-color: #210f90; margin-top: 40px; margin-bottom: 40px; padding: 40px; width: 80%;">
     <div data-aos="fade-up" data-aos-duration="1500">
-      <form id="myForm" method="POST" action="http://localhost:3000/submit">
-        <div id="blue-row" class="row" style="align-items: center; justify-content: space-between;">
-
-          <div id="txt1b" class="col-9">
-
+      <form id="myForm">
+        <div class="row" id="blue-row" style="align-items: center; justify-content: space-between;">
+          <div class="col-9" id="txt1b">
             <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">
-              กำลังวางแผนเรียนต่อ<br>
-              สถาบันเทคโนโลยีไทย-ญี่ปุ่น<br>
+              กำลังวางแผนเรียนต่อ<br />
+              สถาบันเทคโนโลยีไทย-ญี่ปุ่น<br />
               อยู่รึป่าว ?
             </h1>
             <p style="color: #cce8ff; font-size: 1.1rem;">
               กรอกข้อมูลของคุณแล้วเราจะติดต่อหา !
             </p>
-
-
-
           </div>
           <div class="col-3 text-center"
             style="display: flex; gap: 10px; justify-content: flex-start;; align-items: center;">
-
-            <button id="langThBtn" type="button" style="
+            <button id="langThBtn" onmouseout="this.style.transform='translateY(0)';
+            this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';" onmouseover="this.style.transform='translateY(-2px)'; 
+            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" style="
             background-color: #007bff; /* สีพื้นหลังสำหรับ TH */
             color: white;
             padding: 8px 15px;
@@ -356,15 +329,13 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease-in-out;" onmouseover="this.style.transform='translateY(-2px)'; 
-            this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)';
-            this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
+            transition: all 0.2s ease-in-out;" type="button">
               TH
             </button>
-
-
-
-            <button id="langEnBtn" type="button" style="
+            <button id="langEnBtn"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';"
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';"
+              style="
             background-color: #6c757d; /* สีพื้นหลังสำหรับ EN */
             color: white;
             padding: 8px 15px;
@@ -375,111 +346,96 @@
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease-in-out;
-        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.3)';"
-              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.2)';">
+        " type="button">
               EN
             </button>
-
-
           </div>
         </div>
+        <script>
+          document.getElementById('langThBtn').addEventListener('click', function () {
+            // เมื่อคลิกปุ่ม TH
+            document.querySelectorAll('[data-th]').forEach(el => {
+              el.innerHTML = el.getAttribute('data-th');
+            });
+            // เพิ่มไฮไลท์ปุ่มที่ถูกเลือก
+            this.style.backgroundColor = '#007bff';
+            document.getElementById('langEnBtn').style.backgroundColor = '#6c757d';
+          });
 
-<script>
-    document.getElementById('langThBtn').addEventListener('click', function() {
-  // เมื่อคลิกปุ่ม TH
-  document.querySelectorAll('[data-th]').forEach(el => {
-    el.innerHTML = el.getAttribute('data-th');
-  });
-  // เพิ่มไฮไลท์ปุ่มที่ถูกเลือก
-  this.style.backgroundColor = '#007bff';
-  document.getElementById('langEnBtn').style.backgroundColor = '#6c757d';
-});
-
-document.getElementById('langEnBtn').addEventListener('click', function() {
-  // เมื่อคลิกปุ่ม EN
-  document.querySelectorAll('[data-th]').forEach(el => {
-    el.innerHTML = el.getAttribute('data-en');
-  });
-  // เพิ่มไฮไลท์ปุ่มที่ถูกเลือก
-  this.style.backgroundColor = '#007bff';
-  document.getElementById('langThBtn').style.backgroundColor = '#6c757d';
-});
-  </script>
-        <div id="cl1" class="row" style="text-align: left;">
-          <div id="bll" class="col-6 col-md-6 col-sm-12 lm">
+          document.getElementById('langEnBtn').addEventListener('click', function () {
+            // เมื่อคลิกปุ่ม EN
+            document.querySelectorAll('[data-th]').forEach(el => {
+              el.innerHTML = el.getAttribute('data-en');
+            });
+            // เพิ่มไฮไลท์ปุ่มที่ถูกเลือก
+            this.style.backgroundColor = '#007bff';
+            document.getElementById('langThBtn').style.backgroundColor = '#6c757d';
+          });
+        </script>
+        <div class="row" id="cl1" style="text-align: left;">
+          <div class="col-6 col-md-6 col-sm-12 lm" id="bll">
             <div>
-<label for="title">คำนำหน้าชื่อ <span style="color: #b20025;">*</span></label>
-            <select id="title" name="title" class="form-control mb-3" style="margin: auto;">
-              <option value="">เลือกคำนำหน้าชื่อ ▾</option>
-
-              <!-- คำนำหน้าชื่อทั่วไปในไทย -->
-              <option value="นาย">นาย</option>
-              <option value="นาง">นาง</option>
-              <option value="นางสาว">นางสาว</option>
-              <option value="ด.ช.">ด.ช.</option>
-              <option value="ด.ญ.">ด.ญ.</option>
-
-              <!-- คำนำหน้าทางวิชาการ/วิชาชีพ -->
-              <option value="ดร.">ดร.</option>
-              <option value="ศ.">ศ.</option>
-              <option value="รศ.">รศ.</option>
-              <option value="ผศ.">ผศ.</option>
-              <option value="นพ.">นพ.</option>
-              <option value="พญ.">พญ.</option>
-              <option value="ทันตแพทย์">ทันตแพทย์</option>
-              <option value="สัตวแพทย์">สัตวแพทย์</option>
-              <option value="เภสัชกร">เภสัชกร</option>
-              <option value="อาจารย์">อาจารย์</option>
-
-              <!-- คำนำหน้าทางทหาร/ตำรวจ -->
-              <option value="พล.อ.">พล.อ.</option>
-              <option value="พล.ร.อ.">พล.ร.อ.</option>
-              <option value="พล.อากาศเอก">พล.อากาศเอก</option>
-              <option value="พล.ต.อ.">พล.ต.อ.</option>
-              <option value="พ.ต.ท.">พ.ต.ท.</option>
-              <option value="ร.ต.อ.">ร.ต.อ.</option>
-              <option value="ร.ต.ท.">ร.ต.ท.</option>
-              <option value="ด.ต.">ด.ต.</option>
-              <option value="จ.ส.ต.">จ.ส.ต.</option>
-
-              <!-- คำนำหน้าสากล -->
-              <option value="Mr.">Mr.</option>
-              <option value="Mrs.">Mrs.</option>
-              <option value="Miss">Miss</option>
-              <option value="Ms.">Ms.</option>
-              <option value="Mx.">Mx.</option>
-              <option value="Dr.">Dr.</option>
-              <option value="Prof.">Prof.</option>
-              <option value="Sir">Sir</option>
-              <option value="Madam">Madam</option>
-              <option value="Lord">Lord</option>
-              <option value="Lady">Lady</option>
-            </select>
+              <label for="title">คำนำหน้าชื่อ <span style="color: #b20025;">*</span></label>
+              <select class="form-control mb-3" id="title" name="title" style="margin: auto;">
+                <option value="">เลือกคำนำหน้าชื่อ ▾</option>
+                <!-- คำนำหน้าชื่อทั่วไปในไทย -->
+                <option value="นาย">นาย</option>
+                <option value="นาง">นาง</option>
+                <option value="นางสาว">นางสาว</option>
+                <option value="ด.ช.">ด.ช.</option>
+                <option value="ด.ญ.">ด.ญ.</option>
+                <!-- คำนำหน้าทางวิชาการ/วิชาชีพ -->
+                <option value="ดร.">ดร.</option>
+                <option value="ศ.">ศ.</option>
+                <option value="รศ.">รศ.</option>
+                <option value="ผศ.">ผศ.</option>
+                <option value="นพ.">นพ.</option>
+                <option value="พญ.">พญ.</option>
+                <option value="ทันตแพทย์">ทันตแพทย์</option>
+                <option value="สัตวแพทย์">สัตวแพทย์</option>
+                <option value="เภสัชกร">เภสัชกร</option>
+                <option value="อาจารย์">อาจารย์</option>
+                <!-- คำนำหน้าทางทหาร/ตำรวจ -->
+                <option value="พล.อ.">พล.อ.</option>
+                <option value="พล.ร.อ.">พล.ร.อ.</option>
+                <option value="พล.อากาศเอก">พล.อากาศเอก</option>
+                <option value="พล.ต.อ.">พล.ต.อ.</option>
+                <option value="พ.ต.ท.">พ.ต.ท.</option>
+                <option value="ร.ต.อ.">ร.ต.อ.</option>
+                <option value="ร.ต.ท.">ร.ต.ท.</option>
+                <option value="ด.ต.">ด.ต.</option>
+                <option value="จ.ส.ต.">จ.ส.ต.</option>
+                <!-- คำนำหน้าสากล -->
+                <option value="Mr.">Mr.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Miss">Miss</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Mx.">Mx.</option>
+                <option value="Dr.">Dr.</option>
+                <option value="Prof.">Prof.</option>
+                <option value="Sir">Sir</option>
+                <option value="Madam">Madam</option>
+                <option value="Lord">Lord</option>
+                <option value="Lady">Lady</option>
+              </select>
             </div>
-            
-
             <div>
               <label for="fname">
-                            ชื่อ <span style="color: #b20025;">*</span>
-                            <span id="fname-msg"></span>
-                          </label>
-
-
-                          <input type="text" id="fname" name="fname" class="form-control mb-2" placeholder="กรอกชื่อของคุณ" required
-                            oninput="validateName(this, 'fname-msg')" style="margin: auto;">
+                ชื่อ <span style="color: #b20025;">*</span>
+                <span id="fname-msg"></span>
+              </label>
+              <input class="form-control mb-2" id="fname" name="fname" oninput="validateName(this, 'fname-msg')"
+                placeholder="กรอกชื่อของคุณ" required="" style="margin: auto;" type="text" />
             </div>
-            
             <!-- ช่องกรอกนามสกุล -->
-             <div>
-<label for="lname">
-              นามสกุล <span style="color: #b20025;">*</span>
-              <span id="lname-msg"></span>
-            </label>
-            <input type="text" id="lname" name="lname" class="form-control mb-2" placeholder="กรอกนามสกุลของคุณ"
-              required oninput="validateName(this, 'lname-msg')" style="margin: auto;">
-
+            <div>
+              <label for="lname">
+                นามสกุล <span style="color: #b20025;">*</span>
+                <span id="lname-msg"></span>
+              </label>
+              <input class="form-control mb-2" id="lname" name="lname" oninput="validateName(this, 'lname-msg')"
+                placeholder="กรอกนามสกุลของคุณ" required="" style="margin: auto;" type="text" />
             </div>
-            
             <script>
               function validateName(input, msgId) {
                 const msg = document.getElementById(msgId);
@@ -499,38 +455,33 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
                 }
               }
             </script>
-
-
             <div>
-<label for="grade">ระดับชั้น <span style="color: #b20025;">*</span></label>
-            <select id="grade" name="grade" class="form-control mb-3" style="margin: auto;">
-              <option value="">เลือกระดับชั้น ▾</option>
-              <option value="ม.4 (Grade 10 /Year 11)">ม.4 (Grade 10 /Year 11)</option>
-              <option value="ม.5 (Grade 11 /Year 12)">ม.5 (Grade 11 /Year 12)</option>
-              <option value="ม.6 (Grade 12 /Year 13)">ม.6 (Grade 12 /Year 13)</option>
-              <option value="ปวช.1">ปวช.1</option>
-              <option value="ปวช.2">ปวช.2</option>
-              <option value="ปวช.3">ปวช.3</option>
-              <option value="ปวส.1">ปวส.1</option>
-              <option value="ปวส.2">ปวส.2</option>
-              <option value="ปริญญาตรี">ปริญญาตรี</option>
-              <option value="ปริญญาโท">ปริญญาโท</option>
-              <option value="IGCSE">IGCSE</option>
-              <option value="GED">GED</option>
-              <option value="กศน.">กศน.</option>
-              <option value="เทียบโอน">เทียบโอน</option>
-            </select>
+              <label for="grade">ระดับชั้น <span style="color: #b20025;">*</span></label>
+              <select class="form-control mb-3" id="grade" name="grade" style="margin: auto;">
+                <option value="">เลือกระดับชั้น ▾</option>
+                <option value="ม.4 (Grade 10 /Year 11)">ม.4 (Grade 10 /Year 11)</option>
+                <option value="ม.5 (Grade 11 /Year 12)">ม.5 (Grade 11 /Year 12)</option>
+                <option value="ม.6 (Grade 12 /Year 13)">ม.6 (Grade 12 /Year 13)</option>
+                <option value="ปวช.1">ปวช.1</option>
+                <option value="ปวช.2">ปวช.2</option>
+                <option value="ปวช.3">ปวช.3</option>
+                <option value="ปวส.1">ปวส.1</option>
+                <option value="ปวส.2">ปวส.2</option>
+                <option value="ปริญญาตรี">ปริญญาตรี</option>
+                <option value="ปริญญาโท">ปริญญาโท</option>
+                <option value="IGCSE">IGCSE</option>
+                <option value="GED">GED</option>
+                <option value="กศน.">กศน.</option>
+                <option value="เทียบโอน">เทียบโอน</option>
+              </select>
             </div>
-            
-
             <div><label for="email">
-              อีเมล <span style="color: #b20025;">*</span>
-              <span id="email-msg"></span>
-            </label>
-            <input type="email" id="email" name="email" class="form-control mb-2" style="margin: auto;"
-              placeholder="กรอกอีเมลของคุณ" required oninput="validateEmail(this, 'email-msg')" style="margin: auto;">
-</div>
-            
+                อีเมล <span style="color: #b20025;">*</span>
+                <span id="email-msg"></span>
+              </label>
+              <input class="form-control mb-2" id="email" name="email" oninput="validateEmail(this, 'email-msg')"
+                placeholder="กรอกอีเมลของคุณ" required="" style="margin: auto;" type="email" />
+            </div>
             <script>
               function validateEmail(input, msgId) {
                 const msg = document.getElementById(msgId);
@@ -551,14 +502,13 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
               }
             </script>
             <div><label for="phone">
-              เบอร์โทร <span style="color: #b20025;">*</span>
-              <span id="phone-msg"></span>
-            </label>
-            <input type="tel" id="phone" name="phone" class="form-control mb-2" style="margin: auto;"
-              placeholder="กรอกเบอร์ติดต่อของคุณ" required oninput="validatePhone(this, 'phone-msg')" maxlength="10"
-              style="margin: auto;"></div>
-            
-
+                เบอร์โทร <span style="color: #b20025;">*</span>
+                <span id="phone-msg"></span>
+              </label>
+              <input class="form-control mb-2" id="phone" maxlength="10" name="phone"
+                oninput="validatePhone(this, 'phone-msg')" placeholder="กรอกเบอร์ติดต่อของคุณ" required=""
+                style="margin: auto;" type="tel" />
+            </div>
             <script>
               function validatePhone(input, msgId) {
                 const msg = document.getElementById(msgId);
@@ -579,223 +529,223 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
               }
             </script>
           </div>
-
-          <div id="bll" class="col-6 col-md-6 col-sm-12">
-            <div><label style="margin: 0px 80px;" for="lineid">LINE ID</label>
-            <input style="margin: auto; width: 400px;" type="text" id="lineid" name="lineid"
-              placeholder="กรอกไอดีไลน์ของคุณ (ถ้ามี)" class="form-control mb-2">
-</div>
-            <div><label style="margin: 0px 80px;" for="countryInput">ประเทศ <span style="color: #b20025;">*</span></label>
-            <div class="custom-select-container">
-              <input style="margin: auto; width: 400px;" type="text" id="countryInput" name="country"
-                class="form-control mb-3" placeholder="เลือกหรือพิมพ์ชื่อประเทศ" required>
-              <div id="countryDropdown" class="custom-dropdown-list" style="display: none;">
-                <div class="dropdown-item">กัมพูชา</div>
-                <div class="dropdown-item">กาตาร์</div>
-                <div class="dropdown-item">เกาหลีใต้</div>
-                <div class="dropdown-item">เกาหลีเหนือ</div>
-                <div class="dropdown-item">คาซัคสถาน</div>
-                <div class="dropdown-item">คีร์กีซสถาน</div>
-                <div class="dropdown-item">คูเวต</div>
-                <div class="dropdown-item">จอร์เจีย</div>
-                <div class="dropdown-item">จอร์แดน</div>
-                <div class="dropdown-item">จีน</div>
-                <div class="dropdown-item">ซาอุดิอาระเบีย</div>
-                <div class="dropdown-item">ซีเรีย</div>
-                <div class="dropdown-item">ญี่ปุ่น</div>
-                <div class="dropdown-item">ติมอร์-เลสเต / ติมอร์ตะวันออก</div>
-                <div class="dropdown-item">ตุรกี</div>
-                <div class="dropdown-item">เติร์กเมนิสถาน</div>
-                <div class="dropdown-item">ไต้หวัน</div>
-                <div class="dropdown-item">ทาจิกิสถาน</div>
-                <div class="dropdown-item">ไทย</div>
-                <div class="dropdown-item">เนปาล</div>
-                <div class="dropdown-item">บรูไนดารุสซาลาม</div>
-                <div class="dropdown-item">บังกลาเทศ</div>
-                <div class="dropdown-item">บาห์เรน</div>
-                <div class="dropdown-item">ปากีสถาน</div>
-                <div class="dropdown-item">ปาเลสไตน์</div>
-                <div class="dropdown-item">พม่า / เมียนมา</div>
-                <div class="dropdown-item">ฟิลิปปินส์</div>
-                <div class="dropdown-item">ภูฏาน</div>
-                <div class="dropdown-item">มองโกเลีย</div>
-                <div class="dropdown-item">มัลดีฟส์</div>
-                <div class="dropdown-item">มาเลเซีย</div>
-                <div class="dropdown-item">เยเมน</div>
-                <div class="dropdown-item">รัสเซีย</div>
-                <div class="dropdown-item">ลาว</div>
-                <div class="dropdown-item">เลบานอน</div>
-                <div class="dropdown-item">เวียดนาม</div>
-                <div class="dropdown-item">ศรีลังกา</div>
-                <div class="dropdown-item">สหรัฐอาหรับเอมิเรตส์</div>
-                <div class="dropdown-item">สิงคโปร์</div>
-                <div class="dropdown-item">อัฟกานิสถาน</div>
-                <div class="dropdown-item">อาเซอร์ไบจาน</div>
-                <div class="dropdown-item">อาร์มีเนีย</div>
-                <div class="dropdown-item">อินเดีย</div>
-                <div class="dropdown-item">อินโดนีเซีย</div>
-                <div class="dropdown-item">อิรัก</div>
-                <div class="dropdown-item">อิสราเอล</div>
-                <div class="dropdown-item">อิหร่าน</div>
-                <div class="dropdown-item">อุซเบกิสถาน</div>
-                <div class="dropdown-item">โอมาน</div>
-                <div class="dropdown-item">คิริบาส</div>
-                <div class="dropdown-item">ซามัว</div>
-                <div class="dropdown-item">ตองกา</div>
-                <div class="dropdown-item">ตูวาลู</div>
-                <div class="dropdown-item">นาอูรู</div>
-                <div class="dropdown-item">นิวซีแลนด์</div>
-                <div class="dropdown-item">ปาปัวนิวกินี</div>
-                <div class="dropdown-item">ปาเลา</div>
-                <div class="dropdown-item">ฟิจิ</div>
-                <div class="dropdown-item">ไมโครนีเซีย</div>
-                <div class="dropdown-item">วานูอาตู</div>
-                <div class="dropdown-item">หมู่เกาะโซโลมอน</div>
-                <div class="dropdown-item">หมู่เกาะมาร์แชลล์</div>
-                <div class="dropdown-item">ออสเตรเลีย</div>
-                <div class="dropdown-item">กรีซ</div>
-                <div class="dropdown-item">โครเอเชีย</div>
-                <div class="dropdown-item">ซานมารีโน</div>
-                <div class="dropdown-item">เซอร์เบีย</div>
-                <div class="dropdown-item">ไซปรัส</div>
-                <div class="dropdown-item">เดนมาร์ก</div>
-                <div class="dropdown-item">นครรัฐวาติกัน</div>
-                <div class="dropdown-item">นอร์เวย์</div>
-                <div class="dropdown-item">เนเธอร์แลนด์</div>
-                <div class="dropdown-item">บอสเนียและเฮอร์เซโกวีนา</div>
-                <div class="dropdown-item">บัลแกเรีย</div>
-                <div class="dropdown-item">เบลเยียม</div>
-                <div class="dropdown-item">เบลารุส</div>
-                <div class="dropdown-item">โปรตุเกส</div>
-                <div class="dropdown-item">โปแลนด์</div>
-                <div class="dropdown-item">ฝรั่งเศส</div>
-                <div class="dropdown-item">ฟินแลนด์</div>
-                <div class="dropdown-item">มอนเตเนโกร</div>
-                <div class="dropdown-item">มอลโดวา</div>
-                <div class="dropdown-item">มอลตา</div>
-                <div class="dropdown-item">โมนาโก</div>
-                <div class="dropdown-item">ยูเครน</div>
-                <div class="dropdown-item">เยอรมนี</div>
-                <div class="dropdown-item">โรมาเนีย</div>
-                <div class="dropdown-item">ลักเซมเบิร์ก</div>
-                <div class="dropdown-item">ลัตเวีย</div>
-                <div class="dropdown-item">ลิกเตนสไตน์</div>
-                <div class="dropdown-item">ลิทัวเนีย</div>
-                <div class="dropdown-item">เวลส์</div>
-                <div class="dropdown-item">สกอตแลนด์</div>
-                <div class="dropdown-item">สเปน</div>
-                <div class="dropdown-item">สโลวาเกีย</div>
-                <div class="dropdown-item">สโลวีเนีย</div>
-                <div class="dropdown-item">สวิตเซอร์แลนด์</div>
-                <div class="dropdown-item">สวีเดน</div>
-                <div class="dropdown-item">สหราชอาณาจักร</div>
-                <div class="dropdown-item">สาธารณรัฐเช็ก</div>
-                <div class="dropdown-item">มาซิโดเนีย</div>
-                <div class="dropdown-item">ออสเตรีย</div>
-                <div class="dropdown-item">อังกฤษ</div>
-                <div class="dropdown-item">อันดอร์รา</div>
-                <div class="dropdown-item">อิตาลี</div>
-                <div class="dropdown-item">เอสโตเนีย</div>
-                <div class="dropdown-item">แอลเบเนีย</div>
-                <div class="dropdown-item">ไอซ์แลนด์</div>
-                <div class="dropdown-item">ไอร์แลนด์</div>
-                <div class="dropdown-item">ฮังการี</div>
-                <div class="dropdown-item">กานา</div>
-                <div class="dropdown-item">กาบอง</div>
-                <div class="dropdown-item">กินี</div>
-                <div class="dropdown-item">กินี-บิสเซา</div>
-                <div class="dropdown-item">แกมเบีย</div>
-                <div class="dropdown-item">โกตดิวัวร์ / ไอวอรีโคสต์</div>
-                <div class="dropdown-item">คอโมโรส</div>
-                <div class="dropdown-item">เคนยา</div>
-                <div class="dropdown-item">เคปเวิร์ด</div>
-                <div class="dropdown-item">แคเมอรูน</div>
-                <div class="dropdown-item">จิบูตี</div>
-                <div class="dropdown-item">ชาด</div>
-                <div class="dropdown-item">ซิมบับเว</div>
-                <div class="dropdown-item">ซูดาน</div>
-                <div class="dropdown-item">เซเชลส์</div>
-                <div class="dropdown-item">เซเนกัล</div>
-                <div class="dropdown-item">เซาตูเมและปรินซิปี</div>
-                <div class="dropdown-item">เซียร์ราลีโอน</div>
-                <div class="dropdown-item">แซมเบีย</div>
-                <div class="dropdown-item">โซมาเลีย</div>
-                <div class="dropdown-item">ตูนิเซีย</div>
-                <div class="dropdown-item">โตโก</div>
-                <div class="dropdown-item">แทนซาเนีย</div>
-                <div class="dropdown-item">นามิเบีย</div>
-                <div class="dropdown-item">ไนจีเรีย</div>
-                <div class="dropdown-item">ไนเจอร์</div>
-                <div class="dropdown-item">บอตสวานา</div>
-                <div class="dropdown-item">บุรุนดี</div>
-                <div class="dropdown-item">บูร์กินาฟาโซ</div>
-                <div class="dropdown-item">เบนิน</div>
-                <div class="dropdown-item">มอริเซียส</div>
-                <div class="dropdown-item">มอริเตเนีย</div>
-                <div class="dropdown-item">มาดากัสการ์</div>
-                <div class="dropdown-item">มาลาวี</div>
-                <div class="dropdown-item">มาลี</div>
-                <div class="dropdown-item">โมซัมบิก</div>
-                <div class="dropdown-item">โมร็อกโก</div>
-                <div class="dropdown-item">ยูกันดา</div>
-                <div class="dropdown-item">รวันดา</div>
-                <div class="dropdown-item">ลิเบีย</div>
-                <div class="dropdown-item">เลโซโท</div>
-                <div class="dropdown-item">ไลบีเรีย</div>
-                <div class="dropdown-item">สวาซิแลนด์</div>
-                <div class="dropdown-item">สาธารณรัฐคองโก</div>
-                <div class="dropdown-item">สาธารณรัฐแอฟริกากลาง</div>
-                <div class="dropdown-item">อิเควทอเรียลกินี</div>
-                <div class="dropdown-item">อียิปต์</div>
-                <div class="dropdown-item">เอธิโอเปีย</div>
-                <div class="dropdown-item">เอริเทรีย</div>
-                <div class="dropdown-item">เอสวาตีนี</div>
-                <div class="dropdown-item">แองโกลา</div>
-                <div class="dropdown-item">แอฟริกาใต้</div>
-                <div class="dropdown-item">แอลจีเรีย</div>
-                <div class="dropdown-item">กัวเตมาลา</div>
-                <div class="dropdown-item">เกรเนดา</div>
-                <div class="dropdown-item">คอสตาริกา</div>
-                <div class="dropdown-item">คิวบา</div>
-                <div class="dropdown-item">แคนาดา</div>
-                <div class="dropdown-item">จาเมกา</div>
-                <div class="dropdown-item">เซนต์คิตส์และเนวิส</div>
-                <div class="dropdown-item">เซนต์ลูเซีย</div>
-                <div class="dropdown-item">เซนต์วินเซนต์และเกรนาดีนส์</div>
-                <div class="dropdown-item">โดมินิกา</div>
-                <div class="dropdown-item">ตรินิแดดและโตเมโก</div>
-                <div class="dropdown-item">นิการากัว</div>
-                <div class="dropdown-item">บาร์เบโดส</div>
-                <div class="dropdown-item">บาฮามาส</div>
-                <div class="dropdown-item">เบลีซ</div>
-                <div class="dropdown-item">ปานามา</div>
-                <div class="dropdown-item">เม็กซิโก</div>
-                <div class="dropdown-item">สหรัฐอเมริกา</div>
-                <div class="dropdown-item">สาธารณรัฐโดมินิกัน</div>
-                <div class="dropdown-item">เอลซัลวาดอร์</div>
-                <div class="dropdown-item">แอนติกาและบาร์บูดา</div>
-                <div class="dropdown-item">ฮอนดูรัส</div>
-                <div class="dropdown-item">เฮติ</div>
-                <div class="dropdown-item">กายอานา</div>
-                <div class="dropdown-item">โคลอมเบีย</div>
-                <div class="dropdown-item">ชิลี</div>
-                <div class="dropdown-item">ซูรินาเม</div>
-                <div class="dropdown-item">บราซิล</div>
-                <div class="dropdown-item">โบลิเวีย</div>
-                <div class="dropdown-item">ปารากวัย</div>
-                <div class="dropdown-item">เปรู</div>
-                <div class="dropdown-item">เวเนซุเอลา</div>
-                <div class="dropdown-item">อาร์เจนตินา</div>
-                <div class="dropdown-item">อุรุกวัย</div>
-                <div class="dropdown-item">เอกวาดอร์</div>
+          <div class="col-6 col-md-6 col-sm-12" id="bll">
+            <div><label for="lineid" style="margin: 0px 80px;">LINE ID</label>
+              <input class="form-control mb-2" id="lineid" name="lineid" placeholder="กรอกไอดีไลน์ของคุณ (ถ้ามี)"
+                style="margin: auto; width: 400px;" type="text" />
+            </div>
+            <div><label for="countryInput" style="margin: 0px 80px;">ประเทศ <span
+                  style="color: #b20025;">*</span></label>
+              <div class="custom-select-container">
+                <input class="form-control mb-3" id="countryInput" name="country" placeholder="เลือกหรือพิมพ์ชื่อประเทศ"
+                  required="" style="margin: auto; width: 400px;" type="text" />
+                <div class="custom-dropdown-list" id="countryDropdown" style="display: none;">
+                  <div class="dropdown-item">กัมพูชา</div>
+                  <div class="dropdown-item">กาตาร์</div>
+                  <div class="dropdown-item">เกาหลีใต้</div>
+                  <div class="dropdown-item">เกาหลีเหนือ</div>
+                  <div class="dropdown-item">คาซัคสถาน</div>
+                  <div class="dropdown-item">คีร์กีซสถาน</div>
+                  <div class="dropdown-item">คูเวต</div>
+                  <div class="dropdown-item">จอร์เจีย</div>
+                  <div class="dropdown-item">จอร์แดน</div>
+                  <div class="dropdown-item">จีน</div>
+                  <div class="dropdown-item">ซาอุดิอาระเบีย</div>
+                  <div class="dropdown-item">ซีเรีย</div>
+                  <div class="dropdown-item">ญี่ปุ่น</div>
+                  <div class="dropdown-item">ติมอร์-เลสเต / ติมอร์ตะวันออก</div>
+                  <div class="dropdown-item">ตุรกี</div>
+                  <div class="dropdown-item">เติร์กเมนิสถาน</div>
+                  <div class="dropdown-item">ไต้หวัน</div>
+                  <div class="dropdown-item">ทาจิกิสถาน</div>
+                  <div class="dropdown-item">ไทย</div>
+                  <div class="dropdown-item">เนปาล</div>
+                  <div class="dropdown-item">บรูไนดารุสซาลาม</div>
+                  <div class="dropdown-item">บังกลาเทศ</div>
+                  <div class="dropdown-item">บาห์เรน</div>
+                  <div class="dropdown-item">ปากีสถาน</div>
+                  <div class="dropdown-item">ปาเลสไตน์</div>
+                  <div class="dropdown-item">พม่า / เมียนมา</div>
+                  <div class="dropdown-item">ฟิลิปปินส์</div>
+                  <div class="dropdown-item">ภูฏาน</div>
+                  <div class="dropdown-item">มองโกเลีย</div>
+                  <div class="dropdown-item">มัลดีฟส์</div>
+                  <div class="dropdown-item">มาเลเซีย</div>
+                  <div class="dropdown-item">เยเมน</div>
+                  <div class="dropdown-item">รัสเซีย</div>
+                  <div class="dropdown-item">ลาว</div>
+                  <div class="dropdown-item">เลบานอน</div>
+                  <div class="dropdown-item">เวียดนาม</div>
+                  <div class="dropdown-item">ศรีลังกา</div>
+                  <div class="dropdown-item">สหรัฐอาหรับเอมิเรตส์</div>
+                  <div class="dropdown-item">สิงคโปร์</div>
+                  <div class="dropdown-item">อัฟกานิสถาน</div>
+                  <div class="dropdown-item">อาเซอร์ไบจาน</div>
+                  <div class="dropdown-item">อาร์มีเนีย</div>
+                  <div class="dropdown-item">อินเดีย</div>
+                  <div class="dropdown-item">อินโดนีเซีย</div>
+                  <div class="dropdown-item">อิรัก</div>
+                  <div class="dropdown-item">อิสราเอล</div>
+                  <div class="dropdown-item">อิหร่าน</div>
+                  <div class="dropdown-item">อุซเบกิสถาน</div>
+                  <div class="dropdown-item">โอมาน</div>
+                  <div class="dropdown-item">คิริบาส</div>
+                  <div class="dropdown-item">ซามัว</div>
+                  <div class="dropdown-item">ตองกา</div>
+                  <div class="dropdown-item">ตูวาลู</div>
+                  <div class="dropdown-item">นาอูรู</div>
+                  <div class="dropdown-item">นิวซีแลนด์</div>
+                  <div class="dropdown-item">ปาปัวนิวกินี</div>
+                  <div class="dropdown-item">ปาเลา</div>
+                  <div class="dropdown-item">ฟิจิ</div>
+                  <div class="dropdown-item">ไมโครนีเซีย</div>
+                  <div class="dropdown-item">วานูอาตู</div>
+                  <div class="dropdown-item">หมู่เกาะโซโลมอน</div>
+                  <div class="dropdown-item">หมู่เกาะมาร์แชลล์</div>
+                  <div class="dropdown-item">ออสเตรเลีย</div>
+                  <div class="dropdown-item">กรีซ</div>
+                  <div class="dropdown-item">โครเอเชีย</div>
+                  <div class="dropdown-item">ซานมารีโน</div>
+                  <div class="dropdown-item">เซอร์เบีย</div>
+                  <div class="dropdown-item">ไซปรัส</div>
+                  <div class="dropdown-item">เดนมาร์ก</div>
+                  <div class="dropdown-item">นครรัฐวาติกัน</div>
+                  <div class="dropdown-item">นอร์เวย์</div>
+                  <div class="dropdown-item">เนเธอร์แลนด์</div>
+                  <div class="dropdown-item">บอสเนียและเฮอร์เซโกวีนา</div>
+                  <div class="dropdown-item">บัลแกเรีย</div>
+                  <div class="dropdown-item">เบลเยียม</div>
+                  <div class="dropdown-item">เบลารุส</div>
+                  <div class="dropdown-item">โปรตุเกส</div>
+                  <div class="dropdown-item">โปแลนด์</div>
+                  <div class="dropdown-item">ฝรั่งเศส</div>
+                  <div class="dropdown-item">ฟินแลนด์</div>
+                  <div class="dropdown-item">มอนเตเนโกร</div>
+                  <div class="dropdown-item">มอลโดวา</div>
+                  <div class="dropdown-item">มอลตา</div>
+                  <div class="dropdown-item">โมนาโก</div>
+                  <div class="dropdown-item">ยูเครน</div>
+                  <div class="dropdown-item">เยอรมนี</div>
+                  <div class="dropdown-item">โรมาเนีย</div>
+                  <div class="dropdown-item">ลักเซมเบิร์ก</div>
+                  <div class="dropdown-item">ลัตเวีย</div>
+                  <div class="dropdown-item">ลิกเตนสไตน์</div>
+                  <div class="dropdown-item">ลิทัวเนีย</div>
+                  <div class="dropdown-item">เวลส์</div>
+                  <div class="dropdown-item">สกอตแลนด์</div>
+                  <div class="dropdown-item">สเปน</div>
+                  <div class="dropdown-item">สโลวาเกีย</div>
+                  <div class="dropdown-item">สโลวีเนีย</div>
+                  <div class="dropdown-item">สวิตเซอร์แลนด์</div>
+                  <div class="dropdown-item">สวีเดน</div>
+                  <div class="dropdown-item">สหราชอาณาจักร</div>
+                  <div class="dropdown-item">สาธารณรัฐเช็ก</div>
+                  <div class="dropdown-item">มาซิโดเนีย</div>
+                  <div class="dropdown-item">ออสเตรีย</div>
+                  <div class="dropdown-item">อังกฤษ</div>
+                  <div class="dropdown-item">อันดอร์รา</div>
+                  <div class="dropdown-item">อิตาลี</div>
+                  <div class="dropdown-item">เอสโตเนีย</div>
+                  <div class="dropdown-item">แอลเบเนีย</div>
+                  <div class="dropdown-item">ไอซ์แลนด์</div>
+                  <div class="dropdown-item">ไอร์แลนด์</div>
+                  <div class="dropdown-item">ฮังการี</div>
+                  <div class="dropdown-item">กานา</div>
+                  <div class="dropdown-item">กาบอง</div>
+                  <div class="dropdown-item">กินี</div>
+                  <div class="dropdown-item">กินี-บิสเซา</div>
+                  <div class="dropdown-item">แกมเบีย</div>
+                  <div class="dropdown-item">โกตดิวัวร์ / ไอวอรีโคสต์</div>
+                  <div class="dropdown-item">คอโมโรส</div>
+                  <div class="dropdown-item">เคนยา</div>
+                  <div class="dropdown-item">เคปเวิร์ด</div>
+                  <div class="dropdown-item">แคเมอรูน</div>
+                  <div class="dropdown-item">จิบูตี</div>
+                  <div class="dropdown-item">ชาด</div>
+                  <div class="dropdown-item">ซิมบับเว</div>
+                  <div class="dropdown-item">ซูดาน</div>
+                  <div class="dropdown-item">เซเชลส์</div>
+                  <div class="dropdown-item">เซเนกัล</div>
+                  <div class="dropdown-item">เซาตูเมและปรินซิปี</div>
+                  <div class="dropdown-item">เซียร์ราลีโอน</div>
+                  <div class="dropdown-item">แซมเบีย</div>
+                  <div class="dropdown-item">โซมาเลีย</div>
+                  <div class="dropdown-item">ตูนิเซีย</div>
+                  <div class="dropdown-item">โตโก</div>
+                  <div class="dropdown-item">แทนซาเนีย</div>
+                  <div class="dropdown-item">นามิเบีย</div>
+                  <div class="dropdown-item">ไนจีเรีย</div>
+                  <div class="dropdown-item">ไนเจอร์</div>
+                  <div class="dropdown-item">บอตสวานา</div>
+                  <div class="dropdown-item">บุรุนดี</div>
+                  <div class="dropdown-item">บูร์กินาฟาโซ</div>
+                  <div class="dropdown-item">เบนิน</div>
+                  <div class="dropdown-item">มอริเซียส</div>
+                  <div class="dropdown-item">มอริเตเนีย</div>
+                  <div class="dropdown-item">มาดากัสการ์</div>
+                  <div class="dropdown-item">มาลาวี</div>
+                  <div class="dropdown-item">มาลี</div>
+                  <div class="dropdown-item">โมซัมบิก</div>
+                  <div class="dropdown-item">โมร็อกโก</div>
+                  <div class="dropdown-item">ยูกันดา</div>
+                  <div class="dropdown-item">รวันดา</div>
+                  <div class="dropdown-item">ลิเบีย</div>
+                  <div class="dropdown-item">เลโซโท</div>
+                  <div class="dropdown-item">ไลบีเรีย</div>
+                  <div class="dropdown-item">สวาซิแลนด์</div>
+                  <div class="dropdown-item">สาธารณรัฐคองโก</div>
+                  <div class="dropdown-item">สาธารณรัฐแอฟริกากลาง</div>
+                  <div class="dropdown-item">อิเควทอเรียลกินี</div>
+                  <div class="dropdown-item">อียิปต์</div>
+                  <div class="dropdown-item">เอธิโอเปีย</div>
+                  <div class="dropdown-item">เอริเทรีย</div>
+                  <div class="dropdown-item">เอสวาตีนี</div>
+                  <div class="dropdown-item">แองโกลา</div>
+                  <div class="dropdown-item">แอฟริกาใต้</div>
+                  <div class="dropdown-item">แอลจีเรีย</div>
+                  <div class="dropdown-item">กัวเตมาลา</div>
+                  <div class="dropdown-item">เกรเนดา</div>
+                  <div class="dropdown-item">คอสตาริกา</div>
+                  <div class="dropdown-item">คิวบา</div>
+                  <div class="dropdown-item">แคนาดา</div>
+                  <div class="dropdown-item">จาเมกา</div>
+                  <div class="dropdown-item">เซนต์คิตส์และเนวิส</div>
+                  <div class="dropdown-item">เซนต์ลูเซีย</div>
+                  <div class="dropdown-item">เซนต์วินเซนต์และเกรนาดีนส์</div>
+                  <div class="dropdown-item">โดมินิกา</div>
+                  <div class="dropdown-item">ตรินิแดดและโตเมโก</div>
+                  <div class="dropdown-item">นิการากัว</div>
+                  <div class="dropdown-item">บาร์เบโดส</div>
+                  <div class="dropdown-item">บาฮามาส</div>
+                  <div class="dropdown-item">เบลีซ</div>
+                  <div class="dropdown-item">ปานามา</div>
+                  <div class="dropdown-item">เม็กซิโก</div>
+                  <div class="dropdown-item">สหรัฐอเมริกา</div>
+                  <div class="dropdown-item">สาธารณรัฐโดมินิกัน</div>
+                  <div class="dropdown-item">เอลซัลวาดอร์</div>
+                  <div class="dropdown-item">แอนติกาและบาร์บูดา</div>
+                  <div class="dropdown-item">ฮอนดูรัส</div>
+                  <div class="dropdown-item">เฮติ</div>
+                  <div class="dropdown-item">กายอานา</div>
+                  <div class="dropdown-item">โคลอมเบีย</div>
+                  <div class="dropdown-item">ชิลี</div>
+                  <div class="dropdown-item">ซูรินาเม</div>
+                  <div class="dropdown-item">บราซิล</div>
+                  <div class="dropdown-item">โบลิเวีย</div>
+                  <div class="dropdown-item">ปารากวัย</div>
+                  <div class="dropdown-item">เปรู</div>
+                  <div class="dropdown-item">เวเนซุเอลา</div>
+                  <div class="dropdown-item">อาร์เจนตินา</div>
+                  <div class="dropdown-item">อุรุกวัย</div>
+                  <div class="dropdown-item">เอกวาดอร์</div>
+                </div>
               </div>
-            </div></div>
-            
-            <label style="margin: 0px 80px;" for="provinceInput">จังหวัด</label>
+            </div>
+            <label for="provinceInput" style="margin: 0px 80px;">จังหวัด</label>
             <div class="custom-select-container">
-              <input style="margin: auto; width: 400px;" type="text" id="provinceInput" name="province"
-                class="form-control mb-2" placeholder="เลือกหรือพิมพ์ชื่อจังหวัด">
-              <div id="provinceDropdown" class="custom-dropdown-list" style="display: none;">
+              <input class="form-control mb-2" id="provinceInput" name="province"
+                placeholder="เลือกหรือพิมพ์ชื่อจังหวัด" style="margin: auto; width: 400px;" type="text" />
+              <div class="custom-dropdown-list" id="provinceDropdown" style="display: none;">
                 <div class="dropdown-item">กรุงเทพมหานคร</div>
                 <div class="dropdown-item">กระบี่</div>
                 <div class="dropdown-item">กาญจนบุรี</div>
@@ -875,66 +825,61 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
               </div>
             </div>
             <!-- Dropdown: ระดับ -->
-            <label style="margin: 0px 80px;" id="dd3">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+            <label id="dd3" style="margin: 0px 80px;">ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
             <div class="dropdown mb-3" id="dd2">
-              <button style="margin: auto;" id="levelDropdown" type="button" data-bs-toggle="dropdown"
-                class="inher form-control mb-2">เลือกระดับ ▾</button>
-              <ul id="sub1" class="dropdown-menu">
+              <button class="inher form-control mb-2" data-bs-toggle="dropdown" id="levelDropdown" style="margin: auto;"
+                type="button">เลือกระดับ ▾</button>
+              <ul class="dropdown-menu" id="sub1">
                 <li class="dropdown-submenu">
-                  <a style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #6c757d !important;"
-                    class="dropdown-item" href="#"><span>ปริญญาตรี ▶</span></a>
+                  <a class="dropdown-item" href="#"
+                    style="border-bottom-style: solid !important; border-bottom-width:medium !important; border-bottom-color: #6c757d !important;"><span>ปริญญาตรี
+                      ▶</span></a>
                   <ul class="dropdown-menu">
-                    <li><a
-                        style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"
-                        class="dropdown-item level-option" href="#" data-level="ป.ตรี-ปกติ"><span>ป.ตรี
+                    <li><a class="dropdown-item level-option" data-level="ป.ตรี-ปกติ" href="#"
+                        style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"><span>ป.ตรี
                           ภาคปกติ</span></a>
                     </li>
-                    <li><a
-                        style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"
-                        class="dropdown-item level-option" href="#" data-level="ป.ตรี-นานาชาติ"><span>ป.ตรี
+                    <li><a class="dropdown-item level-option" data-level="ป.ตรี-นานาชาติ" href="#"
+                        style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"><span>ป.ตรี
                           หลักสูตรนานาชาติ</span></a></li>
                   </ul>
                 </li>
-                <li><a
-                    style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"
-                    class="dropdown-item level-option" href="#" data-level="ป.ตรี-เทียบโอน"><span>ป.ตรี
+                <li><a class="dropdown-item level-option" data-level="ป.ตรี-เทียบโอน" href="#"
+                    style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"><span>ป.ตรี
                       หลักสูตรเทียบโอน</span></a></li>
-                <li><a
-                    style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"
-                    class="dropdown-item level-option" href="#" data-level="ป.โท"><span>ปริญญาโท</span></a></li>
+                <li><a class="dropdown-item level-option" data-level="ป.โท" href="#"
+                    style="border-bottom-style: solid !important; border-bottom-width:thin !important; border-bottom-color: #6c757d !important;"><span>ปริญญาโท</span></a>
+                </li>
               </ul>
             </div>
             <!-- Dropdown: คณะ -->
-            <label style="margin: 0px 80px;" id="dd3">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+            <label id="dd3" style="margin: 0px 80px;">คณะที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
             <div class="dropdown mb-3" id="dd2">
-              <button id="facultyDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
-                class="inher form-control mb-2">เลือกคณะ ▾</button>
+              <button class="inher form-control mb-2" data-bs-toggle="dropdown" id="facultyDropdown"
+                style="margin: auto;" type="button">เลือกคณะ ▾</button>
               <ul class="dropdown-menu" id="facultyOptions"></ul>
             </div>
-
             <!-- Dropdown: สาขา -->
-            <label style="margin: 0px 80px;" id="dd3">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
+            <label id="dd3" style="margin: 0px 80px;">สาขาที่สนใจศึกษา <span style="color: #b20025;">*</span></label>
             <div class="dropdown mb-4" id="dd2">
-              <button id="majorDropdown" type="button" data-bs-toggle="dropdown" style="margin: auto;"
-                class="inher form-control mb-2">เลือกสาขา ▾</button>
+              <button class="inher form-control mb-2" data-bs-toggle="dropdown" id="majorDropdown" style="margin: auto;"
+                type="button">เลือกสาขา ▾</button>
               <ul class="dropdown-menu" id="majorOptions"></ul>
             </div>
-
             <!-- Input hidden สำหรับส่งข้อมูล -->
-            <input type="hidden" name="level" id="hiddenLevel">
-            <input type="hidden" name="fac" id="hiddenFac">
-            <input type="hidden" name="major" id="hiddenMajor">
+            <input id="hiddenLevel" name="level" type="hidden" />
+            <input id="hiddenFac" name="fac" type="hidden" />
+            <input id="hiddenMajor" name="major" type="hidden" />
           </div>
+        </div>
       </form>
     </div>
-
     <!-- ปุ่มส่ง -->
-    <div id="bb2" class="d-flex justify-content-center"><button id="b2" type="submit"
-        class="btn btn-primary">ส่งข้อมูล</button></div>
+    <div class="d-flex justify-content-center" id="bb2"><button class="btn btn-primary" id="b2"
+        type="submit">ส่งข้อมูล</button></div>
   </section>
   <!-- ***********************************************************ส่วนกรอกข้อมูล*********************************************************** -->
   <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
   <script>
     // ข้อมูลคณะตามระดับ
@@ -1089,7 +1034,6 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
       });
     });
   </script>
-
   <script>
     // เพิ่ม event listener หลังโหลดหน้า
     document.addEventListener('DOMContentLoaded', function () {
@@ -1103,50 +1047,49 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
           const hiddenMajor = document.getElementById("hiddenMajor");
 
           if (selectedLevel === "ป.ตรี-นานาชาติ") {
-    // ตั้งค่า TNIC ให้คณะโดยอัตโนมัติ
-    facultyDropdown.textContent = "TNIC";
-    hiddenFac.value = "TNIC";
+            // ตั้งค่า TNIC ให้คณะโดยอัตโนมัติ
+            facultyDropdown.textContent = "TNIC";
+            hiddenFac.value = "TNIC";
 
-    // เปิดใช้งาน dropdown สาขา
-    majorDropdown.classList.remove("disabled");
-    majorDropdown.style.pointerEvents = "auto";
-    majorDropdown.style.opacity = "1";
+            // เปิดใช้งาน dropdown สาขา
+            majorDropdown.classList.remove("disabled");
+            majorDropdown.style.pointerEvents = "auto";
+            majorDropdown.style.opacity = "1";
 
-    // ใส่สาขาของหลักสูตรนานาชาติโดยตรง
-    majorOptions.innerHTML = "";
-    const internationalMajors = [
-        "วิศวกรรมดิจิทัล (DGE)",
-        "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
-        "ธุรกิจระหว่างประเทศและการเป็นผู้ประกอบการ (IBN)"
-    ];
-    internationalMajors.forEach(major => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = "#";
-        a.className = "dropdown-item";
-        a.textContent = major;
+            // ใส่สาขาของหลักสูตรนานาชาติโดยตรง
+            majorOptions.innerHTML = "";
+            const internationalMajors = [
+              "วิศวกรรมดิจิทัล (DGE)",
+              "วิทยาการข้อมูลและปัญญาประดิษฐ์ (DSA)",
+              "ธุรกิจระหว่างประเทศและการเป็นผู้ประกอบการ (IBN)"
+            ];
+            internationalMajors.forEach(major => {
+              const li = document.createElement("li");
+              const a = document.createElement("a");
+              a.href = "#";
+              a.className = "dropdown-item";
+              a.textContent = major;
 
-        a.addEventListener("click", function (e) {
-            e.preventDefault();
-            majorDropdown.textContent = major;
-            hiddenMajor.value = major;
-        });
+              a.addEventListener("click", function (e) {
+                e.preventDefault();
+                majorDropdown.textContent = major;
+                hiddenMajor.value = major;
+              });
 
-        li.appendChild(a);
-        majorOptions.appendChild(li);
-    });
-} else {
-    // กรณีระดับอื่นทำงานปกติ
-    majorDropdown.classList.remove("disabled");
-    majorDropdown.style.pointerEvents = "auto";
-    majorDropdown.style.opacity = "1";
-}
+              li.appendChild(a);
+              majorOptions.appendChild(li);
+            });
+          } else {
+            // กรณีระดับอื่นทำงานปกติ
+            majorDropdown.classList.remove("disabled");
+            majorDropdown.style.pointerEvents = "auto";
+            majorDropdown.style.opacity = "1";
+          }
 
         });
       });
     });
   </script>
-
   <script>
     document.querySelectorAll('.dropdown-item').forEach(div => {
       div.setAttribute('data-value', div.textContent.trim());
@@ -1283,13 +1226,13 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
       });
     });
   </script>
-
   <div class="container py-5">
     <div class="row align-items-center g-5">
       <div class="omg col-lg-6">
         <div data-aos="zoom-in">
           <h1>泰日工業大学</h1>
-          <h1 class="display-5 fw-bold lh-1 mb-3" data-th="สถาบันเทคโนโลยีไทย-ญี่ปุ่น" data-en="Thai-Nichi Institute of Technology">สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
+          <h1 class="display-5 fw-bold lh-1 mb-3" data-en="Thai-Nichi Institute of Technology"
+            data-th="สถาบันเทคโนโลยีไทย-ญี่ปุ่น">สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h1>
         </div>
         <div data-aos="zoom-in">
           <p class="lead">ในโลกที่เทคโนโลยีหมุนไปอย่างไม่หยุดยั้ง สถาบันเทคโนโลยีไทย-ญี่ปุ่น (TNI)
@@ -1297,35 +1240,28 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
           </p>
         </div>
       </div>
-      <div class="omg  col-lg-6 col-md-12 col-sm-12">
+      <div class="omg col-lg-6 col-md-12 col-sm-12">
         <div data-aos="flip-right">
-          <img src="img/groupBA.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-            height="500" loading="lazy" style="border-radius: 15px;">
+          <img alt="Bootstrap Themes" class="d-block mx-lg-auto img-fluid" height="500" loading="lazy"
+            src="img/groupBA.jpg" style="border-radius: 15px;" width="700" />
         </div>
-
       </div>
     </div>
   </div>
-
   <!-- Bootstrap JS Bundle (รวม Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-
+  <script crossorigin="anonymous" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
-
-
-
   <!-- ***********************************************************ส่วนJavaScript*********************************************************** -->
-
   <!-- ตั้งค่ามือถือ -->
   <style>
     .omg:hover {
       transform: translateY(-6px) scale(1.1);
-    
+
     }
+
     .omg {
-    transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out;
     }
 
     .gap-3 {
@@ -1729,15 +1665,12 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
 
     }
   </style>
-
-
   <div class="container">
-    <footer style="justify-content: space-between;" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top" style="justify-content: space-between;">
       <!-- ลิงก์ไป Bootstrap Icons -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-      <div id="iconadd" class="col-4 mb-3" style="width: 0%;">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+      <div class="col-4 mb-3" id="iconadd" style="width: 0%;">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
       </div>
       <style>
         .fa {
@@ -1798,12 +1731,11 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
           /* ยกขึ้น + ขยายเล็กน้อย */
         }
       </style>
-
       <div class="col mb-3">
         <h5 style="border-bottom: 2px solid #ccc; padding-bottom: 5px;">ช่องทางติดต่อ</h5>
         <ul class="nav flex-column">
-          <div style="padding-top: 5%;" id="iconadd"
-            class="col text-center d-flex justify-content-center gap-3 flex-wrap">
+          <div class="col text-center d-flex justify-content-center gap-3 flex-wrap" id="iconadd"
+            style="padding-top: 5%;">
             <div data-aos="flip-left" data-aos-duration="0"><a href="https://www.tiktok.com/@thai_nichi"><i
                   class="fa-brands fa-tiktok"></i></a></div>
             <div data-aos="flip-left" data-aos-duration="1000"><a href="https://www.instagram.com/instagram"><i
@@ -1814,14 +1746,15 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
                   class="fa-brands fa-line"></i></a></div>
           </div>
           <li class="nav-item">
-            <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/tniadmission/?_rdc=1&_rdr#"
-              target="_blank" class="btn btn-primary d-flex align-items-center">
+            <a class="btn btn-primary d-flex align-items-center"
+              href="https://web.facebook.com/tniadmission/?_rdc=1&amp;_rdr#" style="width: 100%; font-size: 14px;"
+              target="_blank">
               <i class="bi bi-facebook me-2"></i> Thai-Nichi Admission Center
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a style="width: 100%; font-size: 14px;" href="https://web.facebook.com/tnicinter" target="_blank"
-              class="btn btn-primary d-flex align-items-center">
+            <a class="btn btn-primary d-flex align-items-center" href="https://web.facebook.com/tnicinter"
+              style="width: 100%; font-size: 14px;" target="_blank">
               <i class="bi bi-facebook me-2"></i> Thai-Nichi International College
             </a>
           </li>
@@ -1831,33 +1764,32 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
         <h5 style="border-bottom: 2px solid #ccc; padding-bottom: 5px;">สถาบันเทคโนโลยีไทย-ญี่ปุ่น</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="https://maps.app.goo.gl/wbFvtmohz61XwZfN8" target="_blank"
-              class="nav-link p-0 text-body-secondary custom-link">
+            <a class="nav-link p-0 text-body-secondary custom-link" href="https://maps.app.goo.gl/wbFvtmohz61XwZfN8"
+              target="_blank">
               <i class="bi bi-geo-alt-fill me-2"></i>
               1771/1 ถนนพัฒนาการ แขวงสวนหลวง เขตสวนหลวง กรุงเทพฯ 10250
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="tel:+6627632601" class="nav-link p-0 text-body-secondary custom-link">
+            <a class="nav-link p-0 text-body-secondary custom-link" href="tel:+6627632601">
               <i class="bi bi-telephone-fill me-2"></i>
               Tel. 0-2763-2601-5
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="fax:+6627632700" class="nav-link p-0 text-body-secondary custom-link">
+            <a class="nav-link p-0 text-body-secondary custom-link" href="fax:+6627632700">
               <i class="bi bi-printer-fill me-2"></i>
               Fax. 0-2763-2700
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="mailto:admission@tni.ac.th" class="nav-link p-0 text-body-secondary custom-link">
+            <a class="nav-link p-0 text-body-secondary custom-link" href="mailto:admission@tni.ac.th">
               <i class="bi bi-envelope-fill me-2"></i>
               admission@tni.ac.th
             </a>
           </li>
         </ul>
       </div>
-
       <style>
         .custom-link {
           display: inline-flex;
@@ -1875,19 +1807,16 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
           /* ขยับขึ้นเล็กน้อย */
         }
       </style>
-
-      <div id="maptni" class="col mb-3" style="width: 30%;">
+      <div class="col mb-3" id="maptni" style="width: 30%;">
         <h5 style="border-bottom: 2px solid #ccc; padding-bottom: 5px;">แผนที่</h5>
         <!-- แผนที่ Google Maps ฝัง iframe -->
         <div class="mb-3">
           <div class="map-container mb-3">
-            <iframe
+            <iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.676814566951!2d100.6258088088862!3d13.738006186596731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d61d1a42ccfa5%3A0xd5edaf32927b6846!2z4Liq4LiW4Liy4Lia4Lix4LiZ4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14LmE4LiX4LiiLeC4jeC4teC5iOC4m-C4uOC5iOC4mQ!5e0!3m2!1sth!2sth!4v1756888969211!5m2!1sth!2sth"
-              style="border:0; position:absolute; top:0; left:0; width:100%; height:100%;" allowfullscreen=""
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+              style="border:0; position:absolute; top:0; left:0; width:100%; height:100%;">
             </iframe>
           </div>
-
           <style>
             .map-container {
               position: relative;
@@ -1910,19 +1839,14 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
               /* เงาชัดขึ้น */
             }
           </style>
-
         </div>
-
         <!-- <div class="col mb-3"></div> -->
-
         <!-- ถ้ายังไม่มี Bootstrap Icons ให้เพิ่ม -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+      </div>
     </footer>
   </div>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
   <style>
     /* กล่องรวมปุ่ม social */
     .social-float {
@@ -1956,30 +1880,59 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
     }
 
     /* เอฟเฟกต์ hover ปกติของปุ่ม social */
-.social-float a:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-}
+    .social-float a:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
 
-/* 🚫 ยกเลิก hover effect เฉพาะปุ่ม IG ที่อยู่ใน .social-float */
-.social-float a.instagram:hover {
-  transform: none !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-}
-
+    /* 🚫 ยกเลิก hover effect เฉพาะปุ่ม IG ที่อยู่ใน .social-float */
+    .social-float a.instagram:hover {
+      transform: none !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    }
   </style>
-
   <!-- Floating Social Icons -->
   <div class="social-float">
-    <a href="https://www.instagram.com/thai_nichi" target="_blank" class="instagram">
+    <a class="instagram" href="https://www.instagram.com/thai_nichi" target="_blank">
       <i class="fa-brands fa-instagram"></i>
     </a>
   </div>
-
   <script>
     AOS.init();
   </script>
+  <script>
+    document.getElementById("myForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
 
+      const form = e.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // 🔹 ใส่ URL ของ Google Apps Script ที่นี่
+      const SCRIPT_URL = "https://script.google.com/macros/s/PASTE_YOUR_SCRIPT_URL_HERE/exec";
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const result = await response.json();
+        if (result.status === "success") {
+          alert(result.message);
+          form.reset();
+        } else {
+          alert("❌ เกิดข้อผิดพลาด: " + result.message);
+        }
+      } catch (err) {
+        alert("❌ ไม่สามารถเชื่อมต่อ Google Sheets ได้");
+        console.error(err);
+      }
+    });
+  </script>
 </body>
 
 </html>
