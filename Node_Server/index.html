@@ -996,14 +996,9 @@ document.getElementById('langEnBtn').addEventListener('click', function() {
     const levelDropdown = document.getElementById("levelDropdown");
     const facultyDropdown = document.getElementById("facultyDropdown");
     const majorDropdown = document.getElementById("majorDropdown");
-    const facultyOptions = document.getElementById("facultyOptions");
-    const majorOptions = document.getElementById("majorOptions");
 
     // Hidden inputs
     const hiddenLevel = document.getElementById("hiddenLevel");
-    const hiddenFac = document.getElementById("hiddenFac");
-    const hiddenMajor = document.getElementById("hiddenMajor");
-
     // เปิด/ปิด submenu
     document.querySelectorAll('.dropdown-submenu > a').forEach(el => {
       el.addEventListener('click', function (e) {
@@ -1287,7 +1282,7 @@ unsureMajor.addEventListener("change", function () {
         item.addEventListener('click', function () {
           countryInput.value = this.textContent.trim();
           countryDropdown.style.display = 'none';
-          toggleProvinceField(); // ✅ update province เมื่อเลือกประเทศ
+          toggleProvinceField();
         });
       });
 

@@ -3,7 +3,7 @@ const overlay = document.getElementById("overlay");
 
 // ===== เปิด Sidebar =====
 function openNav() {
-  sidenav.style.width = "20%";
+  sidenav.style.width = "40%";
   overlay.style.display = "block";
 }
 
