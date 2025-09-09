@@ -1346,34 +1346,43 @@ unsureMajor.addEventListener("change", function () {
 
       // ----------- VALIDATION SUBMIT ----------
       submitButton.addEventListener('click', function (e) {
-        e.preventDefault();
+    e.preventDefault();
 
-        const title = titleSelect.value;
-        const grade = gradeSelect.value;
-        const country = countryInput.value.trim();
-        const province = provinceInput.value.trim();
-        const level = hiddenLevel.value;
-        const fac = hiddenFac.value;
-        const major = hiddenMajor.value;
+    const title = titleSelect.value;
+    const grade = gradeSelect.value;
+    const country = countryInput.value.trim();
+    const province = provinceInput.value.trim();
+    const level = hiddenLevel.value;
+    const fac = hiddenFac.value;
+    const major = hiddenMajor.value;
 
-        const isInternational = level === "ป.ตรี-นานาชาติ";
-        const isThailand = (country === "ไทย" || country.toLowerCase() === "thailand");
+    const isInternational = level === "ป.ตรี-นานาชาติ";
+    const isThailand = (country === "ไทย" || country.toLowerCase() === "thailand");
 
-        if (
-          !title ||
-          !grade ||
-          !country ||
-          !validCountries.includes(country) ||
-          !level ||
-          !fac ||
-          (!isInternational && !major) ||
-          (isThailand && !province) // ✅ province ต้องกรอกถ้าเลือกไทย
-        ) {
-          alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องทุกช่องที่มีเครื่องหมาย *");
-        } else {
-          form.submit();
-        }
-      });
+    // 👇 อ่านสถานะ “ยังไม่แน่ใจ”
+    const unsureFacultyEl = document.getElementById('unsureFaculty');
+    const unsureMajorEl = document.getElementById('unsureMajor');
+    const skipFac = !!(unsureFacultyEl && unsureFacultyEl.checked);
+    const skipMajor = isInternational || skipFac || !!(unsureMajorEl && unsureMajorEl.checked);
+
+    if (
+      !title ||
+      !grade ||
+      !country ||
+      !validCountries.includes(country) ||
+      !level ||
+      (!skipFac && !fac) ||        // บังคับ fac เฉพาะกรณีไม่ได้ติ๊ก "ยังไม่แน่ใจคณะ"
+      (!skipMajor && !major) ||    // บังคับ major เฉพาะกรณีไม่ได้ติ๊ก/ไม่ได้เป็นนานาชาติ
+      (isThailand && !province)    // บังคับจังหวัดถ้าเลือกไทย
+    ) {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้องทุกช่องที่มีเครื่องหมาย *");
+    } else {
+      // (ถ้าอยากให้ไปโผล่ในชีตแบบอ่านง่าย แทนค่าว่าง ลองเติมบรรทัดเสริมด้านล่าง)
+      if (skipFac && !fac) hiddenFac.value = "ยังไม่แน่ใจ";
+      if (skipMajor && !major) hiddenMajor.value = "ยังไม่แน่ใจ";
+      form.submit();
+    }
+  });
     });
   </script>
 
