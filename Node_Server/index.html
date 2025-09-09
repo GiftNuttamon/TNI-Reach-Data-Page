@@ -1226,6 +1226,26 @@ unsureMajor.addEventListener("change", function () {
   </script>
 
   <script>
+    // โค้ดที่คุณต้องเพิ่ม
+    document.getElementById('unsureFaculty').addEventListener('change', function() {
+      const isChecked = this.checked;
+      document.getElementById('facultyDropdown').disabled = isChecked;
+      document.getElementById('majorDropdown').disabled = isChecked;
+      document.getElementById('majorOptions').innerHTML = ''; // Clear major options
+      document.getElementById('majorDropdown').textContent = 'เลือกสาขา ▾'; // Reset major button text
+      document.getElementById('facultyOptions').innerHTML = ''; // Clear faculty options
+      document.getElementById('facultyDropdown').textContent = 'เลือกคณะ ▾'; // Reset faculty button text
+    });
+
+    document.getElementById('unsureMajor').addEventListener('change', function() {
+      const isChecked = this.checked;
+      document.getElementById('majorDropdown').disabled = isChecked;
+      document.getElementById('majorOptions').innerHTML = ''; // Clear major options
+      document.getElementById('majorDropdown').textContent = 'เลือกสาขา ▾'; // Reset major button text
+    });
+  </script>
+
+  <script>
     document.querySelectorAll('.dropdown-item').forEach(div => {
       div.setAttribute('data-value', div.textContent.trim());
     });
