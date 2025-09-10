@@ -1905,20 +1905,32 @@
       e.preventDefault();
 
       const form = e.target;
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+      const data = {
+  title: document.getElementById('title').value,
+  fname: document.getElementById('fname').value,
+  lname: document.getElementById('lname').value,
+  grade: document.getElementById('grade').value,
+  email: document.getElementById('email').value,
+  phone: document.getElementById('phone').value,
+  lineid: document.getElementById('lineid').value,
+  country: document.getElementById('countryInput').value,
+  province: document.getElementById('provinceInput').value,
+  level: document.getElementById('hiddenLevel').value,
+  fac: document.getElementById('hiddenFac').value,
+  major: document.getElementById('hiddenMajor').value
+};
 
       // 🔹 ใส่ URL ของ Google Apps Script ที่นี่
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNl-U2fi6Ayv8ZqGRWYIJ9jugBsumNapbrlWYk_Gj_WuWJ6ijhRiTJpNEs0ZJpQGiEnw/exec";
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybB2ioH1GA6V9hZ4i-N_mNxPzZidOtPMxCsZap7JHEoQKoL0oOo9oBB31jdbYRZMJKnw/exec";
 
       try {
         const response = await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  method: "POST",
+  body: JSON.stringify(data), // แก้ไขตรงนี้
+  headers: {
+    "Content-Type": "application/json", // และเพิ่มบรรทัดนี้
+  },
+});
 
         const result = await response.json();
         if (result.status === "success") {
