@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Downloads/GiftNuttamon-TNI-Reach-Data-Page-741c5bc/GiftNuttamon-TNI-Reach-Data-Page-741c5bc/node_modules"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "TNI-Reach-Data-Page"
+	}
+}
