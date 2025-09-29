@@ -34,7 +34,7 @@ function processForm(data) {
     
     sheet.appendRow(rowData);
     
-    return { status: "success", message: "✅ บันทึกข้อมูลเรียบร้อย" };
+    return { status: "success", message: "✅ บันทึกข้อมูลเรียบร้อยจ้า" };
     
   } catch (err) {
     return { status: "error", message: "❌ เกิดข้อผิดพลาด: " + err.message };
