@@ -1,0 +1,42 @@
+function doGet() {
+  return HtmlService.createTemplateFromFile('index').evaluate();
+}
+
+function processForm(data) {
+  // ✅ ระบุรหัส Spreadsheet ID ของคุณที่นี่
+  var SPREADSHEET_ID = '1G-htktut-n4Iy9hoZEWWKPsvlw44kDNlZw_Wb8YCDX0';
+  var sheetName = "INFO1";
+  
+  try {
+    // ✅ เปลี่ยนจาก getActiveSpreadsheet() เป็น openById()
+    var spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = spreadsheet.getSheetByName(sheetName);
+    
+    if (!sheet) {
+      return { status: "error", message: "❌ ไม่พบชีตชื่อ " + sheetName };
+    }
+    
+    var rowData = [
+      data.title,
+      data.fname,
+      data.lname,
+      data.grade,
+      data.email,
+      data.phone,
+      data.lineid,
+      data.country,
+      data.province,
+      data.level,
+      data.fac,
+      data.major,
+      new Date()
+    ];
+    
+    sheet.appendRow(rowData);
+    
+    return { status: "success", message: "✅ บันทึกข้อมูลเรียบร้อย" };
+    
+  } catch (err) {
+    return { status: "error", message: "❌ เกิดข้อผิดพลาด: " + err.message };
+  }
+}

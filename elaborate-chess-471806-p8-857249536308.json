@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "elaborate-chess-471806-p8",
+  "private_key_id": "857249536308b232e45f0913aa81bafacb709717",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5p0rkIMyfdRYg\nIjFemoTwgbPDXGjJoawWzYmVWhqCHOVrQm/Ic8r0Ax+7ILZrN+4meXE8JtlMwnL6\nGczZxy+xOnrIR1my8AKP2K5+52roIyFQnHd9/f7UzbflV1mxpXo1RP8dfjXes9FL\nmX+aIU7Esa7HsMLUh1JuL+EkdcPM+v/PDZSZJY/TsLbiP+/vsYcXkq9/35t+Nwjp\nYyOCXok4F9h/1obgxGt+T4RyqVxwjmVlrHRf/iYXMi+HAO/RQDTTe5jJf1+qBU2+\nggT01YjgeMmHEtibFvwOvTnUNTPDHYufh9mWZsClHPfpxvMoVNBkIahhlQ2VU4qE\nDBcNUxT3AgMBAAECggEADOYi/adBvgzI1QtLI2fYbnDZHyO7GdK2q6JZXkCO+cvk\nLL7GYX2aGJPSapJHkTrwKduaN1iMy2HxiWr2oPeGNjL6QO5bBfZHoG5fpextsNGU\nm0V/NHYVBtgTFyK7+qLuHDFiwE4fJlbgndKh20ozbx+zkxTbgkSzicKgJjruJb5C\nJzEmhGQCwqrdRQIpExe1OfmECnwkHFtbCOT3qvmX2vBwhtgWhYvzgrhhuMLTxozz\nHq600ofLICp+mgN5iosJkoml9RgF+DWVYCdnyIZYgr5H4IfLdbLzWk+YVTRXVzy3\nDgy4NznHGB0sFktwPHITpPVsXv1FZltMcR5cShSNoQKBgQDd9UYYJFLuV+YGkNso\nYOV7AWUvBfkCFRBFWH58XrUMsgwikwskrF2MoEnmTwbjcNnha9hL+/ldlKjcOLcO\nfTC6mbm+jwgY3XXl5ibZLAUQefrZAboCnEktY8ppaC2TB9p0gPleqjJNsFpJqZms\n++D/gJMnitKXBPKBrYipQBSWnwKBgQDWIJfTqEq4HFU4xC57J6CDkR3CTacA5PLh\nt/2yLZEB7lwnPkfo0bb7mUsZO1yAytkwvaIqJwIKKaXPgqqjWved9UZ1eFe3fFlw\nvi1k8P9RGLvDpItSwUI063QSMCwgAh0qJLiyDgjRwFz9Lu9/RNnYPF/krlEAqiMp\nhO5lLuCaqQKBgFeXfsTyOMQUbhNzQPmrW4RyZYLsIXt/4n7rUGc2XM6YyQ8v5jrf\nxr9DVkaMM1S4aVN7Ys2Br8QNcaIOw7b1ErDhD5szCOf/JZLHg9c6dvksmiDffI+h\nK4O9GNkGIs4eUEifyUlhcx6TlN3zD1FjyUQrcmctcrPkYOtqFz9rqXRTAoGAUWTy\nUbKXNIUQoBNy172odlqjRUjfQqfE66hU93X6uREyVniGPSn6tIkA0waNkyeIh86N\n5hgN3m8WaFrzIkVh+tlRfzXPoh/Sn9iqyMQTSXBtb2EM1NhBonweEwvcug4TqAFt\nc8GB+Ll2n4dH4sj5RgktKnBYujfyRcYSGMRI/IECgYEAletxomvbZn060OO8QSFB\njwfuLdphswSLcRDAeZIJpaQNXycRwtUlaAIcXEgJxHmJtEa3INt2aVOXTTsJrwN2\nACDtG8w2y/1HUVRP7w+Du46QI9AZBg0FU0017xHau0APXrC92it1V9nOheNUCqJR\nsGZMG7TFwq2ZTwyhw2MwrfU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tni-174@elaborate-chess-471806-p8.iam.gserviceaccount.com",
+  "client_id": "114204912813278363498",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tni-174%40elaborate-chess-471806-p8.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -1,4 +1,5 @@
-/* ===== Hamburger Sticky ===== */
+<style>
+  /* ===== Hamburger Sticky ===== */
 #hamburger {
   position: fixed;
   top: 15px;
@@ -135,3 +136,5 @@ body.body-no-scroll {
   display: block;
 }
 
+
+</style>

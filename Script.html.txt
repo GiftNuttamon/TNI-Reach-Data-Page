@@ -1,0 +1,33 @@
+<script>
+  const sidenav = document.getElementById("mySidenav");
+const overlay = document.getElementById("overlay");
+
+// ===== เปิด Sidebar =====
+function openNav() {
+  sidenav.style.width = "40%";
+  overlay.style.display = "block";
+}
+
+// ===== ปิด Sidebar =====
+function closeNav() {
+  sidenav.style.width = "0";
+  overlay.style.display = "none";
+}
+
+// ===== เปิด/ปิด Dropdown ระดับการศึกษา และ คณะ =====
+document.querySelectorAll(".dropdown-btn").forEach(btn => {
+  btn.addEventListener("click", function() {
+    this.classList.toggle("active");
+    const container = this.nextElementSibling;
+    container.style.display = container.style.display === "block" ? "none" : "block";
+  });
+});
+
+// ===== เปิด/ปิด รายละเอียดสาขา =====
+document.querySelectorAll(".major-link").forEach(link => {
+  link.addEventListener("click", function(e) {
+    e.preventDefault();
+    this.classList.toggle("active");
+  });
+});
+</script>
