@@ -7164,8 +7164,14 @@
                 }
               }
             </script>
+            
+
+
+
+          </div>
+          <div class="col-6 col-md-6 col-sm-12" id="bll">
             <div>
-              <label for="phone" data-th="เบอร์โทร(ห้ามมีเว้นวรรค)<span style='color: #b20025;'>*</span>"
+              <label style="margin: 0px 80px;" for="phone" data-th="เบอร์โทร(ห้ามมีเว้นวรรค)<span style='color: #b20025;'>*</span>"
                 data-en="Phone Number(No spaces allowed)<span style='color: #b20025;'>*</span>">
                 เบอร์โทร(ห้ามมีเว้นวรรค)<span style="color: #b20025;">*</span>
               </label>
@@ -7176,12 +7182,7 @@
                 data-th-placeholder="กรอกเบอร์ติดต่อของคุณ" data-en-placeholder="Enter your phone number" required
                 style="margin: auto;" type="tel" />
             </div>
-
-
-
-          </div>
-          <div class="col-6 col-md-6 col-sm-12" id="bll">
-            <div>
+            <!-- <div>
               <label for="lineid" style="margin: 0 80px;" data-th="LINE ID" data-en="LINE ID">
                 LINE ID
               </label>
@@ -7190,7 +7191,7 @@
               <input class="form-control mb-2" id="lineid" name="lineid" placeholder="กรอกไอดีไลน์ของคุณ (ถ้ามี)"
                 data-th-placeholder="กรอกไอดีไลน์ของคุณ (ถ้ามี)" data-en-placeholder="Enter your LINE ID (optional)"
                 style="margin: auto; width: 400px;" type="text" oninput="validateLineId(this,'lineidMsg')" />
-            </div>
+            </div> -->
 
 
             <script>
@@ -7530,9 +7531,9 @@
               </div>
             </div>
             <label id="dd3" style="margin: 0px 80px;"
-              data-th="1. ระดับที่สนใจศึกษา (เลือกก่อนคณะ) <span style='color: #b20025;'>*</span>"
-              data-en="1. Level (Select first before faculty) <span style='color: #b20025;'>*</span>">
-              1. ระดับที่สนใจศึกษา (เลือกก่อนคณะ) <span style="color: #b20025;">*</span>
+              data-th="ระดับที่สนใจศึกษา <span style='color: #b20025;'>*</span>"
+              data-en="Level <span style='color: #b20025;'>*</span>">
+              ระดับที่สนใจศึกษา <span style="color: #b20025;">*</span>
             </label>
             <div class="dropdown mb-3" id="dd2">
               <button class="inher form-control mb-2" data-bs-toggle="dropdown" id="levelDropdown" style="margin: auto;"
@@ -7580,33 +7581,33 @@
 
               </ul>
             </div>
-            <label id="dd3" style="margin: 0px 80px;"
+            <!-- <label id="dd3" style="margin: 0px 80px;"
               data-th="2. คณะที่สนใจศึกษา (เลือกก่อนสาขา)<span style='color: #b20025;'>*</span>"
               data-en="2. Faculty (Select before major)<span style='color: #b20025;'>*</span>">
               2. คณะที่สนใจศึกษา (เลือกก่อนสาขา)<span style="color: #b20025;">*</span>
-            </label>
-            <div class="dropdown mb-3" id="dd2">
+            </label> -->
+            <!-- <div class="dropdown mb-3" id="dd2">
               <button class="inher form-control mb-2" data-bs-toggle="dropdown" id="facultyDropdown"
                 style="margin: auto;" type="button" data-th="เลือกคณะ ▾" data-en="Select Faculty ▾">เลือกคณะ ▾</button>
 
               <ul class="dropdown-menu" id="facultyOptions"></ul>
-            </div>
-            <label id="dd3" style="margin: 0px 80px;"
+            </div> -->
+            <!-- <label id="dd3" style="margin: 0px 80px;"
               data-th="3. สาขาที่สนใจศึกษา (เลือกสุดท้าย)<span style='color: #b20025;'>*</span>"
               data-en="3. Desired Major (Last select)<span style='color: #b20025;'>*</span>">
               3. สาขาที่สนใจศึกษา (เลือกสุดท้าย)<span style="color: #b20025;">*</span>
-            </label>
-            <div class="dropdown mb-4" id="dd2">
+            </label> -->
+            <!-- <div class="dropdown mb-4" id="dd2">
               <button class="inher form-control mb-2" data-bs-toggle="dropdown" id="majorDropdown" style="margin: auto;"
                 type="button" data-th="เลือกสาขา ▾" data-en="Select Major ▾">
                 เลือกสาขา ▾
               </button>
 
               <ul class="dropdown-menu" id="majorOptions"></ul>
-            </div>
+            </div> -->
             <input id="hiddenLevel" name="level" type="hidden" />
-            <input id="hiddenFac" name="fac" type="hidden" />
-            <input id="hiddenMajor" name="major" type="hidden" />
+            <!-- <input id="hiddenFac" name="fac" type="hidden" />
+            <input id="hiddenMajor" name="major" type="hidden" /> -->
 
           </div>
 
@@ -7624,6 +7625,69 @@
 
   </section>
 
+<script>
+function showNotification(message, type) {
+  const box = document.getElementById('notificationBox');
+  box.textContent = message;
+  box.className = `notification ${type}`;
+  box.style.display = 'block';
+  box.style.opacity = '1';
+  setTimeout(() => {
+    box.style.opacity = '0';
+    setTimeout(() => (box.style.display = 'none'), 300);
+  }, 3000);
+}
+
+document.getElementById("b2").addEventListener("click", async function (e) {
+  e.preventDefault();
+
+  const form = document.getElementById('myForm');
+
+  const title = document.getElementById('title').value.trim();
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const grade = document.getElementById('grade').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const country = document.getElementById('countryInput').value.trim();
+  const province = document.getElementById('provinceInput').value.trim();
+  const level = document.getElementById('hiddenLevel').value.trim();
+
+  if (!title || !fname || !lname || !grade || !email || !phone || !country || !level) {
+    showNotification("❌ กรอกข้อมูลให้ครบถ้วน", "error");
+    return;
+  }
+
+  // เตรียมข้อมูลสำหรับส่งไป PHP
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("fname", fname);
+  formData.append("lname", lname);
+  formData.append("grade", grade);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("country", country);
+  formData.append("province", province);
+  formData.append("level", level);
+
+  try {
+    const response = await fetch("insert_data.php", {
+      method: "POST",
+      body: formData
+    });
+    const result = await response.text();
+    if (result.includes("success")) {
+      showNotification("✅ บันทึกข้อมูลสำเร็จ", "success");
+      form.reset();
+    } else {
+      showNotification("❌ บันทึกไม่สำเร็จ: " + result, "error");
+    }
+  } catch (err) {
+    console.error(err);
+    showNotification("⚠️ เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์", "error");
+  }
+});
+</script>
 
 
   <script>
@@ -8081,101 +8145,6 @@
           majorDropdown.style.opacity = "1";
         }
       });
-
-      // ----------- VALIDATION SUBMIT ----------
-      // ลบโค้ดเก่าที่ส่งข้อมูลไป Google Apps Script ออก
-    });
-  </script>
-  <!-- Firebase -->
-
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
-    import { getDatabase, ref, push, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js';
-
-    function showNotification(message, type) {
-      const box = document.getElementById('notificationBox');
-      box.textContent = message;
-      box.className = `notification ${type}`;
-      box.style.display = 'block';
-      box.style.opacity = '1';
-      setTimeout(() => {
-        box.style.opacity = '0';
-        setTimeout(() => (box.style.display = 'none'), 300);
-      }, 3000);
-    }
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyC19fPxfWlWfrLVkTdZ2V8ZUP8jLJhOXko",
-      authDomain: "hohoho-6bc89.firebaseapp.com",
-      databaseURL: "https://hohoho-6bc89-default-rtdb.asia-southeast1.firebasedatabase.app/",
-      projectId: "hohoho-6bc89",
-      storageBucket: "hohoho-6bc89.firebasestorage.app",
-      messagingSenderId: "872473181386",
-      appId: "1:872473181386:web:0fe6b9f655f4b1e1258833",
-      measurementId: "G-V2EXK83JKK"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    document.getElementById("b2").addEventListener("click", async function (e) {
-      e.preventDefault();
-
-      const form = document.getElementById('myForm');
-
-      // --- ดึงค่าทุกช่อง ---
-      const title = document.getElementById('title').value.trim();
-      const fname = document.getElementById('fname').value.trim();
-      const lname = document.getElementById('lname').value.trim();
-      const grade = document.getElementById('grade').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const lineid = document.getElementById('lineid').value.trim(); // ❗ optional
-      const country = document.getElementById('countryInput').value.trim();
-      const province = document.getElementById('provinceInput').value.trim();
-      const level = document.getElementById('hiddenLevel').value.trim();
-      const fac = document.getElementById('hiddenFac').value.trim();
-      const major = document.getElementById('hiddenMajor').value.trim();
-
-      const isThailand = country === "ไทย";
-      const isInternational = level === "ป.ตรี-นานาชาติ";
-
-      // --- ตรวจสอบเฉพาะฟิลด์บังคับ ---
-      if (
-        !title || !fname || !lname || !grade || !email || !phone ||
-        !country || !level || !fac ||
-        (!isInternational && !major) ||
-        (isThailand && !province)
-      ) {
-        showNotification("❌ กรอกข้อมูลให้ครบถ้วนและถูกต้อง" + "\n" + " Fill out all required fields correctly", "error");
-        return;
-      }
-
-      // --- จัดลำดับคีย์ตามต้องการ ---
-      const data = {
-        title: title,
-        fname: fname,
-        lname: lname,
-        grade: grade,
-        email: email,
-        phone: phone,
-        lineid: lineid,  // ถ้าไม่ได้กรอกจะเป็น ""
-        country: country,
-        province: province,
-        level: level,
-        fac: fac,
-        major: major,
-        timestamp: serverTimestamp()
-      };
-
-      // --- บันทึกไป Firebase ---
-      try {
-        await push(ref(db, 'inquiries'), data);
-        showNotification("✅ ส่งข้อมูลสำเร็จแล้วครับ Data sent successfully", "success");
-        form.reset();
-      } catch (err) {
-        console.error("Firebase Error:", err);
-        showNotification("❌ เกิดข้อผิดพลาดในการส่งข้อมูล error occurred while sending: " + err.message, "error");
-      }
     });
   </script>
 
@@ -8302,8 +8271,6 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 </script>
-  <!-- ป้องกัน In-App Browser -->
-
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -9737,15 +9704,20 @@ data-en="🏢 Train future-ready business professionals<br>
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
     }
   </style>
-  <div class="social-float">
+  <!-- <div class="social-float">
     <a class="instagram" href="https://www.instagram.com/thai_nichi" target="_blank">
       <i class="fa-brands fa-instagram"></i>
     </a>
-  </div>
+  </div> -->
 
   <script>
     AOS.init();
   </script>
+
+  <!-- แชทบอท -->
+    <!-- <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/10/07/02/20251007023519-V33ZKZDO.js" defer></script> -->
+    
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {

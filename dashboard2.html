@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข้อมูลผู้สนใจศึกษาต่อ TNI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #F0F4F8; /* Light Blue Gray */
+      color: #334155;
+      margin: 0;
+      padding: 0;
+    }
+    .card {
+      background-color: #ffffff;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    h1, h2 {
+      color: #0F172A;
+    }
+    select, button {
+      color: #0F172A;
+      background-color: #E2E8F0;
+      border: 1px solid #CBD5E1;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease-in-out;
+    }
+    button:hover {
+      background-color: #93C5FD;
+      color: #fff;
+    }
+    th, td {
+      white-space: nowrap;
+      padding: 0.75rem 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      background-color: #BFDBFE;
+      color: #1E40AF;
+      font-weight: 600;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #F8FAFC;
+    }
+    tbody tr:hover {
+      background-color: #E2E8F0;
+    }
+    .table-container {
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6 md:p-10">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-3xl md:text-4xl font-semibold text-center mb-8">ข้อมูลผู้สนใจศึกษาต่อ TNI</h1>
+
+    <div class="card mb-8 flex flex-wrap gap-4 items-center justify-center">
+      <select id="filterMonth" class="px-4 py-2">
+        <option value="">ทุกเดือน</option>
+      </select>
+      <select id="filterGrade" class="px-4 py-2">
+        <option value="">ทุกวุฒิการศึกษา</option>
+      </select>
+      <select id="filterCountry" class="px-4 py-2">
+        <option value="">ทุกประเทศ</option>
+      </select>
+      <select id="filterLevel" class="px-4 py-2">
+        <option value="">ทุกระดับที่สนใจ</option>
+      </select>
+      <button id="btnFilter" class="px-6 py-2">กรองข้อมูล</button>
+      <button id="btnDownload" class="px-6 py-2">ดาวน์โหลด CSV</button>
+    </div>
+
+    <div class="card mb-8">
+      <h2 class="text-2xl font-semibold mb-4">สรุปจำนวนผู้สนใจตามระดับที่สนใจ (level)</h2>
+      <div style="height: 400px;">
+        <canvas id="levelChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>คำนำหน้า</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>วุฒิการศึกษา</th>
+            <th>อีเมล</th>
+            <th>เบอร์โทร</th>
+            <th>ประเทศ</th>
+            <th>จังหวัด</th>
+            <th>ระดับที่สนใจ</th>
+            <th>วันที่-เวลา</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <p id="countInfo" class="text-right text-sm text-gray-500 mt-4"></p>
+    </div>
+  </div>
+
+  <script>
+    let allData = [];
+    let chart;
+
+    async function loadData() {
+      try {
+        const res = await fetch("fetch_data.php");
+        const text = await res.text();
+        let data;
+
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          console.error("❌ fetch_data.php ไม่ได้ส่ง JSON ที่ถูกต้อง:", text);
+          data = [];
+        }
+
+        if (!Array.isArray(data)) data = [];
+
+        allData = data.map(r => ({
+          title: r.title || "-",
+          fname: r.fname || "-",
+          lname: r.lname || "-",
+          grade: r.grade || "-",
+          email: r.email || "-",
+          phone: r.phone || "-",
+          country: r.country || "-",
+          province: r.province || "-",
+          level: r.level || "-",
+          timestamp: r.timestamp ? formatTimestamp(r.timestamp) : "-"
+        }));
+
+        initFilters();
+        render(allData);
+      } catch (err) {
+        console.error("❌ โหลดข้อมูลล้มเหลว:", err);
+        render([]);
+      }
+    }
+
+    function formatTimestamp(ts) {
+      const d = new Date(ts);
+      if (isNaN(d.getTime())) return "-";
+      return d.toLocaleString("th-TH", {
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit"
+      });
+    }
+
+    function initFilters() {
+      const monthSel = document.getElementById("filterMonth");
+      const gradeSel = document.getElementById("filterGrade");
+      const countrySel = document.getElementById("filterCountry");
+      const levelSel = document.getElementById("filterLevel");
+
+      const months = [...new Set(allData.map(d => d.timestamp.slice(3, 10)).filter(Boolean))];
+      const grades = [...new Set(allData.map(d => d.grade).filter(g => g && g !== "-"))];
+      const countries = [...new Set(allData.map(d => d.country).filter(c => c && c !== "-"))];
+      const levels = [...new Set(allData.map(d => d.level).filter(l => l && l !== "-"))];
+
+      monthSel.innerHTML = '<option value="">ทุกเดือน</option>' + months.map(m => `<option value="${m}">${m}</option>`).join('');
+      gradeSel.innerHTML = '<option value="">ทุกวุฒิการศึกษา</option>' + grades.map(g => `<option value="${g}">${g}</option>`).join('');
+      countrySel.innerHTML = '<option value="">ทุกประเทศ</option>' + countries.map(c => `<option value="${c}">${c}</option>`).join('');
+      levelSel.innerHTML = '<option value="">ทุกระดับที่สนใจ</option>' + levels.map(l => `<option value="${l}">${l}</option>`).join('');
+    }
+
+    function render(data) {
+      const tbody = document.getElementById("tableBody");
+      tbody.innerHTML = "";
+
+      if (!data.length) {
+        tbody.innerHTML = `<tr><td colspan="10" class="text-center text-gray-400 py-4">ไม่มีข้อมูลในระบบ</td></tr>`;
+      } else {
+        data.forEach(r => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${r.title}</td>
+            <td>${r.fname}</td>
+            <td>${r.lname}</td>
+            <td>${r.grade}</td>
+            <td>${r.email}</td>
+            <td>${r.phone}</td>
+            <td>${r.country}</td>
+            <td>${r.province}</td>
+            <td>${r.level}</td>
+            <td>${r.timestamp}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById("countInfo").textContent = `จำนวนรายการ: ${data.length.toLocaleString('th-TH')} รายการ`;
+      renderChart(data);
+    }
+
+    function renderChart(data) {
+      const ctx = document.getElementById("levelChart");
+      const grouped = {};
+      data.forEach(r => {
+        const key = r.level || "ไม่ระบุ";
+        grouped[key] = (grouped[key] || 0) + 1;
+      });
+      const labels = Object.keys(grouped);
+      const values = Object.values(grouped);
+
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [{
+            label: "จำนวนผู้สนใจ",
+            data: values,
+            backgroundColor: "#60A5FA",
+            borderColor: "#3B82F6",
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true, ticks: { color: "#64748B" } },
+            x: { ticks: { color: "#64748B" } }
+          },
+          plugins: {
+            legend: { labels: { color: "#64748B" } }
+          }
+        }
+      });
+    }
+
+    document.getElementById("btnFilter").addEventListener("click", () => {
+      const m = document.getElementById("filterMonth").value;
+      const g = document.getElementById("filterGrade").value;
+      const c = document.getElementById("filterCountry").value;
+      const l = document.getElementById("filterLevel").value;
+
+      const filtered = allData.filter(r =>
+        (!m || r.timestamp.includes(m)) &&
+        (!g || r.grade === g) &&
+        (!c || r.country === c) &&
+        (!l || r.level === l)
+      );
+      render(filtered);
+    });
+
+    document.getElementById("btnDownload").addEventListener("click", () => {
+      const rows = Array.from(document.querySelectorAll("#tableBody tr"));
+      if (!rows.length || rows[0].children.length < 10) {
+        alert("ไม่มีข้อมูลให้ดาวน์โหลด");
+        return;
+      }
+      let csv = "คำนำหน้า,ชื่อ,นามสกุล,วุฒิการศึกษา,อีเมล,เบอร์โทร,ประเทศ,จังหวัด,ระดับที่สนใจ,วันที่-เวลา\n";
+      rows.forEach(row => {
+        const cols = row.querySelectorAll("td");
+        const line = Array.from(cols).map(td => `"${td.textContent.trim()}"`).join(",");
+        csv += line + "\n";
+      });
+      const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "dashboardTNI_filtered.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
